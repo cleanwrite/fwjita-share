@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>吉他谱分享站</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>🎸 吉他谱分享</h1>
+    <p>GPX / PDF / 图片 在线预览 & 下载</p>
+  </header>
+
+  <main>
+    <!-- 分类标签 -->
+    <section id="category-tabs" class="category-tabs"></section>
+
+    <!-- 搜索框 -->
+    <section class="search-box">
+      <input type="text" id="search-input" placeholder="搜索吉他谱..." oninput="filterTabs()">
+    </section>
+
+    <!-- 谱列表 -->
+    <section id="tab-list" class="tab-list">
+      <!-- 动态生成内容 -->
+    </section>
+
+    <!-- 详情/预览模态框 -->
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2 id="modal-title"></h2>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>吉他谱分享站 - Powered by alphaTab</p>
+  </footer>
+
+  <!-- alphaTab CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@coderline/alphatab@latest/dist/alphaTab.min.js"></script>
+  <script src="assets/js/tabs-data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
