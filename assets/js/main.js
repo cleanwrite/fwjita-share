@@ -41,9 +41,11 @@ function renderCategories() {
 
     return `
       <div class="category-card" onclick="openCategory('${cat}')">
-        <div class="category-icon">${getCategoryIcon(cat)}</div>
-        <h3>${cat}</h3>
-        <p class="category-count">${tabs.length} 首</p>
+        <div class="card-header">
+          <span class="category-icon">${getCategoryIcon(cat)}</span>
+          <h3>${cat}</h3>
+        </div>
+        <p class="card-meta">${tabs.length} 首</p>
         <div class="category-formats">
           ${gpxCount ? `<span class="fmt-count gpx">${gpxCount} GPX</span>` : ''}
           ${pdfCount ? `<span class="fmt-count pdf">${pdfCount} PDF</span>` : ''}
@@ -90,23 +92,17 @@ function renderTabListInCategory(cat) {
     return;
   }
 
-  container.innerHTML = tabs.map(tab => {
-    const hasMultiple = tab.formats.length > 1;
-    return `
-      <div class="tab-card" onclick="openPreview(${tab.id})">
+  container.innerHTML = tabs.map(tab => `
+    <div class="tab-card" onclick="openPreview(${tab.id})">
+      <div class="card-info">
         <h3>${tab.title}</h3>
-        <div class="formats">
-          ${tab.formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
-        </div>
-        <div class="actions">
-          <button class="btn btn-primary" onclick="event.stopPropagation(); openPreview(${tab.id})">
-            👁 预览
-          </button>
-          ${hasMultiple ? `<span class="multi-hint" style="font-size:0.75em;color:#8b949e;">（多格式可选）</span>` : ''}
-        </div>
+        <p class="card-category">${tab.category}</p>
       </div>
-    `;
-  }).join('');
+      <div class="formats">
+        ${tab.formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
 }
 
 // ========== 搜索（全局搜索 / 分类内搜索） ==========
@@ -150,24 +146,17 @@ function filterTabs() {
     document.getElementById('back-btn').textContent = '← 返回分类';
   }
 
-  container.innerHTML = tabs.map(tab => {
-    const hasMultiple = tab.formats.length > 1;
-    return `
-      <div class="tab-card" onclick="openPreview(${tab.id})">
+  container.innerHTML = tabs.map(tab => `
+    <div class="tab-card" onclick="openPreview(${tab.id})">
+      <div class="card-info">
         <h3>${tab.title}</h3>
-        <p class="category-tag">${tab.category}</p>
-        <div class="formats">
-          ${tab.formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
-        </div>
-        <div class="actions">
-          <button class="btn btn-primary" onclick="event.stopPropagation(); openPreview(${tab.id})">
-            👁 预览
-          </button>
-          ${hasMultiple ? `<span class="multi-hint" style="font-size:0.75em;color:#8b949e;">（多格式可选）</span>` : ''}
-        </div>
+        <p class="card-category">${tab.category}</p>
       </div>
-    `;
-  }).join('');
+      <div class="formats">
+        ${tab.formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
 }
 
 // ========== 第三层：预览弹窗 ==========
@@ -204,19 +193,15 @@ function openPreview(id) {
 
 function renderPreviewModeSelector(tab, body) {
   const modes = [];
-  if (tab.files.gpx) modes.push({ key: 'gpx', label: '🎸 乐谱', desc: 'GPX 可播放' });
-  if (tab.files.pdf) modes.push({ key: 'pdf', label: '📄 PDF', desc: '文档预览' });
-  if (tab.files.images && tab.files.images.length > 0)
-    modes.push({ key: 'images', label: `🖼️ 图片`, desc: `${tab.files.images.length} 张` });
+  if (tab.files.gpx) modes.push({ key: 'gpx', label: '乐谱' });
+  if (tab.files.pdf) modes.push({ key: 'pdf', label: 'PDF' });
+  if (tab.files.images && tab.files.images.length > 0) modes.push({ key: 'images', label: '图片' });
 
   body.innerHTML = `
     <div class="preview-mode-selector">
       ${modes.map(m => `
         <button class="mode-btn ${m.key === 'gpx' ? 'active' : ''}" data-mode="${m.key}"
-                onclick="switchPreviewMode('${m.key}')">
-          <span class="mode-label">${m.label}</span>
-          <span class="mode-desc">${m.desc}</span>
-        </button>
+                onclick="switchPreviewMode('${m.key}')">${m.label}</button>
       `).join('')}
     </div>
     <div id="preview-content"></div>
@@ -249,8 +234,8 @@ function renderGpxPreview(tab, container) {
       <button onclick="playerPlay()">▶ 播放</button>
       <button onclick="playerPause()">⏸ 暂停</button>
       <button onclick="playerStop()">⏹ 停止</button>
-      <a href="${encodeAssetPath(tab.files.gpx)}" class="btn btn-primary" download="${gpxFilename}">
-        ⬇️ 下载 GPX
+      <a href="${encodeAssetPath(tab.files.gpx)}" download="${gpxFilename}">
+        下载 GPX
       </a>
       <div class="speed-control">
         <label>速度:</label>
@@ -274,12 +259,20 @@ function renderPdfPreview(tab, container) {
 }
 
 function renderImagesPreview(tab, container) {
+  const multiMode = (tab.formats.includes('gpx') && tab.files.gpx) || (tab.formats.includes('pdf') && tab.files.pdf);
   container.innerHTML = `
     <div class="image-gallery">
-      ${tab.files.images.map(img => `
-        <img class="preview-image" src="${encodeAssetPath(img)}" alt="${tab.title}" loading="lazy"
-             onclick="window.open('${encodeAssetPath(img)}', '_blank')">
-      `).join('')}
+      ${tab.files.images.map(img => {
+        const filename = img.split('/').pop();
+        return `
+        <div class="image-item">
+          <img class="preview-image" src="${encodeAssetPath(img)}" alt="${tab.title}" loading="lazy"
+               onclick="window.open('${encodeAssetPath(img)}', '_blank')">
+          <button class="img-download" onclick="event.stopPropagation(); window.open('${encodeAssetPath(img)}', '_blank')">
+            下载 ${filename}
+          </button>
+        </div>`;
+      }).join('')}
     </div>
   `;
 }

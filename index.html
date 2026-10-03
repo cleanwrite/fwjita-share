@@ -4,43 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>吉他谱分享站</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <header>
-    <h1>🎸 吉他谱分享</h1>
-    <p>GPX / PDF / 图片 在线预览 & 下载</p>
-    <div style="margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-      <a href="https://wwatq.lanzn.com/b00v0d8wef" target="_blank" class="btn btn-primary" style="font-size: 1em; padding: 12px 24px;">
-        ☁️ 蓝奏云网盘
-      </a>
-      <span style="color: #484f58; font-size: 0.9em; align-self: center;">密码: ac6x</span>
-      <a href="https://pan.quark.cn/s/0570ac921bc7?pwd=b3jG" target="_blank" class="btn btn-primary" style="font-size: 1em; padding: 12px 24px; background: linear-gradient(135deg, #4096ff 0%, #0958d9 100%);">
-        🎁 夸克网盘
-      </a>
-      <span style="color: #484f58; font-size: 0.9em; align-self: center;">提取码: b3jG</span>
+    <div class="header-inner">
+      <div class="header-text">
+        <h1>吉他谱分享站</h1>
+        <p class="subtitle">GPX / PDF / 图片，在线预览即开即用</p>
+      </div>
+      <div class="header-links">
+        <a href="https://wwatq.lanzn.com/b00v0d8wef" target="_blank" class="link-item">
+          <span class="link-label">蓝奏云</span>
+          <span class="link-meta">密码 ac6x</span>
+        </a>
+        <a href="https://pan.quark.cn/s/0570ac921bc7?pwd=b3jG" target="_blank" class="link-item">
+          <span class="link-label">夸克网盘</span>
+          <span class="link-meta">提取码 b3jG</span>
+        </a>
+      </div>
     </div>
   </header>
 
   <main>
-    <!-- 返回按钮 + 搜索框 -->
     <section class="toolbar">
       <button id="back-btn" class="back-btn" onclick="renderCategories()"></button>
       <input type="text" id="search-input" placeholder="搜索吉他谱..." oninput="filterTabs()">
     </section>
 
-    <!-- 内容区（分类卡片 / 谱列表） -->
-    <section id="tab-list" class="tab-list">
-      <!-- 动态生成内容 -->
-    </section>
+    <section id="tab-list" class="tab-list"></section>
 
-    <!-- 详情/预览模态框 -->
     <div id="modal" class="modal hidden">
       <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <button class="close-btn" onclick="closeModal()" aria-label="关闭">&times;</button>
         <h2 id="modal-title"></h2>
         <div id="modal-body"></div>
       </div>
@@ -48,10 +44,11 @@
   </main>
 
   <footer>
-    <p>吉他谱分享站 - Powered by alphaTab</p>
+    <span>吉他谱分享站</span>
+    <span class="divider">·</span>
+    <span>Powered by alphaTab</span>
   </footer>
 
-  <!-- alphaTab CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@coderline/alphatab@latest/dist/alphaTab.min.js"></script>
   <script src="assets/js/tabs-data.js"></script>
   <script src="assets/js/main.js"></script>
