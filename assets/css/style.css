@@ -525,6 +525,33 @@ main {
   border-radius: var(--radius);
 }
 
+/* ===== 免责声明 ===== */
+.disclaimer-banner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  background: rgba(224, 123, 57, 0.12);
+  border: 1px solid rgba(224, 123, 57, 0.3);
+  border-radius: var(--radius);
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.disclaimer-banner strong {
+  color: #e07b39;
+  font-weight: 600;
+}
+
+.disclaimer-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
 /* ===== 底部 ===== */
 footer {
   text-align: center;
@@ -919,6 +946,12 @@ footer .signature {
 
   .credits-cta {
     font-size: 0.8rem;
+  }
+
+  .disclaimer-banner {
+    margin: 0 12px;
+    padding: 10px 14px;
+    font-size: 0.78rem;
   }
 
   footer {
