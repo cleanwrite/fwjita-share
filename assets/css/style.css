@@ -35,6 +35,50 @@ main {
   padding: 30px 20px;
 }
 
+/* 预览模式切换器 */
+.preview-mode-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.mode-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 16px;
+  border: 2px solid #30363d;
+  border-radius: 8px;
+  background: #21262d;
+  color: #8b949e;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 120px;
+}
+
+.mode-btn:hover {
+  border-color: #58a6ff40;
+  background: #2d333b;
+}
+
+.mode-btn.active {
+  border-color: #58a6ff;
+  background: #1f6feb15;
+  color: #58a6ff;
+}
+
+.mode-label {
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+.mode-desc {
+  font-size: 0.75em;
+  margin-top: 2px;
+  opacity: 0.7;
+}
+
 /* 分类标签 */
 .category-tabs {
   display: flex;
