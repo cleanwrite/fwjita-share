@@ -79,60 +79,117 @@ main {
   opacity: 0.7;
 }
 
-/* 分类标签 */
-.category-tabs {
+/* 工具栏（返回按钮 + 搜索） */
+.toolbar {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 24px;
-  justify-content: center;
 }
 
-.category-btn {
-  padding: 6px 16px;
+.back-btn {
+  display: none;
+  padding: 8px 16px;
   border: 1px solid #30363d;
-  border-radius: 20px;
+  border-radius: 8px;
   background: #21262d;
-  color: #8b949e;
-  font-size: 0.9em;
+  color: #58a6ff;
+  font-size: 14px;
   cursor: pointer;
+  white-space: nowrap;
   transition: all 0.2s;
 }
 
-.category-btn:hover {
+.back-btn:hover {
+  background: #30363d;
   border-color: #58a6ff;
-  color: #58a6ff;
 }
 
-.category-btn.active {
-  background: #1f6feb20;
-  border-color: #58a6ff;
-  color: #58a6ff;
-}
-
-/* 搜索框 */
-.search-box {
-  margin-bottom: 30px;
-}
-
-.search-box input {
-  width: 100%;
-  max-width: 500px;
-  display: block;
-  margin: 0 auto;
-  padding: 12px 20px;
+.toolbar input[type="text"] {
+  flex: 1;
+  padding: 10px 16px;
   border: 1px solid #30363d;
   border-radius: 8px;
   background: #161b22;
   color: #c9d1d9;
-  font-size: 16px;
+  font-size: 15px;
   outline: none;
   transition: border-color 0.3s;
 }
 
-.search-box input:focus {
+.toolbar input[type="text"]:focus {
   border-color: #58a6ff;
 }
+
+/* 分类卡片（第一层） */
+.category-card {
+  background: linear-gradient(145deg, #161b22 0%, #1c2128 100%);
+  border: 1px solid #30363d;
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  border-color: #58a6ff;
+  box-shadow: 0 8px 32px rgba(88, 166, 255, 0.2);
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #58a6ff, #1f6feb);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.category-card:hover::before {
+  opacity: 1;
+}
+
+.category-icon {
+  font-size: 2.5em;
+  margin-bottom: 12px;
+}
+
+.category-card h3 {
+  color: #e6edf3;
+  font-size: 1.3em;
+  margin-bottom: 6px;
+}
+
+.category-count {
+  color: #8b949e;
+  font-size: 0.9em;
+  margin-bottom: 12px;
+}
+
+.category-formats {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fmt-count {
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.fmt-count.gpx { background: #1f6feb20; color: #58a6ff; }
+.fmt-count.pdf { background: #da363320; color: #f85149; }
+.fmt-count.img { background: #23863620; color: #3fb950; }
 
 /* 谱列表 */
 .tab-list {

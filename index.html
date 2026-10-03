@@ -13,15 +13,13 @@
   </header>
 
   <main>
-    <!-- 分类标签 -->
-    <section id="category-tabs" class="category-tabs"></section>
-
-    <!-- 搜索框 -->
-    <section class="search-box">
+    <!-- 返回按钮 + 搜索框 -->
+    <section class="toolbar">
+      <button id="back-btn" class="back-btn" onclick="renderCategories()"></button>
       <input type="text" id="search-input" placeholder="搜索吉他谱..." oninput="filterTabs()">
     </section>
 
-    <!-- 谱列表 -->
+    <!-- 内容区（分类卡片 / 谱列表） -->
     <section id="tab-list" class="tab-list">
       <!-- 动态生成内容 -->
     </section>
