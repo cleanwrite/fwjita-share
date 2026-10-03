@@ -1,5 +1,10 @@
 # 生成脚本
 generate_data.py
+organize_tabs.py
+
+# Python cache
+__pycache__/
+*.pyc
 
 # 空白/示例文件
 "assets/tabs/空白谱图片/"
