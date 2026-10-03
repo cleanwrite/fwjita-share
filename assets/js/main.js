@@ -97,11 +97,31 @@ function renderSongList(cat) {
   }
 
   // Group by base song name (first word of title, or full title if no parentheses)
+  // Group by base song name. Songs with same parent folder = same group.
+  // Use the parent folder name (if exists) as the grouping key.
   const groups = {};
   tabs.forEach(tab => {
-    // Extract base song name: everything before the first ( or （
-    let baseName = tab.title.split(/[（(]/)[0].trim();
-    if (!baseName) baseName = tab.title;
+    let baseName;
+    // Check if this tab's file path has a parent song folder (3+ levels deep)
+    // e.g. undertale/(ut)his theme/his theme/ -> group = "(ut)his theme"
+    // e.g. undertale/Asgore[...]/ -> group = "Asgore[...]" (the folder name itself)
+    const parts = tab.category ? tab.category.split('/') : [];
+    const relativePath = tab.files.gpx || tab.files.pdf || (tab.files.images && tab.files.images[0]) || '';
+    const pathParts = relativePath.split('/');
+
+    if (pathParts.length >= 4) {
+      // File is in a subfolder (e.g. category/song_folder/version/file)
+      // Group by the song folder (third-to-last component)
+      baseName = pathParts[pathParts.length - 3];
+    } else if (pathParts.length >= 3) {
+      // File is directly in category/song_folder/file
+      // Use the last meaningful part of title without parenthetical suffixes
+      baseName = tab.title.split(/[（(]/)[0].trim();
+      if (!baseName) baseName = tab.title;
+    } else {
+      baseName = tab.title;
+    }
+
     if (!groups[baseName]) groups[baseName] = [];
     groups[baseName].push(tab);
   });
@@ -113,20 +133,42 @@ function renderSongList(cat) {
     const versionCount = versions.length;
     const formats = [...new Set(versions.flatMap(t => t.formats))];
 
+    // Single version: click directly to preview
+    if (versionCount === 1) {
+      const tab = versions[0];
+      const contrib = tab.contributor
+        ? `<a href="${tab.contributor.bilibili || tab.contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${tab.contributor.name || '匿名'}</a>`
+        : '';
+      return `
+      <div class="tab-card" onclick="openPreview(${tab.id})">
+        <div class="card-info">
+          <h3>${song}</h3>
+          <div class="card-meta-row">
+            <span class="card-category">${cat}</span>
+            ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
+          </div>
+        </div>
+        <div class="formats">
+          ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
+        </div>
+      </div>`;
+    }
+
+    // Multiple versions: click to show version list
     return `
       <div class="tab-card song-group-card" onclick="openSongGroup('${song}')">
         <div class="card-info">
           <h3>${song}</h3>
           <div class="card-meta-row">
             <span class="card-category">${cat}</span>
-            ${versionCount > 1 ? `<span class="card-dot">·</span><span class="card-versions">${versionCount} 个版本</span>` : ''}
+            <span class="card-dot">·</span>
+            <span class="card-versions">${versionCount} 个版本</span>
           </div>
         </div>
         <div class="formats">
           ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
         </div>
-      </div>
-    `;
+      </div>`;
   }).join('');
 }
 
@@ -147,8 +189,15 @@ function openSongGroup(songName) {
 function renderVersionList(songName) {
   const container = document.getElementById('tab-list');
   const versions = tabsData.filter(tab => {
-    let baseName = tab.title.split(/[（(]/)[0].trim();
-    if (!baseName) baseName = tab.title;
+    const relativePath = tab.files.gpx || tab.files.pdf || (tab.files.images && tab.files.images[0]) || '';
+    const pathParts = relativePath.split('/');
+    let baseName;
+    if (pathParts.length >= 4) {
+      baseName = pathParts[pathParts.length - 3];
+    } else {
+      baseName = tab.title.split(/[（(]/)[0].trim();
+      if (!baseName) baseName = tab.title;
+    }
     return baseName === songName && tab.category === currentCategory;
   });
 
@@ -161,16 +210,15 @@ function renderVersionList(songName) {
     const contrib = tab.contributor
       ? `<a href="${tab.contributor.bilibili || tab.contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${tab.contributor.name || '匿名'}</a>`
       : '';
-    // Show version suffix (the part in parentheses)
-    let versionLabel = tab.title;
-    const parenMatch = tab.title.match(/[（(]([^）)]*)[）)]/);
-    if (parenMatch) versionLabel = parenMatch[1].trim();
-    const isDefault = tab.title === songName || tab.title === songName + '（';
+    // Get version name from the subfolder (last path component before filename)
+    const relativePath = tab.files.gpx || tab.files.pdf || (tab.files.images && tab.files.images[0]) || '';
+    const pathParts = relativePath.split('/');
+    const versionLabel = pathParts.length >= 2 ? pathParts[pathParts.length - 2] : tab.title;
 
     return `
       <div class="tab-card version-card" onclick="openPreview(${tab.id})">
         <div class="card-info">
-          <h3>${isDefault ? '原版' : versionLabel}</h3>
+          <h3>${versionLabel}</h3>
           <div class="card-meta-row">
             ${contrib ? `<span>·</span>${contrib}` : ''}
           </div>
