@@ -624,13 +624,16 @@ footer .signature {
   font-size: 0.9rem;
 }
 
-.credits-list li a {
-  color: var(--accent);
-  text-decoration: none;
+.credits-name {
   font-weight: 500;
 }
 
-.credits-list li a:hover {
+.credits-name a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.credits-name a:hover {
   text-decoration: underline;
 }
 

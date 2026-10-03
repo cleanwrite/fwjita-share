@@ -458,7 +458,7 @@ function showCredits() {
       const link = c.bilibili
         ? `<a href="${c.bilibili}" target="_blank" rel="noopener">${c.name}</a>`
         : c.name;
-      return `<li>${link} <span class="credits-count">${c.count} 首</span></li>`;
+      return `<li><span class="credits-name">${link}</span><span class="credits-count">贡献 ${c.count} 首</span></li>`;
     }).join('');
   }
 
