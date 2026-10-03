@@ -334,11 +334,18 @@ function setupAlphaTab(container, buffer) {
     </p>`;
   });
 
-  alphaTabApi.load(new Uint8Array(buffer), (success) => {
+  // alphaTab 1.8: load(data) returns boolean (sync)
+  try {
+    const uint8 = new Uint8Array(buffer);
+    const success = alphaTabApi.load(uint8);
+    console.log('alphaTab load returned:', success);
     if (!success) {
       container.innerHTML = '<p style="color:#f85149;text-align:center;padding:20px;">⚠️ 乐谱解析失败</p>';
     }
-  });
+  } catch (e) {
+    console.error('alphaTab load exception:', e);
+    container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">⚠️ 加载异常: ${e.message}</p>`;
+  }
 }
 
 // 播放器控制
