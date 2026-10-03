@@ -1,17 +1,17 @@
 const tabsData = [
   {
     "id": 1,
-    "title": "Are you lost（只有第一面qwq） (are you lost)",
+    "title": "are you lost",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/Are you lost（只有第一面qwq）/are you lost.png"
+        "assets/tabs/Are you lost（只有第一面qwq）/are you lost/are you lost.png"
       ]
     },
-    "category": "单曲",
+    "category": "Are you lost（只有第一面qwq）",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -19,17 +19,17 @@ const tabsData = [
   },
   {
     "id": 2,
-    "title": "Are you lost（只有第一面qwq） (are you lost（)",
+    "title": "are you lost（",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/Are you lost（只有第一面qwq）/are you lost（超简版.png"
+        "assets/tabs/Are you lost（只有第一面qwq）/are you lost（/are you lost（超简版.png"
       ]
     },
-    "category": "单曲",
+    "category": "Are you lost（只有第一面qwq）",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -138,14 +138,15 @@ const tabsData = [
   },
   {
     "id": 8,
-    "title": "(ut)his theme (HIS THEME)",
+    "title": "his theme",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/undertale/(ut)his theme/HIS THEME简化.jpg"
+        "assets/tabs/undertale/(ut)his theme/his theme/his theme（1.jpg",
+        "assets/tabs/undertale/(ut)his theme/his theme/his theme（2.jpg"
       ]
     },
     "category": "undertale",
@@ -156,15 +157,14 @@ const tabsData = [
   },
   {
     "id": 9,
-    "title": "(ut)his theme (his theme)",
+    "title": "也是his theme",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/undertale/(ut)his theme/his theme（1.jpg",
-        "assets/tabs/undertale/(ut)his theme/his theme（2.jpg"
+        "assets/tabs/undertale/(ut)his theme/也是his theme/也是his theme.png"
       ]
     },
     "category": "undertale",
@@ -175,14 +175,14 @@ const tabsData = [
   },
   {
     "id": 10,
-    "title": "(ut)his theme (也是his theme)",
+    "title": "还是his theme（？",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/undertale/(ut)his theme/也是his theme.png"
+        "assets/tabs/undertale/(ut)his theme/还是his theme（？/还是his theme（？.png"
       ]
     },
     "category": "undertale",
@@ -193,24 +193,6 @@ const tabsData = [
   },
   {
     "id": 11,
-    "title": "(ut)his theme (还是his theme（？)",
-    "artist": "",
-    "formats": [
-      "jpg"
-    ],
-    "files": {
-      "images": [
-        "assets/tabs/undertale/(ut)his theme/还是his theme（？.png"
-      ]
-    },
-    "category": "undertale",
-    "contributor": {
-      "name": "fw",
-      "bilibili": "https://space.bilibili.com/590547783"
-    }
-  },
-  {
-    "id": 12,
     "title": "Asgore[还原但是有点难",
     "artist": "",
     "formats": [
@@ -228,7 +210,7 @@ const tabsData = [
     }
   },
   {
-    "id": 13,
+    "id": 12,
     "title": "Determination",
     "artist": "",
     "formats": [
@@ -244,7 +226,7 @@ const tabsData = [
     }
   },
   {
-    "id": 14,
+    "id": 13,
     "title": "HOME",
     "artist": "",
     "formats": [
@@ -262,7 +244,7 @@ const tabsData = [
     }
   },
   {
-    "id": 15,
+    "id": 14,
     "title": "Once Upon a Time_Toby Fox",
     "artist": "",
     "formats": [
@@ -280,7 +262,7 @@ const tabsData = [
     }
   },
   {
-    "id": 16,
+    "id": 15,
     "title": "Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正",
     "artist": "",
     "formats": [
@@ -298,7 +280,7 @@ const tabsData = [
     }
   },
   {
-    "id": 17,
+    "id": 16,
     "title": "Snowy",
     "artist": "",
     "formats": [
@@ -316,7 +298,7 @@ const tabsData = [
     }
   },
   {
-    "id": 18,
+    "id": 17,
     "title": "Spider Dance",
     "artist": "",
     "formats": [
@@ -334,7 +316,7 @@ const tabsData = [
     }
   },
   {
-    "id": 19,
+    "id": 18,
     "title": "Spooktune",
     "artist": "",
     "formats": [
@@ -352,7 +334,7 @@ const tabsData = [
     }
   },
   {
-    "id": 20,
+    "id": 19,
     "title": "Tokyovania(也是同人）（Undertronic Remix",
     "artist": "",
     "formats": [
@@ -370,7 +352,7 @@ const tabsData = [
     }
   },
   {
-    "id": 21,
+    "id": 20,
     "title": "与你同在",
     "artist": "",
     "formats": [
@@ -388,7 +370,7 @@ const tabsData = [
     }
   },
   {
-    "id": 22,
+    "id": 21,
     "title": "其他（我忘了名字啥的",
     "artist": "",
     "formats": [
@@ -406,7 +388,7 @@ const tabsData = [
     }
   },
   {
-    "id": 23,
+    "id": 22,
     "title": "劳伦斯先生×纯情活泼小姑娘（混合谱",
     "artist": "",
     "formats": [
@@ -422,7 +404,7 @@ const tabsData = [
     }
   },
   {
-    "id": 24,
+    "id": 23,
     "title": "吉他 - 莫愁乡",
     "artist": "",
     "formats": [
@@ -442,7 +424,7 @@ const tabsData = [
     }
   },
   {
-    "id": 25,
+    "id": 24,
     "title": "小情歌",
     "artist": "",
     "formats": [
@@ -460,7 +442,7 @@ const tabsData = [
     }
   },
   {
-    "id": 26,
+    "id": 25,
     "title": "恋爱循环",
     "artist": "",
     "formats": [
@@ -478,7 +460,7 @@ const tabsData = [
     }
   },
   {
-    "id": 27,
+    "id": 26,
     "title": "haggstorm",
     "artist": "",
     "formats": [
@@ -496,7 +478,7 @@ const tabsData = [
     }
   },
   {
-    "id": 28,
+    "id": 27,
     "title": "Requiem（霜星EP",
     "artist": "",
     "formats": [
@@ -514,7 +496,7 @@ const tabsData = [
     }
   },
   {
-    "id": 29,
+    "id": 28,
     "title": "春弦",
     "artist": "",
     "formats": [
@@ -532,7 +514,7 @@ const tabsData = [
     }
   },
   {
-    "id": 30,
+    "id": 29,
     "title": "晴天",
     "artist": "",
     "formats": [
@@ -548,7 +530,7 @@ const tabsData = [
     }
   },
   {
-    "id": 31,
+    "id": 30,
     "title": "欢乐颂",
     "artist": "",
     "formats": [
@@ -566,7 +548,7 @@ const tabsData = [
     }
   },
   {
-    "id": 32,
+    "id": 31,
     "title": "求生之路 dead center",
     "artist": "",
     "formats": [
@@ -582,7 +564,7 @@ const tabsData = [
     }
   },
   {
-    "id": 33,
+    "id": 32,
     "title": "空白谱图片",
     "artist": "",
     "formats": [
@@ -600,7 +582,7 @@ const tabsData = [
     }
   },
   {
-    "id": 34,
+    "id": 33,
     "title": "美丽的搭档（朱一丹的枯燥生活背景音乐",
     "artist": "",
     "formats": [
@@ -616,7 +598,7 @@ const tabsData = [
     }
   },
   {
-    "id": 35,
+    "id": 34,
     "title": "说谎的马卡龙",
     "artist": "",
     "formats": [
@@ -637,7 +619,7 @@ const tabsData = [
     }
   },
   {
-    "id": 36,
+    "id": 35,
     "title": "风之诗",
     "artist": "",
     "formats": [
@@ -655,7 +637,7 @@ const tabsData = [
     }
   },
   {
-    "id": 37,
+    "id": 36,
     "title": "黄金之风",
     "artist": "",
     "formats": [
@@ -673,7 +655,7 @@ const tabsData = [
     }
   },
   {
-    "id": 38,
+    "id": 37,
     "title": "做梦的人偶（三音听哭老格林",
     "artist": "",
     "formats": [
@@ -691,7 +673,7 @@ const tabsData = [
     }
   },
   {
-    "id": 39,
+    "id": 38,
     "title": "柴郡猫（喵呜",
     "artist": "",
     "formats": [
@@ -709,7 +691,7 @@ const tabsData = [
     }
   },
   {
-    "id": 40,
+    "id": 39,
     "title": "（寒蝉鸣泣之时）YOU",
     "artist": "",
     "formats": [
