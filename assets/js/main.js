@@ -173,10 +173,21 @@ function openPreview(id) {
   titleEl.textContent = tab.category !== '单曲' ? `${tab.title} [${tab.category}]` : tab.title;
   modal.classList.remove('hidden');
 
+  // Show contributor credit
+  let contributorHtml = '';
+  if (tab.contributor) {
+    const name = tab.contributor.name || tab.contributor.uid || '匿名';
+    const url = tab.contributor.bilibili || tab.contributor.url || '#';
+    contributorHtml = `<div class="contributor-tag">感谢 <a href="${url}" target="_blank" rel="noopener">${name}</a> 提供谱子</div>`;
+  }
+
   const hasGpx = tab.formats.includes('gpx') && tab.files.gpx;
   const hasPdf = tab.formats.includes('pdf') && tab.files.pdf;
   const hasImages = tab.files.images && tab.files.images.length > 0;
   const hasMultiple = (hasGpx && hasPdf) || (hasGpx && hasImages) || (hasPdf && hasImages);
+
+  // Insert contributor credit after title
+  document.getElementById('modal-contributor').innerHTML = contributorHtml;
 
   if (hasMultiple) {
     renderPreviewModeSelector(tab, body);
@@ -187,7 +198,7 @@ function openPreview(id) {
   } else if (hasImages) {
     renderImagesPreview(tab, body);
   } else {
-    body.innerHTML = '<p style="text-align:center;color:#8b949e;padding:40px;">没有可预览的资源</p>';
+    body.innerHTML += '<p style="text-align:center;color:#8b949e;padding:40px;">没有可预览的资源</p>';
   }
 }
 
@@ -397,5 +408,53 @@ document.getElementById('modal').addEventListener('click', (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Escape') {
+    closeModal();
+    closeCredits();
+  }
+});
+
+// ===== 致谢墙 =====
+
+function showCredits() {
+  const modal = document.getElementById('credits-modal');
+  const list = document.getElementById('credits-list');
+
+  // Collect all contributors from tabsData
+  const contributors = new Map();
+  tabsData.forEach(tab => {
+    if (tab.contributor) {
+      const key = tab.contributor.bilibili || tab.contributor.name || tab.contributor.uid;
+      if (!contributors.has(key)) {
+        contributors.set(key, {
+          name: tab.contributor.name || tab.contributor.uid || '匿名',
+          bilibili: tab.contributor.bilibili || tab.contributor.url || null,
+          count: 1
+        });
+      } else {
+        contributors.get(key).count++;
+      }
+    }
+  });
+
+  if (contributors.size === 0) {
+    list.innerHTML = `<li class="credits-empty">还没有贡献者，等你来当第一个！</li>`;
+  } else {
+    list.innerHTML = Array.from(contributors.values()).map(c => {
+      const link = c.bilibili
+        ? `<a href="${c.bilibili}" target="_blank" rel="noopener">${c.name}</a>`
+        : c.name;
+      return `<li>${link} <span class="credits-count">${c.count} 首</span></li>`;
+    }).join('');
+  }
+
+  modal.classList.remove('hidden');
+}
+
+function closeCredits() {
+  document.getElementById('credits-modal').classList.add('hidden');
+}
+
+document.getElementById('credits-modal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('credits-modal')) closeCredits();
 });

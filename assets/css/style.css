@@ -539,6 +539,105 @@ footer .signature {
   margin-left: 0;
 }
 
+/* ===== 贡献者标签 ===== */
+.contributor-tag {
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  margin-bottom: 12px;
+}
+
+.contributor-tag a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contributor-tag a:hover {
+  text-decoration: underline;
+}
+
+/* ===== 致谢按钮 ===== */
+.credits-btn {
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.credits-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ===== 致谢墙 ===== */
+.credits-content {
+  max-width: 480px;
+}
+
+.credits-sub {
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.credits-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.credits-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+.credits-list li a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.credits-list li a:hover {
+  text-decoration: underline;
+}
+
+.credits-count {
+  font-size: 0.75rem;
+  color: var(--fg-faint);
+}
+
+.credits-empty {
+  color: var(--fg-faint) !important;
+  justify-content: center !important;
+  font-size: 0.85rem;
+}
+
+.credits-cta {
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+
+.credits-cta p:first-child {
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 4px;
+}
+
 /* ===== 滚动条 ===== */
 ::-webkit-scrollbar {
   width: 6px;

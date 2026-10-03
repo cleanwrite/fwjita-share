@@ -12,7 +12,11 @@ const tabsData = [
         "assets/tabs/Are you lost（只有第一面qwq）/are you lost（超简版.png"
       ]
     },
-    "category": "单曲"
+    "category": "单曲",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
   },
   {
     "id": 2,
@@ -67,7 +71,11 @@ const tabsData = [
       "gpx": "assets/tabs/Something Just Like This/Something Just Like This.gp",
       "pdf": "assets/tabs/Something Just Like This/Something Just Like This.pdf"
     },
-    "category": "单曲"
+    "category": "单曲",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
   },
   {
     "id": 5,
@@ -81,7 +89,11 @@ const tabsData = [
         "assets/tabs/call of silence/call of silence.jpeg"
       ]
     },
-    "category": "单曲"
+    "category": "单曲",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
   },
   {
     "id": 6,
@@ -111,7 +123,11 @@ const tabsData = [
         "assets/tabs/undertale/(ut)his theme/还是his theme（？.png"
       ]
     },
-    "category": "undertale"
+    "category": "undertale",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
   },
   {
     "id": 8,
@@ -125,7 +141,11 @@ const tabsData = [
       "gpx": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.gpx",
       "pdf": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.pdf"
     },
-    "category": "undertale"
+    "category": "undertale",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
   },
   {
     "id": 9,
@@ -361,7 +381,11 @@ const tabsData = [
       "gpx": "assets/tabs/明日方舟/春弦/春弦.gpx",
       "pdf": "assets/tabs/明日方舟/春弦/春弦.pdf"
     },
-    "category": "明日方舟"
+    "category": "明日方舟",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
   },
   {
     "id": 26,

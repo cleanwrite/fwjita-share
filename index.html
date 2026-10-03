@@ -30,6 +30,7 @@
     <section class="toolbar">
       <button id="back-btn" class="back-btn" onclick="renderCategories()"></button>
       <input type="text" id="search-input" placeholder="搜索吉他谱..." oninput="filterTabs()">
+      <button id="credits-btn" class="credits-btn" onclick="showCredits()">致谢</button>
     </section>
 
     <section id="tab-list" class="tab-list"></section>
@@ -38,7 +39,21 @@
       <div class="modal-content">
         <button class="close-btn" onclick="closeModal()" aria-label="关闭">&times;</button>
         <h2 id="modal-title"></h2>
+        <div id="modal-contributor"></div>
         <div id="modal-body"></div>
+      </div>
+    </div>
+
+    <div id="credits-modal" class="modal hidden">
+      <div class="modal-content credits-content">
+        <button class="close-btn" onclick="closeCredits()" aria-label="关闭">&times;</button>
+        <h2>致谢墙</h2>
+        <p class="credits-sub">感谢以下朋友提供曲谱</p>
+        <ul id="credits-list" class="credits-list"></ul>
+        <div class="credits-cta">
+          <p>想要贡献曲谱？</p>
+          <p>把谱子发到 B站私信 或 GitHub issue，上传后这里会加上你的 B站主页 ✨</p>
+        </div>
       </div>
     </div>
   </main>
