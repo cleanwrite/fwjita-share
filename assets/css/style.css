@@ -512,6 +512,22 @@ footer .divider {
   margin: 0 8px;
 }
 
+.footer-link {
+  color: var(--fg-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--fg);
+}
+
+.signature {
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
 /* ===== 滚动条 ===== */
 ::-webkit-scrollbar {
   width: 6px;
