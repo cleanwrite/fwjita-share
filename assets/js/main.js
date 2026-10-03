@@ -15,8 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function renderCategories() {
   currentView = 'categories';
   const search = document.getElementById('search-input');
-  search.style.display = 'none';
+  search.style.display = 'block';
   document.getElementById('back-btn').style.display = 'none';
+  search.value = '';
+  search.placeholder = '🔍 搜索所有吉他谱...';
 
   const grouped = {};
   tabsData.forEach(tab => {
@@ -72,6 +74,7 @@ function openCategory(cat) {
   const search = document.getElementById('search-input');
   search.style.display = 'block';
   search.value = '';
+  search.placeholder = '🔍 在当前分类中搜索...';
   document.getElementById('back-btn').style.display = 'block';
   document.getElementById('back-btn').textContent = '← 返回分类';
 
@@ -106,25 +109,53 @@ function renderTabListInCategory(cat) {
   }).join('');
 }
 
-// ========== 搜索（仅第二层有效） ==========
+// ========== 搜索（全局搜索 / 分类内搜索） ==========
 
 function filterTabs() {
-  if (currentView !== 'tabs') return;
-  const keyword = document.getElementById('search-input').value.toLowerCase();
-  const tabs = tabsData.filter(t =>
-    t.category === currentCategory &&
-    t.title.toLowerCase().includes(keyword)
-  );
+  const keyword = document.getElementById('search-input').value.toLowerCase().trim();
   const container = document.getElementById('tab-list');
-  if (tabs.length === 0) {
-    container.innerHTML = '<p style="text-align:center;color:#8b949e;padding:40px;">没有找到匹配的吉他谱</p>';
+
+  if (!keyword) {
+    // 空搜索 → 回到当前视图
+    if (currentView === 'categories') {
+      renderCategories();
+    } else {
+      renderTabListInCategory(currentCategory);
+    }
     return;
   }
+
+  // 判断搜索范围
+  let tabs;
+  if (currentView === 'categories') {
+    // 全局搜索：搜所有谱子
+    tabs = tabsData.filter(t => t.title.toLowerCase().includes(keyword));
+  } else {
+    // 分类内搜索
+    tabs = tabsData.filter(t =>
+      t.category === currentCategory &&
+      t.title.toLowerCase().includes(keyword)
+    );
+  }
+
+  if (tabs.length === 0) {
+    container.innerHTML = `<p style="text-align:center;color:#8b949e;padding:40px;">没有找到"${keyword}"相关的吉他谱</p>`;
+    return;
+  }
+
+  // 全局搜索时切换到列表视图
+  if (currentView === 'categories' && tabs.length > 0) {
+    currentView = 'tabs';
+    document.getElementById('back-btn').style.display = 'block';
+    document.getElementById('back-btn').textContent = '← 返回分类';
+  }
+
   container.innerHTML = tabs.map(tab => {
     const hasMultiple = tab.formats.length > 1;
     return `
       <div class="tab-card" onclick="openPreview(${tab.id})">
         <h3>${tab.title}</h3>
+        <p class="category-tag">${tab.category}</p>
         <div class="formats">
           ${tab.formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
         </div>
