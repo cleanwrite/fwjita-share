@@ -314,7 +314,6 @@ function initAlphaTab(gpxPath) {
 }
 
 function setupAlphaTab(container, buffer) {
-  // Ensure container has width before init
   if (!container.offsetWidth) {
     container.style.width = '100%';
     container.style.minWidth = '600px';
@@ -324,10 +323,10 @@ function setupAlphaTab(container, buffer) {
     core: {
       engine: 'svg',
       logLevel: 1,
-      useWorkers: false  // Disable workers for static hosting
+      useWorkers: false
     },
     display: {
-      staveProfile: 'score-tab',  // Show both score and tab
+      staveProfile: 0,  // StaveProfile.Default = 0
       scale: 1.0
     },
     player: {
@@ -342,29 +341,23 @@ function setupAlphaTab(container, buffer) {
     alphaTabApi = new alphaTab.AlphaTabApi(container, settings);
   } catch (e) {
     console.error('alphaTab init error:', e);
-    container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">
-      ⚠️ alphaTab 初始化失败: ${e.message}
-    </p>`;
+    container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">⚠️ alphaTab 初始化失败: ${e.message}</p>`;
     return;
   }
 
   alphaTabApi.error.on((error) => {
     console.error('alphaTab Error:', error);
-    container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">
-      ⚠️ 乐谱解析失败: ${error.message || error}
-    </p>`;
   });
 
   alphaTabApi.scoreLoaded.on((score) => {
     console.log('Score loaded:', score?.title, 'Tracks:', score?.tracks?.length);
-  });
-
-  alphaTabApi.renderStarted.on(() => {
-    console.log('Rendering started, container width:', container.offsetWidth);
-  });
-
-  alphaTabApi.renderFinished.on(() => {
-    console.log('Rendering finished');
+    // Fix missing per-track stylesheet maps that cause "Cannot read properties of undefined (reading 'has')"
+    if (score?.stylesheet) {
+      const ss = score.stylesheet;
+      if (!ss.perTrackMultiBarRest) ss.perTrackMultiBarRest = new Map();
+      if (!ss.perTrackDisplayTuning) ss.perTrackDisplayTuning = new Map();
+      if (!ss.perTrackChordDiagramsOnTop) ss.perTrackChordDiagramsOnTop = new Map();
+    }
   });
 
   // alphaTab 1.8: load(data) returns boolean (sync)
@@ -373,7 +366,7 @@ function setupAlphaTab(container, buffer) {
     const success = alphaTabApi.load(uint8);
     console.log('alphaTab load returned:', success);
     if (!success) {
-      container.innerHTML = '<p style="color:#f85149;text-align:center;padding:20px;">⚠️ 乐谱解析失败，文件可能损坏或格式不支持。</p>';
+      container.innerHTML = '<p style="color:#f85149;text-align:center;padding:20px;">⚠️ 乐谱解析失败</p>';
     }
   } catch (e) {
     console.error('alphaTab load exception:', e);
