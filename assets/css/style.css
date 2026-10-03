@@ -257,6 +257,12 @@ main {
   align-items: center;
   gap: 4px;
   margin-top: 2px;
+  flex-wrap: wrap;
+}
+
+.card-versions {
+  font-size: 0.75rem;
+  color: var(--accent);
 }
 
 .card-category {

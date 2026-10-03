@@ -1,7 +1,8 @@
 // 全局状态
 let alphaTabApi = null;
 let currentCategory = '全部';
-let currentView = 'categories';  // 'categories' | 'tabs'
+let currentSongGroup = null;     // 当前打开的歌名分组
+let currentView = 'categories';  // 'categories' | 'songs' | 'versions'
 let currentPreviewTab = null;
 let currentPreviewMode = 'gpx';
 
@@ -70,8 +71,9 @@ function getCategoryIcon(cat) {
 // ========== 第二层：分类内的谱子列表 ==========
 
 function openCategory(cat) {
-  currentView = 'tabs';
+  currentView = 'songs';
   currentCategory = cat;
+  currentSongGroup = null;
 
   const search = document.getElementById('search-input');
   search.style.display = 'block';
@@ -80,7 +82,105 @@ function openCategory(cat) {
   document.getElementById('back-btn').style.display = 'block';
   document.getElementById('back-btn').textContent = '← 返回分类';
 
-  renderTabListInCategory(cat);
+  renderSongList(cat);
+}
+
+// ========== 第二层：歌名列表（同一首歌只显示一次） ==========
+
+function renderSongList(cat) {
+  const container = document.getElementById('tab-list');
+  const tabs = tabsData.filter(t => t.category === cat);
+
+  if (tabs.length === 0) {
+    container.innerHTML = '<p style="text-align:center;color:#8b949e;padding:40px;">该分类下没有谱子</p>';
+    return;
+  }
+
+  // Group by base song name (first word of title, or full title if no parentheses)
+  const groups = {};
+  tabs.forEach(tab => {
+    // Extract base song name: everything before the first ( or （
+    let baseName = tab.title.split(/[（(]/)[0].trim();
+    if (!baseName) baseName = tab.title;
+    if (!groups[baseName]) groups[baseName] = [];
+    groups[baseName].push(tab);
+  });
+
+  const songs = Object.keys(groups).sort();
+
+  container.innerHTML = songs.map(song => {
+    const versions = groups[song];
+    const versionCount = versions.length;
+    const formats = [...new Set(versions.flatMap(t => t.formats))];
+
+    return `
+      <div class="tab-card song-group-card" onclick="openSongGroup('${song}')">
+        <div class="card-info">
+          <h3>${song}</h3>
+          <div class="card-meta-row">
+            <span class="card-category">${cat}</span>
+            ${versionCount > 1 ? `<span class="card-dot">·</span><span class="card-versions">${versionCount} 个版本</span>` : ''}
+          </div>
+        </div>
+        <div class="formats">
+          ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ========== 第三层：同一首歌的版本列表 ==========
+
+function openSongGroup(songName) {
+  currentView = 'versions';
+  currentSongGroup = songName;
+
+  const search = document.getElementById('search-input');
+  search.style.display = 'none';
+  document.getElementById('back-btn').style.display = 'block';
+  document.getElementById('back-btn').textContent = '← 返回歌名';
+
+  renderVersionList(songName);
+}
+
+function renderVersionList(songName) {
+  const container = document.getElementById('tab-list');
+  const versions = tabsData.filter(tab => {
+    let baseName = tab.title.split(/[（(]/)[0].trim();
+    if (!baseName) baseName = tab.title;
+    return baseName === songName && tab.category === currentCategory;
+  });
+
+  if (versions.length === 0) {
+    container.innerHTML = '<p style="text-align:center;color:#8b949e;padding:40px;">没有版本</p>';
+    return;
+  }
+
+  container.innerHTML = versions.map(tab => {
+    const contrib = tab.contributor
+      ? `<a href="${tab.contributor.bilibili || tab.contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${tab.contributor.name || '匿名'}</a>`
+      : '';
+    // Show version suffix (the part in parentheses)
+    let versionLabel = tab.title;
+    const parenMatch = tab.title.match(/[（(]([^）)]*)[）)]/);
+    if (parenMatch) versionLabel = parenMatch[1].trim();
+    const isDefault = tab.title === songName || tab.title === songName + '（';
+
+    return `
+      <div class="tab-card version-card" onclick="openPreview(${tab.id})">
+        <div class="card-info">
+          <h3>${isDefault ? '原版' : versionLabel}</h3>
+          <div class="card-meta-row">
+            ${contrib ? `<span>·</span>${contrib}` : ''}
+          </div>
+        </div>
+        <div class="formats">
+          ${tab.formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 function renderTabListInCategory(cat) {
@@ -119,22 +219,20 @@ function filterTabs() {
   const container = document.getElementById('tab-list');
 
   if (!keyword) {
-    // 空搜索 → 回到当前视图
     if (currentView === 'categories') {
       renderCategories();
-    } else {
-      renderTabListInCategory(currentCategory);
+    } else if (currentView === 'songs') {
+      renderSongList(currentCategory);
+    } else if (currentView === 'versions') {
+      renderVersionList(currentSongGroup);
     }
     return;
   }
 
-  // 判断搜索范围
   let tabs;
   if (currentView === 'categories') {
-    // 全局搜索：搜所有谱子
     tabs = tabsData.filter(t => t.title.toLowerCase().includes(keyword));
   } else {
-    // 分类内搜索
     tabs = tabsData.filter(t =>
       t.category === currentCategory &&
       t.title.toLowerCase().includes(keyword)
@@ -146,9 +244,8 @@ function filterTabs() {
     return;
   }
 
-  // 全局搜索时切换到列表视图
-  if (currentView === 'categories' && tabs.length > 0) {
-    currentView = 'tabs';
+  if (currentView === 'categories') {
+    currentView = 'songs';
     document.getElementById('back-btn').style.display = 'block';
     document.getElementById('back-btn').textContent = '← 返回分类';
   }
@@ -396,6 +493,24 @@ function setupAlphaTab(container, buffer) {
   } catch (e) {
     console.error('alphaTab load exception:', e);
     container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">⚠️ 加载异常: ${e.message}</p>`;
+  }
+}
+
+// 返回按钮逻辑
+function goBack() {
+  if (currentView === 'versions') {
+    // 版本列表 → 返回歌名列表
+    currentView = 'songs';
+    currentSongGroup = null;
+    const search = document.getElementById('search-input');
+    search.style.display = 'block';
+    search.value = '';
+    search.placeholder = '🔍 在当前分类中搜索...';
+    document.getElementById('back-btn').textContent = '← 返回分类';
+    renderSongList(currentCategory);
+  } else if (currentView === 'songs') {
+    // 歌名列表 → 返回分类
+    renderCategories();
   }
 }
 
