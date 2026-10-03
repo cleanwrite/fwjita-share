@@ -243,11 +243,15 @@ function switchPreviewMode(mode) {
 }
 
 function renderGpxPreview(tab, container) {
+  const gpxFilename = tab.files.gpx.split('/').pop();
   container.innerHTML = `
     <div class="player-controls">
       <button onclick="playerPlay()">▶ 播放</button>
       <button onclick="playerPause()">⏸ 暂停</button>
       <button onclick="playerStop()">⏹ 停止</button>
+      <a href="${encodeAssetPath(tab.files.gpx)}" class="btn btn-primary" download="${gpxFilename}">
+        ⬇️ 下载 GPX
+      </a>
       <div class="speed-control">
         <label>速度:</label>
         <input type="range" id="speed-slider" min="25" max="150" value="100"
