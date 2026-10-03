@@ -78,7 +78,7 @@ function openCategory(cat) {
   const search = document.getElementById('search-input');
   search.style.display = 'block';
   search.value = '';
-  search.placeholder = '🔍 在当前分类中搜索...';
+  search.placeholder = '🔍 搜索所有吉他谱...';
   document.getElementById('back-btn').style.display = 'block';
   document.getElementById('back-btn').textContent = '← 返回分类';
 
@@ -228,13 +228,14 @@ function renderTabListInCategory(cat) {
   `}).join('');
 }
 
-// ========== 搜索（全局搜索 / 分类内搜索） ==========
+// ========== 搜索（全局搜索） ==========
 
 function filterTabs() {
   const keyword = document.getElementById('search-input').value.toLowerCase().trim();
   const container = document.getElementById('tab-list');
 
   if (!keyword) {
+    // Empty search → return to current view
     if (currentView === 'categories') {
       renderCategories();
     } else if (currentView === 'songs') {
@@ -245,45 +246,76 @@ function filterTabs() {
     return;
   }
 
-  let tabs;
-  if (currentView === 'categories') {
-    tabs = tabsData.filter(t => t.title.toLowerCase().includes(keyword));
-  } else {
-    tabs = tabsData.filter(t =>
-      t.category === currentCategory &&
-      t.title.toLowerCase().includes(keyword)
-    );
-  }
+  // Global search: search ALL tabs across all categories
+  const matchedTabs = tabsData.filter(tab =>
+    tab.title.toLowerCase().includes(keyword) ||
+    tab.category.toLowerCase().includes(keyword) ||
+    (tab.song_group && tab.song_group.toLowerCase().includes(keyword))
+  );
 
-  if (tabs.length === 0) {
-    container.innerHTML = `<p style="text-align:center;color:#8b949e;padding:40px;">没有找到"${keyword}"相关的吉他谱</p>`;
+  if (matchedTabs.length === 0) {
+    container.innerHTML = `<p style="text-align:center;color:var(--fg-muted);padding:40px;">没有找到"${keyword}"相关的吉他谱</p>`;
     return;
   }
 
-  if (currentView === 'categories') {
-    currentView = 'songs';
-    document.getElementById('back-btn').style.display = 'block';
-    document.getElementById('back-btn').textContent = '← 返回分类';
-  }
+  // Group results by song_group
+  const groups = {};
+  matchedTabs.forEach(tab => {
+    const group = tab.song_group || tab.title;
+    if (!groups[group]) groups[group] = [];
+    groups[group].push(tab);
+  });
 
-  container.innerHTML = tabs.map(tab => {
-    const contrib = tab.contributor
-      ? `<a href="${tab.contributor.bilibili || tab.contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${tab.contributor.name || '匿名'}</a>`
+  // Switch to search results view
+  currentView = 'search';
+  document.getElementById('back-btn').style.display = 'block';
+  document.getElementById('back-btn').textContent = '← 返回分类';
+
+  const songs = Object.keys(groups).sort();
+
+  container.innerHTML = songs.map(song => {
+    const versions = groups[song];
+    const versionCount = versions.length;
+    const formats = [...new Set(versions.flatMap(t => t.formats))];
+    const contrib = versions[0].contributor
+      ? `<a href="${versions[0].contributor.bilibili || versions[0].contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${versions[0].contributor.name || '匿名'}</a>`
       : '';
-    return `
-    <div class="tab-card" onclick="openPreview(${tab.id})">
-      <div class="card-info">
-        <h3>${tab.title}</h3>
-        <div class="card-meta-row">
-          <span class="card-category">${tab.category}</span>
-          ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
+    const category = versions[0].category;
+
+    // Single version: click directly to preview
+    if (versionCount === 1) {
+      const tab = versions[0];
+      return `
+      <div class="tab-card" onclick="openPreview(${tab.id})">
+        <div class="card-info">
+          <h3>${song}</h3>
+          <div class="card-meta-row">
+            <span class="card-category">${category}</span>
+            ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
+          </div>
         </div>
-      </div>
-      <div class="formats">
-        ${tab.formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
-      </div>
-    </div>
-  `}).join('');
+        <div class="formats">
+          ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
+        </div>
+      </div>`;
+    }
+
+    // Multiple versions: click to show version list
+    return `
+      <div class="tab-card song-group-card" onclick="openSongGroup('${song}')">
+        <div class="card-info">
+          <h3>${song}</h3>
+          <div class="card-meta-row">
+            <span class="card-category">${category}</span>
+            <span class="card-dot">·</span>
+            <span class="card-versions">${versionCount} 个版本</span>
+          </div>
+        </div>
+        <div class="formats">
+          ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
+        </div>
+      </div>`;
+  }).join('');
 }
 
 // ========== 第三层：预览弹窗 ==========
@@ -521,11 +553,11 @@ function goBack() {
     const search = document.getElementById('search-input');
     search.style.display = 'block';
     search.value = '';
-    search.placeholder = '🔍 在当前分类中搜索...';
+    search.placeholder = '🔍 搜索所有吉他谱...';
     document.getElementById('back-btn').textContent = '← 返回分类';
     renderSongList(currentCategory);
-  } else if (currentView === 'songs') {
-    // 歌名列表 → 返回分类
+  } else if (currentView === 'songs' || currentView === 'search') {
+    // 歌名列表或搜索结果 → 返回分类
     renderCategories();
   }
 }
