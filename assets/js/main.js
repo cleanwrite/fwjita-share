@@ -43,16 +43,9 @@ function renderTabList(data) {
         <button class="btn btn-primary" onclick="event.stopPropagation(); openPreview(${tab.id})">
           👁 预览
         </button>
-        ${tab.files.gpx ? `<a href="${encodePath(tab.files.gpx)}" class="btn" download onclick="event.stopPropagation();">📥 GPX</a>` : ''}
-        ${tab.files.pdf ? `<a href="${encodePath(tab.files.pdf)}" class="btn" target="_blank" onclick="event.stopPropagation();">📄 PDF</a>` : ''}
       </div>
     </div>
   `).join('');
-}
-
-// 编码中文路径
-function encodePath(path) {
-  return path.split('/').map(encodeURIComponent).join('/');
 }
 
 // 搜索 + 分类过滤
@@ -91,7 +84,7 @@ function openPreview(id) {
 
   let html = '';
 
-  // GPX 渲染
+  // GPX 渲染（最高优先级）
   if (tab.formats.includes('gpx') && tab.files.gpx) {
     html += `
       <div class="player-controls">
@@ -105,38 +98,75 @@ function openPreview(id) {
           <span id="speed-value">100%</span>
         </div>
       </div>
-      <div id="alphaTab-container"></div>
+      <div id="alphaTab-container">
+        <p style="color:#8b949e;text-align:center;padding:40px;">正在加载乐谱...</p>
+      </div>
     `;
-    setTimeout(() => initAlphaTab(tab.files.gpx), 100);
+    body.innerHTML = html;
+    initAlphaTab(tab.files.gpx);
+    return;
+  }
+
+  // PDF 预览（iframe 直接嵌入）
+  if (tab.formats.includes('pdf') && tab.files.pdf) {
+    html += `<iframe class="preview-pdf" src="${encodeAssetPath(tab.files.pdf)}"></iframe>`;
   }
 
   // 图片预览
   if (tab.files.images) {
     html += '<div class="image-gallery">';
     tab.files.images.forEach(img => {
-      html += `<img class="preview-image" src="${encodePath(img)}" alt="${tab.title}" loading="lazy"
-                    onclick="window.open('${encodePath(img)}', '_blank')">`;
+      html += `<img class="preview-image" src="${encodeAssetPath(img)}" alt="${tab.title}" loading="lazy"
+                    onclick="window.open('${encodeAssetPath(img)}', '_blank')">`;
     });
     html += '</div>';
-  }
-
-  // PDF 预览
-  if (tab.formats.includes('pdf') && tab.files.pdf) {
-    html += `<iframe class="preview-pdf" src="${encodePath(tab.files.pdf)}"></iframe>`;
   }
 
   body.innerHTML = html;
 }
 
-// 初始化 alphaTab
-function initAlphaTab(gpxUrl) {
+// 编码资源路径（中文和特殊字符）
+function encodeAssetPath(path) {
+  return path.split('/').map(segment => encodeURIComponent(segment)).join('/');
+}
+
+// 初始化 alphaTab - 使用 fetch + ArrayBuffer 加载文件
+function initAlphaTab(gpxPath) {
   const container = document.getElementById('alphaTab-container');
   if (!container) return;
 
+  // 销毁旧实例
   if (alphaTabApi) {
-    alphaTabApi.destroy();
+    try { alphaTabApi.destroy(); } catch(e) {}
     alphaTabApi = null;
   }
+
+  container.innerHTML = '<p style="color:#8b949e;text-align:center;padding:40px;">正在加载乐谱文件...</p>';
+
+  // 先 fetch 文件（确保中文路径正确编码）
+  const encodedUrl = encodeAssetPath(gpxPath);
+
+  fetch(encodedUrl)
+    .then(response => {
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      return response.arrayBuffer();
+    })
+    .then(buffer => {
+      container.innerHTML = '';
+      setupAlphaTab(container, buffer);
+    })
+    .catch(err => {
+      console.error('GPX load error:', err);
+      container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">
+        ⚠️ 乐谱文件加载失败：${err.message}<br>
+        <small>路径: ${gpxPath}</small>
+      </p>`;
+    });
+}
+
+// 设置 alphaTab 并传入 ArrayBuffer
+function setupAlphaTab(container, buffer) {
+  console.log('alphaTab setup: buffer size =', buffer.length, 'bytes');
 
   const settings = {
     core: {
@@ -157,9 +187,27 @@ function initAlphaTab(gpxUrl) {
 
   alphaTabApi = new alphaTab.AlphaTabApi(container, settings);
 
-  alphaTabApi.load(gpxUrl, (success) => {
+  // 监听错误事件
+  alphaTabApi.error = (message, type, details) => {
+    console.error('alphaTab Error:', { message, type, details });
+    container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">
+      ⚠️ 乐谱解析失败: ${message}
+    </p>`;
+  };
+
+  // 渲染成功时输出信息
+  alphaTabApi.renderStarted = () => {
+    console.log('alphaTab rendering started');
+  };
+
+  alphaTabApi.renderFinished = () => {
+    console.log('alphaTab rendering finished');
+  };
+
+  alphaTabApi.load(new Uint8Array(buffer), (success) => {
+    console.log('alphaTab load callback: success =', success);
     if (!success) {
-      container.innerHTML = '<p style="color:#f85149;text-align:center;padding:20px;">⚠️ 乐谱加载失败。可能原因：文件路径包含中文（建议改用英文路径）或文件损坏。</p>';
+      container.innerHTML = '<p style="color:#f85149;text-align:center;padding:20px;">⚠️ 乐谱解析失败，文件可能损坏或格式不支持。</p>';
     }
   });
 }
