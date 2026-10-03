@@ -228,7 +228,7 @@ function renderTabListInCategory(cat) {
   `}).join('');
 }
 
-// ========== 搜索（全局搜索） ==========
+// ========== 搜索 ==========
 
 function filterTabs() {
   const keyword = document.getElementById('search-input').value.toLowerCase().trim();
@@ -246,10 +246,27 @@ function filterTabs() {
     return;
   }
 
-  // Global search: search ALL tabs across all categories
-  const matchedTabs = tabsData.filter(tab =>
+  // Determine search scope based on current view
+  let searchPool;
+  let isGlobalSearch;
+
+  if (currentView === 'categories') {
+    // At category level → global search across all categories
+    searchPool = tabsData;
+    isGlobalSearch = true;
+  } else if (currentView === 'songs') {
+    // Inside a category → search only within this category
+    searchPool = tabsData.filter(tab => tab.category === currentCategory);
+    isGlobalSearch = false;
+  } else {
+    // versions or other → global search
+    searchPool = tabsData;
+    isGlobalSearch = true;
+  }
+
+  // Search
+  const matchedTabs = searchPool.filter(tab =>
     tab.title.toLowerCase().includes(keyword) ||
-    tab.category.toLowerCase().includes(keyword) ||
     (tab.song_group && tab.song_group.toLowerCase().includes(keyword))
   );
 
@@ -266,10 +283,10 @@ function filterTabs() {
     groups[group].push(tab);
   });
 
-  // Switch to search results view
+  // Mark as search view
   currentView = 'search';
   document.getElementById('back-btn').style.display = 'block';
-  document.getElementById('back-btn').textContent = '← 返回分类';
+  document.getElementById('back-btn').textContent = isGlobalSearch ? '← 返回分类' : '← 返回歌名';
 
   const songs = Object.keys(groups).sort();
 
