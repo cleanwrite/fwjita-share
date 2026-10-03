@@ -259,11 +259,14 @@ function renderGpxPreview(tab, container) {
         <span id="speed-value">100%</span>
       </div>
     </div>
-    <div id="alphaTab-container">
+    <div id="alphaTab-container" style="width:100%; min-height:400px; background:#fff; border-radius:8px; padding:16px; box-sizing:border-box; overflow-x:auto;">
       <p style="color:#8b949e;text-align:center;padding:40px;">正在加载乐谱...</p>
     </div>
   `;
-  initAlphaTab(tab.files.gpx);
+  // Give browser a moment to calculate layout before init alphaTab
+  requestAnimationFrame(() => {
+    initAlphaTab(tab.files.gpx);
+  });
 }
 
 function renderPdfPreview(tab, container) {
@@ -318,9 +321,22 @@ function initAlphaTab(gpxPath) {
 }
 
 function setupAlphaTab(container, buffer) {
+  // Ensure container has width before init
+  if (!container.offsetWidth) {
+    container.style.width = '100%';
+    container.style.minWidth = '600px';
+  }
+
   const settings = {
-    core: { engine: 'svg', logLevel: 1 },
-    display: { staveProfile: 'tab', scale: 1.0 },
+    core: {
+      engine: 'svg',
+      logLevel: 1,
+      useWorkers: false  // Disable workers for static hosting
+    },
+    display: {
+      staveProfile: 'score-tab',  // Show both score and tab
+      scale: 1.0
+    },
     player: {
       enablePlayer: true,
       enableCursor: true,
@@ -329,7 +345,15 @@ function setupAlphaTab(container, buffer) {
     }
   };
 
-  alphaTabApi = new alphaTab.AlphaTabApi(container, settings);
+  try {
+    alphaTabApi = new alphaTab.AlphaTabApi(container, settings);
+  } catch (e) {
+    console.error('alphaTab init error:', e);
+    container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">
+      ⚠️ alphaTab 初始化失败: ${e.message}
+    </p>`;
+    return;
+  }
 
   alphaTabApi.error.on((error) => {
     console.error('alphaTab Error:', error);
@@ -338,13 +362,25 @@ function setupAlphaTab(container, buffer) {
     </p>`;
   });
 
+  alphaTabApi.scoreLoaded.on((score) => {
+    console.log('Score loaded:', score?.title, 'Tracks:', score?.tracks?.length);
+  });
+
+  alphaTabApi.renderStarted.on(() => {
+    console.log('Rendering started, container width:', container.offsetWidth);
+  });
+
+  alphaTabApi.renderFinished.on(() => {
+    console.log('Rendering finished');
+  });
+
   // alphaTab 1.8: load(data) returns boolean (sync)
   try {
     const uint8 = new Uint8Array(buffer);
     const success = alphaTabApi.load(uint8);
     console.log('alphaTab load returned:', success);
     if (!success) {
-      container.innerHTML = '<p style="color:#f85149;text-align:center;padding:20px;">⚠️ 乐谱解析失败</p>';
+      container.innerHTML = '<p style="color:#f85149;text-align:center;padding:20px;">⚠️ 乐谱解析失败，文件可能损坏或格式不支持。</p>';
     }
   } catch (e) {
     console.error('alphaTab load exception:', e);
