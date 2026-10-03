@@ -187,22 +187,22 @@ function setupAlphaTab(container, buffer) {
 
   alphaTabApi = new alphaTab.AlphaTabApi(container, settings);
 
-  // 监听错误事件
-  alphaTabApi.error = (message, type, details) => {
-    console.error('alphaTab Error:', { message, type, details });
+  // 监听错误事件（EventEmitter，不是直接赋值）
+  alphaTabApi.error.on((error) => {
+    console.error('alphaTab Error:', error);
     container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">
-      ⚠️ 乐谱解析失败: ${message}
+      ⚠️ 乐谱解析失败: ${error.message || error}
     </p>`;
-  };
+  });
 
-  // 渲染成功时输出信息
-  alphaTabApi.renderStarted = () => {
+  // 渲染事件
+  alphaTabApi.renderStarted.on(() => {
     console.log('alphaTab rendering started');
-  };
+  });
 
-  alphaTabApi.renderFinished = () => {
+  alphaTabApi.renderFinished.on(() => {
     console.log('alphaTab rendering finished');
-  };
+  });
 
   alphaTabApi.load(new Uint8Array(buffer), (success) => {
     console.log('alphaTab load callback: success =', success);
