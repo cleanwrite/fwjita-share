@@ -523,10 +523,20 @@ footer .divider {
 }
 
 .signature {
+  display: inline-block;
   color: var(--accent);
   font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  margin-left: 6px;
+  opacity: 0.75;
+  vertical-align: middle;
+}
+
+footer .signature {
   font-size: 1rem;
-  letter-spacing: 0.04em;
+  opacity: 1;
+  margin-left: 0;
 }
 
 /* ===== 滚动条 ===== */
