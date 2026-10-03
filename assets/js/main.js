@@ -96,34 +96,12 @@ function renderSongList(cat) {
     return;
   }
 
-  // Group by base song name (first word of title, or full title if no parentheses)
-  // Group by base song name. Songs with same parent folder = same group.
-  // Use the parent folder name (if exists) as the grouping key.
+  // Group by song_group field. Songs with same song_group = same song, multiple versions.
   const groups = {};
   tabs.forEach(tab => {
-    let baseName;
-    // Check if this tab's file path has a parent song folder (3+ levels deep)
-    // e.g. undertale/(ut)his theme/his theme/ -> group = "(ut)his theme"
-    // e.g. undertale/Asgore[...]/ -> group = "Asgore[...]" (the folder name itself)
-    const parts = tab.category ? tab.category.split('/') : [];
-    const relativePath = tab.files.gpx || tab.files.pdf || (tab.files.images && tab.files.images[0]) || '';
-    const pathParts = relativePath.split('/');
-
-    if (pathParts.length >= 4) {
-      // File is in a subfolder (e.g. category/song_folder/version/file)
-      // Group by the song folder (third-to-last component)
-      baseName = pathParts[pathParts.length - 3];
-    } else if (pathParts.length >= 3) {
-      // File is directly in category/song_folder/file
-      // Use the last meaningful part of title without parenthetical suffixes
-      baseName = tab.title.split(/[（(]/)[0].trim();
-      if (!baseName) baseName = tab.title;
-    } else {
-      baseName = tab.title;
-    }
-
-    if (!groups[baseName]) groups[baseName] = [];
-    groups[baseName].push(tab);
+    const group = tab.song_group || tab.title;
+    if (!groups[group]) groups[group] = [];
+    groups[group].push(tab);
   });
 
   const songs = Object.keys(groups).sort();
@@ -132,13 +110,13 @@ function renderSongList(cat) {
     const versions = groups[song];
     const versionCount = versions.length;
     const formats = [...new Set(versions.flatMap(t => t.formats))];
+    const contrib = versions[0].contributor
+      ? `<a href="${versions[0].contributor.bilibili || versions[0].contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${versions[0].contributor.name || '匿名'}</a>`
+      : '';
 
     // Single version: click directly to preview
     if (versionCount === 1) {
       const tab = versions[0];
-      const contrib = tab.contributor
-        ? `<a href="${tab.contributor.bilibili || tab.contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${tab.contributor.name || '匿名'}</a>`
-        : '';
       return `
       <div class="tab-card" onclick="openPreview(${tab.id})">
         <div class="card-info">
@@ -189,16 +167,8 @@ function openSongGroup(songName) {
 function renderVersionList(songName) {
   const container = document.getElementById('tab-list');
   const versions = tabsData.filter(tab => {
-    const relativePath = tab.files.gpx || tab.files.pdf || (tab.files.images && tab.files.images[0]) || '';
-    const pathParts = relativePath.split('/');
-    let baseName;
-    if (pathParts.length >= 4) {
-      baseName = pathParts[pathParts.length - 3];
-    } else {
-      baseName = tab.title.split(/[（(]/)[0].trim();
-      if (!baseName) baseName = tab.title;
-    }
-    return baseName === songName && tab.category === currentCategory;
+    const group = tab.song_group || tab.title;
+    return group === songName && tab.category === currentCategory;
   });
 
   if (versions.length === 0) {
@@ -210,10 +180,8 @@ function renderVersionList(songName) {
     const contrib = tab.contributor
       ? `<a href="${tab.contributor.bilibili || tab.contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${tab.contributor.name || '匿名'}</a>`
       : '';
-    // Get version name from the subfolder (last path component before filename)
-    const relativePath = tab.files.gpx || tab.files.pdf || (tab.files.images && tab.files.images[0]) || '';
-    const pathParts = relativePath.split('/');
-    const versionLabel = pathParts.length >= 2 ? pathParts[pathParts.length - 2] : tab.title;
+    // Display the version title (subfolder name)
+    const versionLabel = tab.title;
 
     return `
       <div class="tab-card version-card" onclick="openPreview(${tab.id})">

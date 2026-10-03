@@ -11,7 +11,8 @@ const tabsData = [
         "assets/tabs/Are you lost（只有第一面qwq）/are you lost/are you lost.png"
       ]
     },
-    "category": "Are you lost（只有第一面qwq）",
+    "category": "单曲",
+    "song_group": "Are you lost（只有第一面qwq）",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -29,7 +30,8 @@ const tabsData = [
         "assets/tabs/Are you lost（只有第一面qwq）/are you lost（/are you lost（超简版.png"
       ]
     },
-    "category": "Are you lost（只有第一面qwq）",
+    "category": "单曲",
+    "song_group": "Are you lost（只有第一面qwq）",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -56,6 +58,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
+    "song_group": "Revolution(大树音乐",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -79,6 +82,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
+    "song_group": "River flows in you（元子吉他",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -97,6 +101,7 @@ const tabsData = [
       "pdf": "assets/tabs/Something Just Like This/Something Just Like This.pdf"
     },
     "category": "单曲",
+    "song_group": "Something Just Like This",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -115,6 +120,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
+    "song_group": "call of silence",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -131,6 +137,7 @@ const tabsData = [
       "pdf": "assets/tabs/stay/Stay.pdf"
     },
     "category": "单曲",
+    "song_group": "stay",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -150,6 +157,7 @@ const tabsData = [
       ]
     },
     "category": "undertale",
+    "song_group": "(ut)his theme",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -168,6 +176,7 @@ const tabsData = [
       ]
     },
     "category": "undertale",
+    "song_group": "(ut)his theme",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -186,6 +195,7 @@ const tabsData = [
       ]
     },
     "category": "undertale",
+    "song_group": "(ut)his theme",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -204,6 +214,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.pdf"
     },
     "category": "undertale",
+    "song_group": "Asgore[还原但是有点难",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -220,6 +231,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/Determination/Determination.pdf"
     },
     "category": "undertale",
+    "song_group": "Determination",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -238,6 +250,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/HOME/Undertale - Home.pdf"
     },
     "category": "undertale",
+    "song_group": "HOME",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -256,6 +269,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/Once Upon a Time_Toby Fox/Once Upon a Time_Toby Fox.pdf"
     },
     "category": "undertale",
+    "song_group": "Once Upon a Time_Toby Fox",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -274,6 +288,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正/Shanghaivania.pdf"
     },
     "category": "undertale",
+    "song_group": "Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -292,6 +307,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/Snowy/Snowy.pdf"
     },
     "category": "undertale",
+    "song_group": "Snowy",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -310,6 +326,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/Spider Dance/Spider Dance.pdf"
     },
     "category": "undertale",
+    "song_group": "Spider Dance",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -328,6 +345,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/Spooktune/Spooktune.pdf"
     },
     "category": "undertale",
+    "song_group": "Spooktune",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -346,6 +364,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/Tokyovania(也是同人）（Undertronic Remix/Tokyovania（Undertronic Remix）gtp.pdf"
     },
     "category": "undertale",
+    "song_group": "Tokyovania(也是同人）（Undertronic Remix",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -364,6 +383,7 @@ const tabsData = [
       "pdf": "assets/tabs/与你同在/千与千寻 - 与你同在(Always With Me)(指弹版).pdf"
     },
     "category": "单曲",
+    "song_group": "与你同在",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -382,6 +402,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
+    "song_group": "其他（我忘了名字啥的",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -398,6 +419,7 @@ const tabsData = [
       "pdf": "assets/tabs/劳伦斯先生×纯情活泼小姑娘（混合谱/Merry Cristmas,Miss Cirno.pdf"
     },
     "category": "单曲",
+    "song_group": "劳伦斯先生×纯情活泼小姑娘（混合谱",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -418,6 +440,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
+    "song_group": "吉他 - 莫愁乡",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -436,6 +459,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
+    "song_group": "小情歌",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -454,6 +478,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
+    "song_group": "恋爱循环",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -472,6 +497,7 @@ const tabsData = [
       ]
     },
     "category": "我的世界",
+    "song_group": "haggstorm",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -490,6 +516,7 @@ const tabsData = [
       "pdf": "assets/tabs/明日方舟/Requiem（霜星EP/Requiem.pdf"
     },
     "category": "明日方舟",
+    "song_group": "Requiem（霜星EP",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -508,6 +535,7 @@ const tabsData = [
       "pdf": "assets/tabs/明日方舟/春弦/春弦.pdf"
     },
     "category": "明日方舟",
+    "song_group": "春弦",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -524,6 +552,7 @@ const tabsData = [
       "pdf": "assets/tabs/晴天/晴天_1777565102341.pdf"
     },
     "category": "单曲",
+    "song_group": "晴天",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -542,6 +571,7 @@ const tabsData = [
       "pdf": "assets/tabs/欢乐颂/欢乐颂.pdf"
     },
     "category": "单曲",
+    "song_group": "欢乐颂",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -558,6 +588,7 @@ const tabsData = [
       "pdf": "assets/tabs/求生之路 dead center/求生之路 dead center.pdf"
     },
     "category": "单曲",
+    "song_group": "求生之路 dead center",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -576,6 +607,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
+    "song_group": "空白谱图片",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -592,6 +624,7 @@ const tabsData = [
       "pdf": "assets/tabs/美丽的搭档（朱一丹的枯燥生活背景音乐/美丽的搭档.pdf"
     },
     "category": "单曲",
+    "song_group": "美丽的搭档（朱一丹的枯燥生活背景音乐",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -613,6 +646,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
+    "song_group": "说谎的马卡龙",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -631,6 +665,7 @@ const tabsData = [
       "pdf": "assets/tabs/风之诗/风之诗.pdf"
     },
     "category": "单曲",
+    "song_group": "风之诗",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -649,6 +684,7 @@ const tabsData = [
       "pdf": "assets/tabs/黄金之风/黄金之风.pdf"
     },
     "category": "单曲",
+    "song_group": "黄金之风",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -667,6 +703,7 @@ const tabsData = [
       "pdf": "assets/tabs/黑暗之魂（blacksouls/做梦的人偶（三音听哭老格林/做梦的人偶.pdf"
     },
     "category": "黑暗之魂（blacksouls",
+    "song_group": "做梦的人偶（三音听哭老格林",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -685,6 +722,7 @@ const tabsData = [
       "pdf": "assets/tabs/黑暗之魂（blacksouls/柴郡猫（喵呜/柴郡猫.pdf"
     },
     "category": "黑暗之魂（blacksouls",
+    "song_group": "柴郡猫（喵呜",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -701,6 +739,7 @@ const tabsData = [
       "pdf": "assets/tabs/（寒蝉鸣泣之时）YOU/YOU.pdf"
     },
     "category": "单曲",
+    "song_group": "（寒蝉鸣泣之时）YOU",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
