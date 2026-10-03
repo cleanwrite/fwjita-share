@@ -658,36 +658,250 @@ footer .signature {
 }
 
 /* ===== 响应式 ===== */
+
+/* 平板 */
+@media (max-width: 768px) {
+  .tab-list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+}
+
+/* 手机 */
 @media (max-width: 640px) {
   header {
-    padding: 32px 16px 28px;
+    padding: 24px 16px 20px;
   }
 
   .header-inner {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 12px;
   }
 
   .header-text h1 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+  }
+
+  .header-links {
+    width: 100%;
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .link-item {
+    flex: 1;
+    padding: 6px 10px;
   }
 
   main {
-    padding: 16px;
+    padding: 16px 12px;
+  }
+
+  .toolbar {
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .toolbar input[type="text"] {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    min-width: 0;
+  }
+
+  .back-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .credits-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
   }
 
   .tab-list {
     grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .category-card {
+    padding: 14px 16px;
+  }
+
+  .category-icon {
+    font-size: 1.2rem;
+  }
+
+  .category-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .tab-card {
+    padding: 12px 14px;
     gap: 8px;
   }
 
+  .tab-card h3 {
+    font-size: 0.85rem;
+  }
+
+  .format-badge {
+    font-size: 0.65rem;
+    padding: 1px 5px;
+  }
+
+  .modal {
+    padding: 12px;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
   .modal-content {
-    padding: 20px 16px;
+    padding: 16px 14px;
+    border-radius: var(--radius);
+    margin-top: auto;
+    margin-bottom: auto;
+    max-height: none;
+  }
+
+  .modal-content h2 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .close-btn {
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    font-size: 1.1rem;
+  }
+
+  .preview-mode-selector {
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .mode-btn {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .player-controls {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .player-controls button {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .player-controls a {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .speed-control label {
+    font-size: 0.75rem;
+  }
+
+  .speed-control input[type="range"] {
+    width: 70px;
+  }
+
+  #alphaTab-container {
+    padding: 10px;
+    min-height: 300px;
   }
 
   .preview-pdf {
-    height: 400px;
+    height: 350px;
+  }
+
+  .image-gallery {
+    gap: 10px;
+  }
+
+  .image-item .img-download {
+    opacity: 1;
+    top: 6px;
+    right: 6px;
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+
+  .contributor-tag {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+  }
+
+  .credits-content {
+    max-width: 100%;
+  }
+
+  .credits-list li {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .credits-cta {
+    font-size: 0.8rem;
+  }
+
+  footer {
+    padding: 24px 16px;
+    font-size: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  footer .divider {
+    margin: 0 4px;
+  }
+}
+
+/* 小屏手机 */
+@media (max-width: 380px) {
+  .header-text h1 {
+    font-size: 1.2rem;
+  }
+
+  .header-links {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .link-item {
+    width: 100%;
+  }
+
+  .toolbar {
+    flex-wrap: wrap;
+  }
+
+  .toolbar input[type="text"] {
+    width: 100%;
+    order: 2;
+  }
+
+  .back-btn {
+    order: 1;
+  }
+
+  .credits-btn {
+    order: 3;
+    margin-left: auto;
+  }
+
+  .preview-pdf {
+    height: 280px;
   }
 }
 
