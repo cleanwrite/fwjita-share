@@ -92,17 +92,24 @@ function renderTabListInCategory(cat) {
     return;
   }
 
-  container.innerHTML = tabs.map(tab => `
+  container.innerHTML = tabs.map(tab => {
+    const contrib = tab.contributor
+      ? `<a href="${tab.contributor.bilibili || tab.contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${tab.contributor.name || '匿名'}</a>`
+      : '';
+    return `
     <div class="tab-card" onclick="openPreview(${tab.id})">
       <div class="card-info">
         <h3>${tab.title}</h3>
-        <p class="card-category">${tab.category}</p>
+        <div class="card-meta-row">
+          <span class="card-category">${tab.category}</span>
+          ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
+        </div>
       </div>
       <div class="formats">
         ${tab.formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 // ========== 搜索（全局搜索 / 分类内搜索） ==========
@@ -146,17 +153,24 @@ function filterTabs() {
     document.getElementById('back-btn').textContent = '← 返回分类';
   }
 
-  container.innerHTML = tabs.map(tab => `
+  container.innerHTML = tabs.map(tab => {
+    const contrib = tab.contributor
+      ? `<a href="${tab.contributor.bilibili || tab.contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${tab.contributor.name || '匿名'}</a>`
+      : '';
+    return `
     <div class="tab-card" onclick="openPreview(${tab.id})">
       <div class="card-info">
         <h3>${tab.title}</h3>
-        <p class="card-category">${tab.category}</p>
+        <div class="card-meta-row">
+          <span class="card-category">${tab.category}</span>
+          ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
+        </div>
       </div>
       <div class="formats">
         ${tab.formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 // ========== 第三层：预览弹窗 ==========

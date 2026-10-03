@@ -252,10 +252,31 @@ main {
   text-overflow: ellipsis;
 }
 
-.tab-card .card-category {
+.card-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.card-category {
   font-size: 0.75rem;
   color: var(--fg-faint);
-  margin-top: 2px;
+}
+
+.card-dot {
+  color: var(--fg-faint);
+  font-size: 0.75rem;
+}
+
+.card-contributor {
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.card-contributor:hover {
+  text-decoration: underline;
 }
 
 .tab-card .formats {
@@ -747,6 +768,16 @@ footer .signature {
 
   .tab-card h3 {
     font-size: 0.85rem;
+  }
+
+  .card-meta-row {
+    flex-wrap: wrap;
+  }
+
+  .card-category,
+  .card-dot,
+  .card-contributor {
+    font-size: 0.7rem;
   }
 
   .format-badge {
