@@ -86,7 +86,9 @@
 
   function renderCategories() {
     currentView = 'categories';
-    document.getElementById('search-input').style.display = 'none';
+    document.getElementById('search-input').style.display = 'block';
+    document.getElementById('search-input').value = '';
+    document.getElementById('search-input').placeholder = '🔍 搜索所有吉他谱...';
     document.getElementById('back-btn').style.display = 'none';
 
     var grouped = {};
@@ -227,35 +229,37 @@
     }).join('');
   }
 
-  // === 搜索（防抖 + 分类内搜索）===
+  // === 搜索（全局搜索，防抖）===
 
   function filterTabs() {
     var keyword = document.getElementById('search-input').value.toLowerCase().trim();
     var container = document.getElementById('tab-list');
 
-    // 防抖
     clearTimeout(searchTimer);
     searchTimer = setTimeout(function () {
+      // 空搜索 → 显示分类卡片
       if (!keyword) {
-        renderTabList(currentCategory);
+        renderCategories();
         return;
       }
 
-      var matchedTabs = tabsData.filter(function (tab) {
-        return tab.category === currentCategory &&
-          (tab.title.toLowerCase().includes(keyword) ||
-           (tab.song_group && tab.song_group.toLowerCase().includes(keyword)));
+      // 全局搜索：匹配歌名、分类名
+      var matched = tabsData.filter(function (tab) {
+        return tab.title.toLowerCase().includes(keyword) ||
+               (tab.song_group && tab.song_group.toLowerCase().includes(keyword)) ||
+               tab.category.toLowerCase().includes(keyword);
       });
 
-      if (matchedTabs.length === 0) {
+      if (matched.length === 0) {
         container.innerHTML = '<p class="empty-state">没有找到"' + escapeHtml(keyword) + '"相关的吉他谱</p>';
         return;
       }
 
+      // 显示搜索结果
       currentView = 'search';
       document.getElementById('back-btn').style.display = 'block';
-      document.getElementById('back-btn').textContent = '← 返回谱子';
-      container.innerHTML = renderGroupedTabs(matchedTabs, currentCategory);
+      document.getElementById('back-btn').textContent = '← 返回';
+      container.innerHTML = renderGroupedTabs(matched, '搜索结果');
     }, 150);
   }
 
@@ -832,7 +836,9 @@
   }
 
   function goBack() {
-    if (currentView === 'search' || currentView === 'versions') {
+    if (currentView === 'search') {
+      renderCategories();
+    } else if (currentView === 'versions') {
       currentView = 'tabs';
       document.getElementById('search-input').style.display = 'block';
       document.getElementById('back-btn').textContent = '← 返回分类';
