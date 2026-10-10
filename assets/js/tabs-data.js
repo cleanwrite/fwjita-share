@@ -744,22 +744,5 @@ const tabsData = [
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
     }
-  },
-  {
-    "id": 40,
-    "title": "API���ղ���",
-    "artist": "",
-    "formats": [
-      "gpx"
-    ],
-    "files": {
-      "gpx": "assets/tabs/���Է���/API���ղ���/test.gpx"
-    },
-    "category": "���Է���",
-    "song_group": "API���ղ���",
-    "contributor": {
-      "name": "������",
-      "bilibili": ""
-    }
   }
 ];
