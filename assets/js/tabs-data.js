@@ -761,5 +761,237 @@ const tabsData = [
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
     }
+  },
+  {
+    "id": 42,
+    "title": "The Ocean",
+    "artist": "",
+    "formats": [
+      "jpg"
+    ],
+    "files": {
+      "images": [
+        "assets/tabs/The Ocean（元子吉他/The Ocean (1).jpg",
+        "assets/tabs/The Ocean（元子吉他/The Ocean (2).jpg",
+        "assets/tabs/The Ocean（元子吉他/The Ocean (3).jpg",
+        "assets/tabs/The Ocean（元子吉他/The Ocean (4).jpg",
+        "assets/tabs/The Ocean（元子吉他/The Ocean (5).jpg",
+        "assets/tabs/The Ocean（元子吉他/The Ocean (6).jpg",
+        "assets/tabs/The Ocean（元子吉他/The Ocean (7).jpg",
+        "assets/tabs/The Ocean（元子吉他/The Ocean (8).jpg",
+        "assets/tabs/The Ocean（元子吉他/The Ocean (9).jpg"
+      ]
+    },
+    "category": "单曲",
+    "song_group": "The Ocean（元子吉他",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 43,
+    "title": "Dreaming",
+    "artist": "",
+    "formats": [
+      "jpg"
+    ],
+    "files": {
+      "images": [
+        "assets/tabs/Dreaming（元子吉他/Dreaming.jpg"
+      ]
+    },
+    "category": "单曲",
+    "song_group": "Dreaming（元子吉他",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 44,
+    "title": "Wings~ You are the HERO",
+    "artist": "",
+    "formats": [
+      "jpg"
+    ],
+    "files": {
+      "images": [
+        "assets/tabs/Wings~ You are the HERO/Wings~ You are the HERO (1).jpg",
+        "assets/tabs/Wings~ You are the HERO/Wings~ You are the HERO (2).jpg",
+        "assets/tabs/Wings~ You are the HERO/Wings~ You are the HERO (3).jpg",
+        "assets/tabs/Wings~ You are the HERO/Wings~ You are the HERO (4).jpg",
+        "assets/tabs/Wings~ You are the HERO/Wings~ You are the HERO (5).jpg"
+      ]
+    },
+    "category": "单曲",
+    "song_group": "Wings~ You are the HERO",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 45,
+    "title": "Carmen Opera",
+    "artist": "",
+    "formats": [
+      "jpg"
+    ],
+    "files": {
+      "images": [
+        "assets/tabs/Marcin Patrzalek/Carmen Opera/Carmen Opera.jpg"
+      ]
+    },
+    "category": "Marcin Patrzalek",
+    "song_group": "Carmen Opera",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 46,
+    "title": "THEME",
+    "artist": "",
+    "formats": [
+      "jpg"
+    ],
+    "files": {
+      "images": [
+        "assets/tabs/Marcin Patrzalek/THEME/THEME.jpg"
+      ]
+    },
+    "category": "Marcin Patrzalek",
+    "song_group": "THEME",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 47,
+    "title": "BIPOWER",
+    "artist": "",
+    "formats": [
+      "jpg"
+    ],
+    "files": {
+      "images": [
+        "assets/tabs/Marcin Patrzalek/BIPOWER/BIPOWER.jpg"
+      ]
+    },
+    "category": "Marcin Patrzalek",
+    "song_group": "BIPOWER",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 48,
+    "title": "Add tremolo",
+    "artist": "",
+    "formats": [
+      "jpg"
+    ],
+    "files": {
+      "images": [
+        "assets/tabs/Marcin Patrzalek/Add tremolo/Add tremolo.jpg"
+      ]
+    },
+    "category": "Marcin Patrzalek",
+    "song_group": "Add tremolo",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 49,
+    "title": "Slap",
+    "artist": "",
+    "formats": [
+      "jpg"
+    ],
+    "files": {
+      "images": [
+        "assets/tabs/Marcin Patrzalek/Slap/Slap.jpg"
+      ]
+    },
+    "category": "Marcin Patrzalek",
+    "song_group": "Slap",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 50,
+    "title": "其他片段（版权页等）",
+    "artist": "",
+    "formats": [
+      "jpg"
+    ],
+    "files": {
+      "images": [
+        "assets/tabs/Marcin Patrzalek/其他/其他 (2).jpg",
+        "assets/tabs/Marcin Patrzalek/其他/其他 (5).jpg",
+        "assets/tabs/Marcin Patrzalek/其他/其他 (6).jpg",
+        "assets/tabs/Marcin Patrzalek/其他/其他 (8).jpg",
+        "assets/tabs/Marcin Patrzalek/其他/其他 (9).jpg",
+        "assets/tabs/Marcin Patrzalek/其他/其他 (10).jpg",
+        "assets/tabs/Marcin Patrzalek/其他/其他 (11).jpg",
+        "assets/tabs/Marcin Patrzalek/其他/其他 (13).jpg",
+        "assets/tabs/Marcin Patrzalek/其他/其他 (14).jpg",
+        "assets/tabs/Marcin Patrzalek/其他/其他 (15).jpg",
+        "assets/tabs/Marcin Patrzalek/其他/其他 (16).jpg"
+      ]
+    },
+    "category": "Marcin Patrzalek",
+    "song_group": "其他片段",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 51,
+    "title": "吉他和弦图教程",
+    "artist": "",
+    "formats": [
+      "jpg"
+    ],
+    "files": {
+      "images": [
+        "assets/tabs/吉他和弦图教程/吉他和弦图教程 (1).jpg",
+        "assets/tabs/吉他和弦图教程/吉他和弦图教程 (2).jpg"
+      ]
+    },
+    "category": "单曲",
+    "song_group": "吉他和弦图教程",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 52,
+    "title": "BIGTREEMUSIC",
+    "artist": "",
+    "formats": [
+      "jpg"
+    ],
+    "files": {
+      "images": [
+        "assets/tabs/BIGTREEMUSIC/BIGTREEMUSIC.jpg"
+      ]
+    },
+    "category": "单曲",
+    "song_group": "BIGTREEMUSIC",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
   }
 ];
