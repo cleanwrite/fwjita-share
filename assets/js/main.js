@@ -479,7 +479,7 @@
 
   // === 提交谱子 ===
 
-  var API_BASE = ''; // 同域，Worker 反代
+  var API_BASE = 'https://fwjita-share.ss20211111705.workers.dev';
 
   function openSubmitModal() {
     var select = document.getElementById('submitCategory');
