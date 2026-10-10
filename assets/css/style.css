@@ -110,8 +110,10 @@ header {
 .toolbar {
   display: flex;
   align-items: center;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-5);
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  border-bottom: 1px solid var(--c-border);
+  background: var(--c-bg);
 }
 
 .back-btn {
@@ -124,6 +126,7 @@ header {
   font-size: var(--fs-sm);
   cursor: pointer;
   font-family: inherit;
+  white-space: nowrap;
 }
 
 .back-btn:hover {
@@ -133,11 +136,12 @@ header {
 
 .search-box {
   flex: 1;
+  position: relative;
 }
 
 .search-box input {
   width: 100%;
-  padding: var(--sp-2) var(--sp-3);
+  padding: var(--sp-2) var(--sp-3) var(--sp-2) 32px;
   border: 1px solid var(--c-border);
   border-radius: var(--r-md);
   background: var(--c-surface);
@@ -154,6 +158,35 @@ header {
 
 .search-box input::placeholder {
   color: var(--c-text-faint);
+}
+
+.search-box::before {
+  content: "🔍";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.credits-btn {
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  background: transparent;
+  color: var(--c-text-muted);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: all var(--tr-fast);
+}
+
+.credits-btn:hover {
+  border-color: var(--c-text-faint);
+  color: var(--c-text);
 }
 
 /* ===== 卡片网格 ===== */

@@ -1,8 +1,7 @@
 // 全局状态
 let alphaTabApi = null;
-let currentCategory = '全部';
-let currentSongGroup = null;     // 当前打开的歌名分组
-let currentView = 'categories';  // 'categories' | 'songs' | 'versions'
+let currentView = 'categories'; // 'categories' | 'tabs' | 'preview'
+let currentCategory = '';
 let currentPreviewTab = null;
 let currentPreviewMode = 'gpx';
 
@@ -11,15 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCategories();
 });
 
-// ========== 第一层：大分类页面 ==========
+// ========== 第一层：分类卡片 ==========
 
 function renderCategories() {
   currentView = 'categories';
-  const search = document.getElementById('search-input');
-  search.style.display = 'block';
+  document.getElementById('search-input').style.display = 'none';
   document.getElementById('back-btn').style.display = 'none';
-  search.value = '';
-  search.placeholder = '🔍 搜索所有吉他谱...';
 
   const grouped = {};
   tabsData.forEach(tab => {
@@ -29,7 +25,7 @@ function renderCategories() {
 
   const container = document.getElementById('tab-list');
   const categories = Object.keys(grouped).sort((a, b) => {
-    if (a === '单曲') return 1;  // 单曲排最后
+    if (a === '单曲') return 1;
     if (b === '单曲') return -1;
     return a.localeCompare(b);
   });
@@ -68,35 +64,30 @@ function getCategoryIcon(cat) {
   return icons[cat] || '📁';
 }
 
-// ========== 第二层：分类内的谱子列表 ==========
+// ========== 第二层：谱子列表 ==========
 
 function openCategory(cat) {
-  currentView = 'songs';
+  currentView = 'tabs';
   currentCategory = cat;
-  currentSongGroup = null;
-
-  const search = document.getElementById('search-input');
-  search.style.display = 'block';
-  search.value = '';
-  search.placeholder = '🔍 搜索所有吉他谱...';
+  document.getElementById('search-input').style.display = 'block';
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-input').placeholder = `在「${cat}」中搜索...`;
   document.getElementById('back-btn').style.display = 'block';
   document.getElementById('back-btn').textContent = '← 返回分类';
 
-  renderSongList(cat);
+  renderTabList(cat);
 }
 
-// ========== 第二层：歌名列表（同一首歌只显示一次） ==========
-
-function renderSongList(cat) {
+function renderTabList(cat) {
   const container = document.getElementById('tab-list');
   const tabs = tabsData.filter(t => t.category === cat);
 
   if (tabs.length === 0) {
-    container.innerHTML = '<p style="text-align:center;color:#8b949e;padding:40px;">该分类下没有谱子</p>';
+    container.innerHTML = '<p style="text-align:center;color:var(--fg-muted);padding:40px;">该分类下没有谱子</p>';
     return;
   }
 
-  // Group by song_group field. Songs with same song_group = same song, multiple versions.
+  // 按歌名分组
   const groups = {};
   tabs.forEach(tab => {
     const group = tab.song_group || tab.title;
@@ -114,25 +105,24 @@ function renderSongList(cat) {
       ? `<a href="${versions[0].contributor.bilibili || versions[0].contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${versions[0].contributor.name || '匿名'}</a>`
       : '';
 
-    // Single version: click directly to preview
     if (versionCount === 1) {
       const tab = versions[0];
       return `
-      <div class="tab-card" onclick="openPreview(${tab.id})">
-        <div class="card-info">
-          <h3>${song}</h3>
-          <div class="card-meta-row">
-            <span class="card-category">${cat}</span>
-            ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
+        <div class="tab-card" onclick="openPreview(${tab.id})">
+          <div class="card-info">
+            <h3>${song}</h3>
+            <div class="card-meta-row">
+              <span class="card-category">${cat}</span>
+              ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
+            </div>
           </div>
-        </div>
-        <div class="formats">
-          ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
-        </div>
-      </div>`;
+          <div class="formats">
+            ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
+          </div>
+        </div>`;
     }
 
-    // Multiple versions: click to show version list
+    // 多版本
     return `
       <div class="tab-card song-group-card" onclick="openSongGroup('${song}')">
         <div class="card-info">
@@ -150,21 +140,12 @@ function renderSongList(cat) {
   }).join('');
 }
 
-// ========== 第三层：同一首歌的版本列表 ==========
-
 function openSongGroup(songName) {
   currentView = 'versions';
-  currentSongGroup = songName;
-
-  const search = document.getElementById('search-input');
-  search.style.display = 'none';
+  document.getElementById('search-input').style.display = 'none';
   document.getElementById('back-btn').style.display = 'block';
-  document.getElementById('back-btn').textContent = '← 返回歌名';
+  document.getElementById('back-btn').textContent = '← 返回谱子';
 
-  renderVersionList(songName);
-}
-
-function renderVersionList(songName) {
   const container = document.getElementById('tab-list');
   const versions = tabsData.filter(tab => {
     const group = tab.song_group || tab.title;
@@ -172,7 +153,7 @@ function renderVersionList(songName) {
   });
 
   if (versions.length === 0) {
-    container.innerHTML = '<p style="text-align:center;color:#8b949e;padding:40px;">没有版本</p>';
+    container.innerHTML = '<p style="text-align:center;color:var(--fg-muted);padding:40px;">没有版本</p>';
     return;
   }
 
@@ -180,13 +161,11 @@ function renderVersionList(songName) {
     const contrib = tab.contributor
       ? `<a href="${tab.contributor.bilibili || tab.contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${tab.contributor.name || '匿名'}</a>`
       : '';
-    // Display the version title (subfolder name)
-    const versionLabel = tab.title;
 
     return `
       <div class="tab-card version-card" onclick="openPreview(${tab.id})">
         <div class="card-info">
-          <h3>${versionLabel}</h3>
+          <h3>${tab.title}</h3>
           <div class="card-meta-row">
             ${contrib ? `<span>·</span>${contrib}` : ''}
           </div>
@@ -199,72 +178,32 @@ function renderVersionList(songName) {
   }).join('');
 }
 
-function renderTabListInCategory(cat) {
-  const container = document.getElementById('tab-list');
-  const tabs = tabsData.filter(t => t.category === cat);
-
-  if (tabs.length === 0) {
-    container.innerHTML = '<p style="text-align:center;color:#8b949e;padding:40px;">该分类下没有谱子</p>';
-    return;
-  }
-
-  container.innerHTML = tabs.map(tab => {
-    const contrib = tab.contributor
-      ? `<a href="${tab.contributor.bilibili || tab.contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${tab.contributor.name || '匿名'}</a>`
-      : '';
-    return `
-    <div class="tab-card" onclick="openPreview(${tab.id})">
-      <div class="card-info">
-        <h3>${tab.title}</h3>
-        <div class="card-meta-row">
-          <span class="card-category">${tab.category}</span>
-          ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
-        </div>
-      </div>
-      <div class="formats">
-        ${tab.formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
-      </div>
-    </div>
-  `}).join('');
-}
-
-// ========== 搜索 ==========
+// ========== 搜索 =========
 
 function filterTabs() {
   const keyword = document.getElementById('search-input').value.toLowerCase().trim();
   const container = document.getElementById('tab-list');
 
   if (!keyword) {
-    // Empty search → return to current view
     if (currentView === 'categories') {
       renderCategories();
-    } else if (currentView === 'songs') {
-      renderSongList(currentCategory);
-    } else if (currentView === 'versions') {
-      renderVersionList(currentSongGroup);
+    } else {
+      renderTabList(currentCategory);
     }
     return;
   }
 
-  // Determine search scope based on current view
   let searchPool;
   let isGlobalSearch;
 
   if (currentView === 'categories') {
-    // At category level → global search across all categories
     searchPool = tabsData;
     isGlobalSearch = true;
-  } else if (currentView === 'songs') {
-    // Inside a category → search only within this category
+  } else {
     searchPool = tabsData.filter(tab => tab.category === currentCategory);
     isGlobalSearch = false;
-  } else {
-    // versions or other → global search
-    searchPool = tabsData;
-    isGlobalSearch = true;
   }
 
-  // Search
   const matchedTabs = searchPool.filter(tab =>
     tab.title.toLowerCase().includes(keyword) ||
     (tab.song_group && tab.song_group.toLowerCase().includes(keyword))
@@ -275,7 +214,6 @@ function filterTabs() {
     return;
   }
 
-  // Group results by song_group
   const groups = {};
   matchedTabs.forEach(tab => {
     const group = tab.song_group || tab.title;
@@ -283,10 +221,9 @@ function filterTabs() {
     groups[group].push(tab);
   });
 
-  // Mark as search view
   currentView = 'search';
   document.getElementById('back-btn').style.display = 'block';
-  document.getElementById('back-btn').textContent = isGlobalSearch ? '← 返回分类' : '← 返回歌名';
+  document.getElementById('back-btn').textContent = isGlobalSearch ? '← 返回分类' : '← 返回谱子';
 
   const songs = Object.keys(groups).sort();
 
@@ -299,25 +236,23 @@ function filterTabs() {
       : '';
     const category = versions[0].category;
 
-    // Single version: click directly to preview
     if (versionCount === 1) {
       const tab = versions[0];
       return `
-      <div class="tab-card" onclick="openPreview(${tab.id})">
-        <div class="card-info">
-          <h3>${song}</h3>
-          <div class="card-meta-row">
-            <span class="card-category">${category}</span>
-            ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
+        <div class="tab-card" onclick="openPreview(${tab.id})">
+          <div class="card-info">
+            <h3>${song}</h3>
+            <div class="card-meta-row">
+              <span class="card-category">${category}</span>
+              ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
+            </div>
           </div>
-        </div>
-        <div class="formats">
-          ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
-        </div>
-      </div>`;
+          <div class="formats">
+            ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
+          </div>
+        </div>`;
     }
 
-    // Multiple versions: click to show version list
     return `
       <div class="tab-card song-group-card" onclick="openSongGroup('${song}')">
         <div class="card-info">
@@ -335,7 +270,7 @@ function filterTabs() {
   }).join('');
 }
 
-// ========== 第三层：预览弹窗 ==========
+// ========== 预览弹窗 ==========
 
 function openPreview(id) {
   currentPreviewTab = tabsData.find(t => t.id === id);
@@ -349,7 +284,6 @@ function openPreview(id) {
   titleEl.textContent = tab.category !== '单曲' ? `${tab.title} [${tab.category}]` : tab.title;
   modal.classList.remove('hidden');
 
-  // Show contributor credit
   let contributorHtml = '';
   if (tab.contributor) {
     const name = tab.contributor.name || tab.contributor.uid || '匿名';
@@ -362,7 +296,6 @@ function openPreview(id) {
   const hasImages = tab.files.images && tab.files.images.length > 0;
   const hasMultiple = (hasGpx && hasPdf) || (hasGpx && hasImages) || (hasPdf && hasImages);
 
-  // Insert contributor credit after title
   document.getElementById('modal-contributor').innerHTML = contributorHtml;
 
   if (hasMultiple) {
@@ -374,7 +307,7 @@ function openPreview(id) {
   } else if (hasImages) {
     renderImagesPreview(tab, body);
   } else {
-    body.innerHTML += '<p style="text-align:center;color:#8b949e;padding:40px;">没有可预览的资源</p>';
+    body.innerHTML += '<p style="text-align:center;color:var(--fg-muted);padding:40px;">没有可预览的资源</p>';
   }
 }
 
@@ -421,9 +354,7 @@ function renderGpxPreview(tab, container) {
       <button onclick="playerPlay()">▶ 播放</button>
       <button onclick="playerPause()">⏸ 暂停</button>
       <button onclick="playerStop()">⏹ 停止</button>
-      <a href="${encodeAssetPath(tab.files.gpx)}" download="${gpxFilename}">
-        下载 GPX
-      </a>
+      <a href="${encodeAssetPath(tab.files.gpx)}" download="${gpxFilename}">下载 GPX</a>
       <div class="speed-control">
         <label>速度:</label>
         <input type="range" id="speed-slider" min="25" max="150" value="100"
@@ -435,7 +366,6 @@ function renderGpxPreview(tab, container) {
       <p style="color:#8b949e;text-align:center;padding:40px;">正在加载乐谱...</p>
     </div>
   `;
-  // Give browser a moment to calculate layout before init alphaTab
   requestAnimationFrame(() => {
     initAlphaTab(tab.files.gpx);
   });
@@ -446,7 +376,6 @@ function renderPdfPreview(tab, container) {
 }
 
 function renderImagesPreview(tab, container) {
-  const multiMode = (tab.formats.includes('gpx') && tab.files.gpx) || (tab.formats.includes('pdf') && tab.files.pdf);
   container.innerHTML = `
     <div class="image-gallery">
       ${tab.files.images.map(img => {
@@ -480,7 +409,6 @@ function initAlphaTab(gpxPath) {
   container.innerHTML = '<p style="color:#8b949e;text-align:center;padding:40px;">正在加载乐谱文件...</p>';
 
   const encodedUrl = encodeAssetPath(gpxPath);
-  console.log('Fetching GPX:', encodedUrl);
 
   fetch(encodedUrl)
     .then(response => {
@@ -507,15 +435,8 @@ function setupAlphaTab(container, buffer) {
   }
 
   const settings = {
-    core: {
-      engine: 'svg',
-      logLevel: 1,
-      useWorkers: false
-    },
-    display: {
-      staveProfile: 0,  // StaveProfile.Default = 0
-      scale: 1.0
-    },
+    core: { engine: 'svg', logLevel: 1, useWorkers: false },
+    display: { staveProfile: 0, scale: 1.0 },
     player: {
       enablePlayer: true,
       enableCursor: true,
@@ -538,7 +459,6 @@ function setupAlphaTab(container, buffer) {
 
   alphaTabApi.scoreLoaded.on((score) => {
     console.log('Score loaded:', score?.title, 'Tracks:', score?.tracks?.length);
-    // Fix missing per-track stylesheet maps that cause "Cannot read properties of undefined (reading 'has')"
     if (score?.stylesheet) {
       const ss = score.stylesheet;
       if (!ss.perTrackMultiBarRest) ss.perTrackMultiBarRest = new Map();
@@ -547,7 +467,6 @@ function setupAlphaTab(container, buffer) {
     }
   });
 
-  // alphaTab 1.8: load(data) returns boolean (sync)
   try {
     const uint8 = new Uint8Array(buffer);
     const success = alphaTabApi.load(uint8);
@@ -561,20 +480,14 @@ function setupAlphaTab(container, buffer) {
   }
 }
 
-// 返回按钮逻辑
+// 返回按钮
 function goBack() {
   if (currentView === 'versions') {
-    // 版本列表 → 返回歌名列表
-    currentView = 'songs';
-    currentSongGroup = null;
-    const search = document.getElementById('search-input');
-    search.style.display = 'block';
-    search.value = '';
-    search.placeholder = '🔍 搜索所有吉他谱...';
+    currentView = 'tabs';
+    document.getElementById('search-input').style.display = 'block';
     document.getElementById('back-btn').textContent = '← 返回分类';
-    renderSongList(currentCategory);
-  } else if (currentView === 'songs' || currentView === 'search') {
-    // 歌名列表或搜索结果 → 返回分类
+    renderTabList(currentCategory);
+  } else if (currentView === 'tabs' || currentView === 'search') {
     renderCategories();
   }
 }
@@ -617,7 +530,6 @@ async function openSubmitModal() {
   const modal = document.getElementById('submitModal');
   modal.classList.remove('hidden');
 
-  // 加载分类列表
   const select = document.getElementById('submitCategory');
   select.innerHTML = '<option value="">-- 选择分类 --</option>';
   try {
@@ -639,7 +551,6 @@ async function openSubmitModal() {
   newOpt.textContent = '+ 新建分类';
   select.appendChild(newOpt);
 
-  // 文件类型检测（只绑定一次）
   const fileInput = document.getElementById('submitFiles');
   if (!fileInput.dataset.bound) {
     fileInput.addEventListener('change', handleFileSelect);
@@ -667,7 +578,6 @@ function handleFileSelect(e) {
     tags.appendChild(tag);
   }
 
-  // 显示总大小
   if (files.length > 0) {
     const sizeTag = document.createElement('span');
     sizeTag.className = 'file-tag total';
@@ -687,7 +597,7 @@ function closeSubmitModal() {
 }
 
 async function submitTab() {
-  if (isSubmitting) return; // 防重复提交
+  if (isSubmitting) return;
   isSubmitting = true;
 
   const btn = document.querySelector('.submit-form-btn');
@@ -866,7 +776,6 @@ async function deleteTab(id) {
     });
     const data = await resp.json();
     if (data.success) {
-      // 从本地数据移除
       window._adminTabsData = window._adminTabsData.filter(t => t.id !== id);
       renderAdminTabs(document.getElementById('adminTabContent'));
     } else {
@@ -895,7 +804,6 @@ function showCredits() {
   const modal = document.getElementById('credits-modal');
   const list = document.getElementById('credits-list');
 
-  // Collect all contributors from tabsData
   const contributors = new Map();
   tabsData.forEach(tab => {
     if (tab.contributor) {
