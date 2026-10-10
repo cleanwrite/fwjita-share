@@ -180,7 +180,7 @@
       var formats = [];
       versions.forEach(function (t) { t.formats.forEach(function (f) { if (formats.indexOf(f) === -1) formats.push(f); }); });
       var contrib = versions[0].contributor
-        ? '<a href="' + (versions[0].contributor.bilibili || versions[0].contributor.url || '#') + '" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">' + escapeHtml(versions[0].contributor.name || '匿名') + '</a>'
+        ? '<span class="card-contributor">' + escapeHtml(versions[0].contributor.name || '匿名') + '</span>'
         : '';
 
       if (versionCount === 1) {
@@ -221,7 +221,7 @@
 
     container.innerHTML = versions.map(function (tab) {
       var contrib = tab.contributor
-        ? '<a href="' + (tab.contributor.bilibili || tab.contributor.url || '#') + '" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">' + escapeHtml(tab.contributor.name || '匿名') + '</a>'
+        ? '<span class="card-contributor">' + escapeHtml(tab.contributor.name || '匿名') + '</span>'
         : '';
       return '<div class="tab-card version-card" data-id="' + tab.id + '" role="button" tabindex="0">' +
         '<div class="card-info"><h3>' + escapeHtml(tab.title) + '</h3>' +
@@ -287,8 +287,7 @@
     var contributorHtml = '';
     if (tab.contributor) {
       var name = tab.contributor.name || tab.contributor.uid || '匿名';
-      var url = tab.contributor.bilibili || tab.contributor.url || '#';
-      contributorHtml = '<div class="contributor-tag">感谢 <a href="' + url + '" target="_blank" rel="noopener">' + escapeHtml(name) + '</a> 提供谱子</div>';
+      contributorHtml = '<div class="contributor-tag">感谢 <span class="contributor-name-text">' + escapeHtml(name) + '</span> 提供谱子</div>';
     }
     document.getElementById('modal-contributor').innerHTML = contributorHtml;
 
