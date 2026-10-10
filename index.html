@@ -15,6 +15,7 @@
       </div>
       <div class="header-links">
         <button class="submit-btn" onclick="openSubmitModal()">+ 提交谱子</button>
+        <button class="admin-btn" onclick="openAdminPanel()">⚙ 管理</button>
         <a href="https://wwatq.lanzn.com/b00v0d8wef" target="_blank" class="link-item">
           <span class="link-label">蓝奏云</span>
           <span class="link-meta">密码 ac6x</span>
@@ -111,6 +112,25 @@
 
         <button type="button" onclick="submitTab()" class="submit-form-btn">提交</button>
       </form>
+    </div>
+  </div>
+
+  <!-- 管理员面板 -->
+  <div id="adminModal" class="modal hidden">
+    <div class="modal-content admin-modal">
+      <button class="close-btn" onclick="closeAdminPanel()" aria-label="关闭">&times;</button>
+      <h2>⚙ 管理面板</h2>
+      <div class="admin-auth">
+        <input type="password" id="adminPassword" placeholder="输入管理密码" onkeydown="if(event.key==='Enter') loginAdmin()">
+        <button onclick="loginAdmin()" class="admin-login-btn">登录</button>
+      </div>
+      <div id="adminContent" style="display:none;">
+        <div class="admin-tabs">
+          <button class="admin-tab active" onclick="showAdminTab('tabs')">谱子列表</button>
+          <button class="admin-tab" onclick="showAdminTab('logs')">操作日志</button>
+        </div>
+        <div id="adminTabContent"></div>
+      </div>
     </div>
   </div>
 

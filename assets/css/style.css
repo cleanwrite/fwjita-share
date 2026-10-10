@@ -1035,6 +1035,213 @@ footer .signature {
   }
 }
 
+/* ===== 管理按钮 ===== */
+.admin-btn {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.admin-btn:hover {
+  border-color: var(--fg-faint);
+  color: var(--fg);
+}
+
+/* ===== 管理员面板 ===== */
+.admin-modal {
+  max-width: 700px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.admin-modal h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--fg);
+}
+
+.admin-auth {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-auth input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  color: var(--fg);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.admin-auth input:focus {
+  border-color: var(--accent);
+}
+
+.admin-login-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.admin-login-btn:hover { opacity: 0.85; }
+
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.admin-tab {
+  padding: 6px 14px;
+  border: none;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.admin-tab.active {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.admin-tab:hover:not(.active) {
+  color: var(--fg);
+}
+
+.admin-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
+
+.admin-refresh-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.admin-refresh-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.admin-tab-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  transition: border-color 0.2s;
+}
+
+.admin-tab-item:hover {
+  border-color: var(--fg-faint);
+}
+
+.admin-tab-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-tab-info strong {
+  color: var(--fg);
+  font-size: 0.95rem;
+}
+
+.admin-tag {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: rgba(200, 155, 92, 0.12);
+  color: var(--accent);
+}
+
+.admin-contrib {
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+}
+
+.admin-delete-btn {
+  padding: 5px 12px;
+  border: 1px solid rgba(248, 81, 73, 0.3);
+  border-radius: var(--radius);
+  background: transparent;
+  color: #f85149;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.admin-delete-btn:hover {
+  background: rgba(248, 81, 73, 0.1);
+}
+
+.admin-log-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+.log-action {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.log-action.submit { background: rgba(35, 134, 54, 0.12); color: #3fb950; }
+.log-action.delete { background: rgba(248, 81, 73, 0.12); color: #f85149; }
+
+.log-title { color: var(--fg); font-weight: 500; }
+.log-meta { color: var(--fg-muted); font-size: 0.78rem; }
+.log-time { color: var(--fg-faint); font-size: 0.75rem; margin-left: auto; }
+
 /* ===== 提交表单 ===== */
 .submit-modal {
   max-width: 520px;

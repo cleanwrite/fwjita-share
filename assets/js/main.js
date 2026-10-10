@@ -611,6 +611,7 @@ document.addEventListener('keydown', (e) => {
 // ===== 提交谱子 =====
 
 const API_BASE = ''; // 同域，Worker 反代
+let isSubmitting = false;
 
 async function openSubmitModal() {
   const modal = document.getElementById('submitModal');
@@ -638,22 +639,42 @@ async function openSubmitModal() {
   newOpt.textContent = '+ 新建分类';
   select.appendChild(newOpt);
 
-  // 文件类型检测
-  document.getElementById('submitFiles').addEventListener('change', (e) => {
-    const tags = document.getElementById('fileTags');
-    tags.innerHTML = '';
-    for (const file of e.target.files) {
-      const ext = '.' + file.name.split('.').pop().toLowerCase();
-      let type = 'unknown';
-      if (['.gp', '.gp3', '.gp4', '.gp5', '.gp7', '.gp8', '.gpx'].includes(ext)) type = 'GPX';
-      else if (ext === '.pdf') type = 'PDF';
-      else if (['.jpg', '.jpeg', '.png', '.webp', '.gif', '.bmp'].includes(ext)) type = '图片';
-      const tag = document.createElement('span');
-      tag.className = 'file-tag ' + type.toLowerCase();
-      tag.textContent = `${file.name} (${type})`;
-      tags.appendChild(tag);
-    }
-  });
+  // 文件类型检测（只绑定一次）
+  const fileInput = document.getElementById('submitFiles');
+  if (!fileInput.dataset.bound) {
+    fileInput.addEventListener('change', handleFileSelect);
+    fileInput.dataset.bound = '1';
+  }
+}
+
+function handleFileSelect(e) {
+  const tags = document.getElementById('fileTags');
+  tags.innerHTML = '';
+  const files = e.target.files;
+  let totalSize = 0;
+
+  for (const file of files) {
+    totalSize += file.size;
+    const ext = '.' + (file.name.split('.').pop() || '').toLowerCase();
+    let type = 'unknown';
+    if (['.gp', '.gp3', '.gp4', '.gp5', '.gp7', '.gp8', '.gpx'].includes(ext)) type = 'GPX';
+    else if (ext === '.pdf') type = 'PDF';
+    else if (['.jpg', '.jpeg', '.png', '.webp', '.gif', '.bmp'].includes(ext)) type = '图片';
+
+    const tag = document.createElement('span');
+    tag.className = 'file-tag ' + (type === 'unknown' ? 'unsupported' : type.toLowerCase());
+    tag.textContent = `${file.name} (${type}${file.size > 1024 * 1024 ? ' ' + (file.size / 1024 / 1024).toFixed(1) + 'MB' : ''})`;
+    tags.appendChild(tag);
+  }
+
+  // 显示总大小
+  if (files.length > 0) {
+    const sizeTag = document.createElement('span');
+    sizeTag.className = 'file-tag total';
+    sizeTag.textContent = `总计: ${(totalSize / 1024 / 1024).toFixed(1)}MB / 50MB`;
+    sizeTag.style.background = totalSize > 50 * 1024 * 1024 ? 'rgba(248,81,73,0.2)' : '';
+    tags.appendChild(sizeTag);
+  }
 }
 
 function closeSubmitModal() {
@@ -662,11 +683,18 @@ function closeSubmitModal() {
   document.getElementById('fileTags').innerHTML = '';
   document.getElementById('submitResult').innerHTML = '';
   document.getElementById('newCategory').style.display = 'none';
+  isSubmitting = false;
 }
 
 async function submitTab() {
+  if (isSubmitting) return; // 防重复提交
+  isSubmitting = true;
+
+  const btn = document.querySelector('.submit-form-btn');
   const result = document.getElementById('submitResult');
-  result.innerHTML = '<p class="result-loading">⏳ 提交中，请稍候...</p>';
+  btn.disabled = true;
+  btn.textContent = '提交中...';
+  result.innerHTML = '<p class="result-loading">⏳ 上传中，请稍候...</p>';
 
   const category = document.getElementById('submitCategory').value === '__new__'
     ? document.getElementById('newCategory').value.trim()
@@ -679,14 +707,17 @@ async function submitTab() {
 
   if (!category || !songGroup) {
     result.innerHTML = '<p class="result-error">请填写分类和歌曲名</p>';
+    resetSubmitBtn(btn);
     return;
   }
   if (files.length === 0) {
     result.innerHTML = '<p class="result-error">请至少上传一个文件</p>';
+    resetSubmitBtn(btn);
     return;
   }
   if (!password) {
     result.innerHTML = '<p class="result-error">请输入提交密码</p>';
+    resetSubmitBtn(btn);
     return;
   }
 
@@ -708,12 +739,153 @@ async function submitTab() {
     const data = await resp.json();
     if (data.success) {
       result.innerHTML = `<p class="result-success">✅ ${data.message}</p>`;
+      btn.textContent = '提交成功！';
       setTimeout(() => closeSubmitModal(), 2000);
     } else {
       result.innerHTML = `<p class="result-error">❌ ${data.error}</p>`;
+      resetSubmitBtn(btn);
     }
   } catch (e) {
-    result.innerHTML = `<p class="result-error">❌ 网络错误: ${e.message}</p>`;
+    result.innerHTML = `<p class="result-error">❌ 网络错误，请稍后重试</p>`;
+    resetSubmitBtn(btn);
+  }
+}
+
+function resetSubmitBtn(btn) {
+  isSubmitting = false;
+  btn.disabled = false;
+  btn.textContent = '提交';
+}
+
+// ===== 管理员面板 =====
+
+let adminAuthed = false;
+
+function openAdminPanel() {
+  document.getElementById('adminModal').classList.remove('hidden');
+  document.getElementById('adminContent').style.display = 'none';
+  document.getElementById('adminPassword').value = '';
+  adminAuthed = false;
+}
+
+function closeAdminPanel() {
+  document.getElementById('adminModal').classList.add('hidden');
+}
+
+async function loginAdmin() {
+  const pwd = document.getElementById('adminPassword').value;
+  if (!pwd) return;
+
+  try {
+    const resp = await fetch(API_BASE + '/api/tabs-data', {
+      headers: { Authorization: `Bearer ${pwd}` }
+    });
+    const data = await resp.json();
+
+    if (data.success) {
+      adminAuthed = true;
+      document.getElementById('adminContent').style.display = 'block';
+      document.querySelector('.admin-auth').style.display = 'none';
+      window._adminTabsData = data.data;
+      showAdminTab('tabs');
+    } else {
+      alert('密码错误');
+    }
+  } catch (e) {
+    alert('登录失败');
+  }
+}
+
+function showAdminTab(tab) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  const content = document.getElementById('adminTabContent');
+
+  if (tab === 'tabs') {
+    renderAdminTabs(content);
+  } else if (tab === 'logs') {
+    renderAdminLogs(content);
+  }
+}
+
+function renderAdminTabs(container) {
+  const tabs = window._adminTabsData || [];
+  if (tabs.length === 0) {
+    container.innerHTML = '<p style="color:var(--fg-muted);text-align:center;padding:40px;">暂无谱子</p>';
+    return;
+  }
+
+  container.innerHTML = `<div class="admin-actions">
+    <span>${tabs.length} 首谱子</span>
+    <button onclick="refreshAdminData()" class="admin-refresh-btn">刷新</button>
+  </div>` + tabs.map(t => `
+    <div class="admin-tab-item">
+      <div class="admin-tab-info">
+        <strong>${t.title}</strong>
+        <span class="admin-tag">${t.category}</span>
+        <span class="admin-tag">${t.formats?.join(', ') || ''}</span>
+        <span class="admin-contrib">${t.contributor?.name || ''}</span>
+      </div>
+      <button onclick="deleteTab(${t.id})" class="admin-delete-btn">删除</button>
+    </div>
+  `).join('');
+}
+
+async function renderAdminLogs(container) {
+  container.innerHTML = '<p style="text-align:center;padding:20px;">加载中...</p>';
+  try {
+    const resp = await fetch(API_BASE + '/api/admin/logs', {
+      headers: { Authorization: `Bearer ${document.getElementById('adminPassword').value}` }
+    });
+    const data = await resp.json();
+    if (!data.success || data.logs.length === 0) {
+      container.innerHTML = '<p style="color:var(--fg-muted);text-align:center;padding:40px;">暂无日志</p>';
+      return;
+    }
+    container.innerHTML = data.logs.map(log => `
+      <div class="admin-log-item">
+        <span class="log-action ${log.action}">${log.action === 'submit' ? '新增' : '删除'}</span>
+        <span class="log-title">${log.title}</span>
+        <span class="log-meta">${log.category || ''} · ${log.contributor || ''}</span>
+        <span class="log-time">${log.time ? log.time.replace('T', ' ').slice(0, 16) : ''}</span>
+      </div>
+    `).join('');
+  } catch (e) {
+    container.innerHTML = '<p style="color:#f85149;text-align:center;">加载失败</p>';
+  }
+}
+
+async function deleteTab(id) {
+  if (!confirm('确定要删除这首谱子吗？此操作不可恢复。')) return;
+
+  const pwd = document.getElementById('adminPassword').value;
+  try {
+    const resp = await fetch(API_BASE + `/api/tabs/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${pwd}` }
+    });
+    const data = await resp.json();
+    if (data.success) {
+      // 从本地数据移除
+      window._adminTabsData = window._adminTabsData.filter(t => t.id !== id);
+      renderAdminTabs(document.getElementById('adminTabContent'));
+    } else {
+      alert('删除失败: ' + data.error);
+    }
+  } catch (e) {
+    alert('删除失败');
+  }
+}
+
+async function refreshAdminData() {
+  const pwd = document.getElementById('adminPassword').value;
+  const resp = await fetch(API_BASE + '/api/tabs-data', {
+    headers: { Authorization: `Bearer ${pwd}` }
+  });
+  const data = await resp.json();
+  if (data.success) {
+    window._adminTabsData = data.data;
+    renderAdminTabs(document.getElementById('adminTabContent'));
   }
 }
 
