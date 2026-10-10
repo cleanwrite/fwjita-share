@@ -14,6 +14,7 @@
         <p class="subtitle">GPX / PDF / 图片，在线预览即开即用</p>
       </div>
       <div class="header-links">
+        <button class="submit-btn" onclick="openSubmitModal()">+ 提交谱子</button>
         <a href="https://wwatq.lanzn.com/b00v0d8wef" target="_blank" class="link-item">
           <span class="link-label">蓝奏云</span>
           <span class="link-meta">密码 ac6x</span>
@@ -63,6 +64,55 @@
       </div>
     </div>
   </main>
+
+  <!-- 提交谱子弹窗 -->
+  <div id="submitModal" class="modal hidden">
+    <div class="modal-content submit-modal">
+      <button class="close-btn" onclick="closeSubmitModal()" aria-label="关闭">&times;</button>
+      <h2>🎸 提交新谱子</h2>
+      <form id="submitForm" onsubmit="return false;">
+        <div class="form-row">
+          <label>大分类 <span class="required">*</span></label>
+          <div class="category-input-wrap">
+            <select id="submitCategory" onchange="if(this.value==='__new__') document.getElementById('newCategory').style.display='block'; else document.getElementById('newCategory').style.display='none'">
+              <option value="">-- 选择分类 --</option>
+            </select>
+          </div>
+          <input type="text" id="newCategory" placeholder="输入新分类名" style="display:none; margin-top:8px;">
+        </div>
+
+        <div class="form-row">
+          <label>歌曲名 <span class="required">*</span></label>
+          <input type="text" id="submitSongGroup" placeholder="歌曲名称（也是文件夹名）">
+        </div>
+
+        <div class="form-row">
+          <label>贡献者</label>
+          <input type="text" id="submitContributor" placeholder="你的名字（可选）">
+        </div>
+
+        <div class="form-row">
+          <label>B站主页</label>
+          <input type="text" id="submitBilibili" placeholder="https://space.bilibili.com/xxxx（可选）">
+        </div>
+
+        <div class="form-row">
+          <label>文件 <span class="required">*</span></label>
+          <input type="file" id="submitFiles" multiple accept=".gp,.gp3,.gp4,.gp5,.gp7,.gp8,.gpx,.pdf,.jpg,.jpeg,.png,.webp,.gif,.bmp">
+          <div id="fileTags" class="file-tags"></div>
+        </div>
+
+        <div class="form-row">
+          <label>提交密码 <span class="required">*</span></label>
+          <input type="password" id="submitPassword" placeholder="输入提交密码">
+        </div>
+
+        <div id="submitResult" class="submit-result"></div>
+
+        <button type="button" onclick="submitTab()" class="submit-form-btn">提交</button>
+      </form>
+    </div>
+  </div>
 
   <div class="disclaimer-banner">
     <span class="disclaimer-icon">⚠️</span>

@@ -608,6 +608,115 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// ===== 提交谱子 =====
+
+const API_BASE = ''; // 同域，Worker 反代
+
+async function openSubmitModal() {
+  const modal = document.getElementById('submitModal');
+  modal.classList.remove('hidden');
+
+  // 加载分类列表
+  const select = document.getElementById('submitCategory');
+  select.innerHTML = '<option value="">-- 选择分类 --</option>';
+  try {
+    const resp = await fetch(API_BASE + '/api/categories');
+    const data = await resp.json();
+    if (data.success) {
+      data.categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = cat;
+        select.appendChild(opt);
+      });
+    }
+  } catch (e) {
+    console.error('Failed to load categories:', e);
+  }
+  const newOpt = document.createElement('option');
+  newOpt.value = '__new__';
+  newOpt.textContent = '+ 新建分类';
+  select.appendChild(newOpt);
+
+  // 文件类型检测
+  document.getElementById('submitFiles').addEventListener('change', (e) => {
+    const tags = document.getElementById('fileTags');
+    tags.innerHTML = '';
+    for (const file of e.target.files) {
+      const ext = '.' + file.name.split('.').pop().toLowerCase();
+      let type = 'unknown';
+      if (['.gp', '.gp3', '.gp4', '.gp5', '.gp7', '.gp8', '.gpx'].includes(ext)) type = 'GPX';
+      else if (ext === '.pdf') type = 'PDF';
+      else if (['.jpg', '.jpeg', '.png', '.webp', '.gif', '.bmp'].includes(ext)) type = '图片';
+      const tag = document.createElement('span');
+      tag.className = 'file-tag ' + type.toLowerCase();
+      tag.textContent = `${file.name} (${type})`;
+      tags.appendChild(tag);
+    }
+  });
+}
+
+function closeSubmitModal() {
+  document.getElementById('submitModal').classList.add('hidden');
+  document.getElementById('submitForm').reset();
+  document.getElementById('fileTags').innerHTML = '';
+  document.getElementById('submitResult').innerHTML = '';
+  document.getElementById('newCategory').style.display = 'none';
+}
+
+async function submitTab() {
+  const result = document.getElementById('submitResult');
+  result.innerHTML = '<p class="result-loading">⏳ 提交中，请稍候...</p>';
+
+  const category = document.getElementById('submitCategory').value === '__new__'
+    ? document.getElementById('newCategory').value.trim()
+    : document.getElementById('submitCategory').value;
+  const songGroup = document.getElementById('submitSongGroup').value.trim();
+  const contributor = document.getElementById('submitContributor').value.trim();
+  const bilibili = document.getElementById('submitBilibili').value.trim();
+  const password = document.getElementById('submitPassword').value;
+  const files = document.getElementById('submitFiles').files;
+
+  if (!category || !songGroup) {
+    result.innerHTML = '<p class="result-error">请填写分类和歌曲名</p>';
+    return;
+  }
+  if (files.length === 0) {
+    result.innerHTML = '<p class="result-error">请至少上传一个文件</p>';
+    return;
+  }
+  if (!password) {
+    result.innerHTML = '<p class="result-error">请输入提交密码</p>';
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('category', category);
+  formData.append('songGroup', songGroup);
+  formData.append('contributor', contributor);
+  formData.append('bilibili', bilibili);
+  formData.append('password', password);
+  for (const file of files) {
+    formData.append('files', file);
+  }
+
+  try {
+    const resp = await fetch(API_BASE + '/api/submit', {
+      method: 'POST',
+      body: formData,
+    });
+    const data = await resp.json();
+    if (data.success) {
+      result.innerHTML = `<p class="result-success">✅ ${data.message}</p>`;
+      setTimeout(() => closeSubmitModal(), 2000);
+    } else {
+      result.innerHTML = `<p class="result-error">❌ ${data.error}</p>`;
+    }
+  } catch (e) {
+    result.innerHTML = `<p class="result-error">❌ 网络错误: ${e.message}</p>`;
+  }
+}
+
 // ===== 致谢墙 =====
 
 function showCredits() {

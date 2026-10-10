@@ -88,6 +88,26 @@ header {
   color: var(--fg);
 }
 
+/* 提交按钮 */
+.submit-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.submit-btn:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+}
+
 .link-label {
   font-size: 0.85rem;
   font-weight: 500;
@@ -1012,5 +1032,121 @@ footer .signature {
   *::after {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* ===== 提交表单 ===== */
+.submit-modal {
+  max-width: 520px;
+}
+
+.submit-modal h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--fg);
+}
+
+.form-row {
+  margin-bottom: 14px;
+}
+
+.form-row label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  margin-bottom: 6px;
+}
+
+.form-row .required {
+  color: #f85149;
+}
+
+.form-row input[type="text"],
+.form-row input[type="password"],
+.form-row select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  color: var(--fg);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-row input[type="text"]:focus,
+.form-row input[type="password"]:focus,
+.form-row select:focus {
+  border-color: var(--accent);
+}
+
+.form-row input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+}
+
+.file-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.file-tag {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.file-tag.gpx { background: rgba(31, 111, 235, 0.12); color: #58a6ff; }
+.file-tag.pdf { background: rgba(218, 54, 51, 0.12); color: #f85149; }
+.file-tag.jpg { background: rgba(35, 134, 54, 0.12); color: #3fb950; }
+
+.submit-result {
+  min-height: 24px;
+  margin: 12px 0;
+  font-size: 0.9rem;
+}
+
+.result-loading { color: var(--fg-muted); }
+.result-success { color: #3fb950; }
+.result-error { color: #f85149; }
+
+.submit-form-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--accent), #b38a4c);
+  color: #000;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  margin-top: 8px;
+}
+
+.submit-form-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.submit-form-btn:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 600px) {
+  .submit-modal {
+    padding: 24px 18px;
   }
 }
