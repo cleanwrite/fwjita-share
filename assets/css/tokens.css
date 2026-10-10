@@ -1,0 +1,53 @@
+/* ===== 统一设计令牌 ===== */
+:root {
+  /* 颜色 — 统一用暖灰 + 一个强调色 */
+  --c-bg: #0a0a0a;
+  --c-surface: #141414;
+  --c-elevated: #1a1a1a;
+  --c-border: rgba(255, 255, 255, 0.08);
+  --c-text: rgba(255, 255, 255, 0.92);
+  --c-text-muted: rgba(255, 255, 255, 0.55);
+  --c-text-faint: rgba(255, 255, 255, 0.3);
+  --c-accent: #c89b5c;
+  --c-accent-subtle: rgba(200, 155, 92, 0.12);
+  --c-danger: #f85149;
+  --c-success: #3fb950;
+
+  /* 圆角 — 统一小圆角 */
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 8px;
+
+  /* 间距 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+
+  /* 字号 */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.85rem;
+  --fs-md: 0.95rem;
+  --fs-lg: 1.1rem;
+  --fs-xl: 1.3rem;
+  --fs-2xl: 1.6rem;
+
+  /* 字重 */
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  /* 行高 */
+  --lh-tight: 1.4;
+  --lh-normal: 1.6;
+  --lh-loose: 1.8;
+
+  /* 过渡 */
+  --tr-fast: 0.15s ease;
+  --tr-normal: 0.2s ease;
+
+  /* 字体栈 */
+  --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
