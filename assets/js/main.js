@@ -801,7 +801,7 @@
     // 搜索框清空时恢复
     document.getElementById('search-input').addEventListener('input', filterTabs);
 
-    // 模态框关闭
+    // 模态框关闭（点击背景）
     document.getElementById('modal').addEventListener('click', function (e) {
       if (e.target === this) closeMainModal();
     });
@@ -813,6 +813,19 @@
     });
     document.getElementById('adminModal').addEventListener('click', function (e) {
       if (e.target === this) closeAdminPanel();
+    });
+
+    // 关闭按钮
+    document.querySelectorAll('.close-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var modal = btn.closest('.modal');
+        if (!modal) return;
+        var modalId = modal.id;
+        if (modalId === 'modal') closeMainModal();
+        else if (modalId === 'credits-modal') closeCredits();
+        else if (modalId === 'submitModal') closeSubmitModal();
+        else if (modalId === 'adminModal') closeAdminPanel();
+      });
     });
 
     // ESC 关闭

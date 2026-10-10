@@ -1,7 +1,7 @@
 const tabsData = [
   {
     "id": 1,
-    "title": "are you lost",
+    "title": "Are you lost",
     "artist": "",
     "formats": [
       "jpg"
@@ -12,7 +12,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
-    "song_group": "Are you lost（只有第一面qwq）",
+    "song_group": "Are you lost",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -20,7 +20,7 @@ const tabsData = [
   },
   {
     "id": 2,
-    "title": "are you lost（",
+    "title": "Are you lost（超简版）",
     "artist": "",
     "formats": [
       "jpg"
@@ -31,7 +31,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
-    "song_group": "Are you lost（只有第一面qwq）",
+    "song_group": "Are you lost",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -39,7 +39,7 @@ const tabsData = [
   },
   {
     "id": 3,
-    "title": "Marcin Patrzalek",
+    "title": "TAKI TAKI TAPPING RIFF",
     "artist": "",
     "formats": [
       "jpg"
@@ -49,8 +49,8 @@ const tabsData = [
         "assets/tabs/Marcin Patrzalek/TAKI TAKI TAPPING RIFF.jpg"
       ]
     },
-    "category": "单曲",
-    "song_group": "Marcin Patrzalek",
+    "category": "Marcin Patrzalek",
+    "song_group": "TAKI TAKI TAPPING RIFF",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -58,7 +58,7 @@ const tabsData = [
   },
   {
     "id": 4,
-    "title": "Revolution(大树音乐",
+    "title": "Revolution",
     "artist": "",
     "formats": [
       "jpg"
@@ -77,7 +77,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
-    "song_group": "Revolution(大树音乐",
+    "song_group": "Revolution",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -85,7 +85,7 @@ const tabsData = [
   },
   {
     "id": 5,
-    "title": "River flows in you（元子吉他",
+    "title": "River flows in you",
     "artist": "",
     "formats": [
       "jpg"
@@ -101,7 +101,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
-    "song_group": "River flows in you（元子吉他",
+    "song_group": "River flows in you",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -429,7 +429,7 @@ const tabsData = [
   },
   {
     "id": 23,
-    "title": "劳伦斯先生×纯情活泼小姑娘（混合谱",
+    "title": "劳伦斯先生×纯情活泼小姑娘（混合谱）",
     "artist": "",
     "formats": [
       "pdf"
@@ -438,7 +438,7 @@ const tabsData = [
       "pdf": "assets/tabs/劳伦斯先生×纯情活泼小姑娘（混合谱/Merry Cristmas,Miss Cirno.pdf"
     },
     "category": "单曲",
-    "song_group": "劳伦斯先生×纯情活泼小姑娘（混合谱",
+    "song_group": "劳伦斯先生×纯情活泼小姑娘",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -446,7 +446,7 @@ const tabsData = [
   },
   {
     "id": 24,
-    "title": "吉他 - 莫愁乡",
+    "title": "莫愁乡",
     "artist": "",
     "formats": [
       "jpg"
@@ -459,7 +459,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
-    "song_group": "吉他 - 莫愁乡",
+    "song_group": "莫愁乡",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -615,7 +615,7 @@ const tabsData = [
   },
   {
     "id": 33,
-    "title": "美丽的搭档（朱一丹的枯燥生活背景音乐",
+    "title": "美丽的搭档",
     "artist": "",
     "formats": [
       "pdf"
@@ -624,7 +624,7 @@ const tabsData = [
       "pdf": "assets/tabs/美丽的搭档（朱一丹的枯燥生活背景音乐/美丽的搭档.pdf"
     },
     "category": "单曲",
-    "song_group": "美丽的搭档（朱一丹的枯燥生活背景音乐",
+    "song_group": "美丽的搭档",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -654,7 +654,7 @@ const tabsData = [
   },
   {
     "id": 35,
-    "title": "郑晟河",
+    "title": "Just two of us",
     "artist": "",
     "formats": [
       "pdf"
@@ -662,8 +662,8 @@ const tabsData = [
     "files": {
       "pdf": "assets/tabs/郑晟河/Just two of us.pdf"
     },
-    "category": "单曲",
-    "song_group": "郑晟河",
+    "category": "郑晟河",
+    "song_group": "Just two of us",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -771,19 +771,19 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/The Ocean（元子吉他/The Ocean (1).jpg",
-        "assets/tabs/The Ocean（元子吉他/The Ocean (2).jpg",
-        "assets/tabs/The Ocean（元子吉他/The Ocean (3).jpg",
-        "assets/tabs/The Ocean（元子吉他/The Ocean (4).jpg",
-        "assets/tabs/The Ocean（元子吉他/The Ocean (5).jpg",
-        "assets/tabs/The Ocean（元子吉他/The Ocean (6).jpg",
-        "assets/tabs/The Ocean（元子吉他/The Ocean (7).jpg",
-        "assets/tabs/The Ocean（元子吉他/The Ocean (8).jpg",
-        "assets/tabs/The Ocean（元子吉他/The Ocean (9).jpg"
+        "assets/tabs/The Ocean/The Ocean (1).jpg",
+        "assets/tabs/The Ocean/The Ocean (2).jpg",
+        "assets/tabs/The Ocean/The Ocean (3).jpg",
+        "assets/tabs/The Ocean/The Ocean (4).jpg",
+        "assets/tabs/The Ocean/The Ocean (5).jpg",
+        "assets/tabs/The Ocean/The Ocean (6).jpg",
+        "assets/tabs/The Ocean/The Ocean (7).jpg",
+        "assets/tabs/The Ocean/The Ocean (8).jpg",
+        "assets/tabs/The Ocean/The Ocean (9).jpg"
       ]
     },
     "category": "单曲",
-    "song_group": "The Ocean（元子吉他",
+    "song_group": "The Ocean",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -798,11 +798,11 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/Dreaming（元子吉他/Dreaming.jpg"
+        "assets/tabs/Dreaming/Dreaming.jpg"
       ]
     },
     "category": "单曲",
-    "song_group": "Dreaming（元子吉他",
+    "song_group": "Dreaming",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -928,7 +928,7 @@ const tabsData = [
   },
   {
     "id": 50,
-    "title": "其他片段（版权页等）",
+    "title": "Marcin Patrzalek 其他片段",
     "artist": "",
     "formats": [
       "jpg"
@@ -949,7 +949,7 @@ const tabsData = [
       ]
     },
     "category": "Marcin Patrzalek",
-    "song_group": "其他片段",
+    "song_group": "Marcin Patrzalek 其他片段",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
