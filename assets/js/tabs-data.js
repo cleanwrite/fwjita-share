@@ -8,11 +8,11 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/Are you lostÃ¯Â¼ÂÃ¥ÂÂªÃ¦ÂÂÃ§Â¬Â¬Ã¤Â¸ÂÃ©ÂÂ¢qwqÃ¯Â¼Â/are you lost/are you lost.png"
+        "assets/tabs/Are you lost（只有第一面qwq）/are you lost/are you lost.png"
       ]
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Are you lostÃ¯Â¼ÂÃ¥ÂÂªÃ¦ÂÂÃ§Â¬Â¬Ã¤Â¸ÂÃ©ÂÂ¢qwqÃ¯Â¼Â",
+    "category": "Are you lost（只有第一面qwq）",
+    "song_group": "are you lost",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -20,18 +20,18 @@ const tabsData = [
   },
   {
     "id": 2,
-    "title": "are you lostÃ¯Â¼Â",
+    "title": "are you lost（",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/Are you lostÃ¯Â¼ÂÃ¥ÂÂªÃ¦ÂÂÃ§Â¬Â¬Ã¤Â¸ÂÃ©ÂÂ¢qwqÃ¯Â¼Â/are you lostÃ¯Â¼Â/are you lostÃ¯Â¼ÂÃ¨Â¶ÂÃ§Â®ÂÃ§ÂÂ.png"
+        "assets/tabs/Are you lost（只有第一面qwq）/are you lost（/are you lost（超简版.png"
       ]
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Are you lostÃ¯Â¼ÂÃ¥ÂÂªÃ¦ÂÂÃ§Â¬Â¬Ã¤Â¸ÂÃ©ÂÂ¢qwqÃ¯Â¼Â",
+    "category": "Are you lost（只有第一面qwq）",
+    "song_group": "are you lost（",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -39,26 +39,26 @@ const tabsData = [
   },
   {
     "id": 3,
-    "title": "Revolution(Ã¥Â¤Â§Ã¦Â ÂÃ©ÂÂ³Ã¤Â¹Â",
+    "title": "Revolution(大树音乐",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/Revolution(Ã¥Â¤Â§Ã¦Â ÂÃ©ÂÂ³Ã¤Â¹Â/revolution (1).jpg",
-        "assets/tabs/Revolution(Ã¥Â¤Â§Ã¦Â ÂÃ©ÂÂ³Ã¤Â¹Â/revolution (2).jpg",
-        "assets/tabs/Revolution(Ã¥Â¤Â§Ã¦Â ÂÃ©ÂÂ³Ã¤Â¹Â/revolution (3).jpg",
-        "assets/tabs/Revolution(Ã¥Â¤Â§Ã¦Â ÂÃ©ÂÂ³Ã¤Â¹Â/revolution (4).jpg",
-        "assets/tabs/Revolution(Ã¥Â¤Â§Ã¦Â ÂÃ©ÂÂ³Ã¤Â¹Â/revolution (5).jpg",
-        "assets/tabs/Revolution(Ã¥Â¤Â§Ã¦Â ÂÃ©ÂÂ³Ã¤Â¹Â/revolution (6).jpg",
-        "assets/tabs/Revolution(Ã¥Â¤Â§Ã¦Â ÂÃ©ÂÂ³Ã¤Â¹Â/revolution (7).jpg",
-        "assets/tabs/Revolution(Ã¥Â¤Â§Ã¦Â ÂÃ©ÂÂ³Ã¤Â¹Â/revolution (8).jpg",
-        "assets/tabs/Revolution(Ã¥Â¤Â§Ã¦Â ÂÃ©ÂÂ³Ã¤Â¹Â/revolution (9).jpg"
+        "assets/tabs/Revolution(大树音乐/revolution (1).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (2).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (3).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (4).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (5).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (6).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (7).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (8).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (9).jpg"
       ]
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Revolution(Ã¥Â¤Â§Ã¦Â ÂÃ©ÂÂ³Ã¤Â¹Â",
+    "category": "单曲",
+    "song_group": "Revolution(大树音乐",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -66,23 +66,23 @@ const tabsData = [
   },
   {
     "id": 4,
-    "title": "River flows in youÃ¯Â¼ÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂÃ¤Â»Â",
+    "title": "River flows in you（元子吉他",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/River flows in youÃ¯Â¼ÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂÃ¤Â»Â/1 (1).jpg",
-        "assets/tabs/River flows in youÃ¯Â¼ÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂÃ¤Â»Â/1 (2).jpg",
-        "assets/tabs/River flows in youÃ¯Â¼ÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂÃ¤Â»Â/1 (3).jpg",
-        "assets/tabs/River flows in youÃ¯Â¼ÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂÃ¤Â»Â/1 (4).jpg",
-        "assets/tabs/River flows in youÃ¯Â¼ÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂÃ¤Â»Â/1 (5).jpg",
-        "assets/tabs/River flows in youÃ¯Â¼ÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂÃ¤Â»Â/1 (6).jpg"
+        "assets/tabs/River flows in you（元子吉他/1 (1).jpg",
+        "assets/tabs/River flows in you（元子吉他/1 (2).jpg",
+        "assets/tabs/River flows in you（元子吉他/1 (3).jpg",
+        "assets/tabs/River flows in you（元子吉他/1 (4).jpg",
+        "assets/tabs/River flows in you（元子吉他/1 (5).jpg",
+        "assets/tabs/River flows in you（元子吉他/1 (6).jpg"
       ]
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "River flows in youÃ¯Â¼ÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂÃ¤Â»Â",
+    "category": "单曲",
+    "song_group": "River flows in you（元子吉他",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -100,7 +100,7 @@ const tabsData = [
       "gpx": "assets/tabs/Something Just Like This/Something Just Like This.gp",
       "pdf": "assets/tabs/Something Just Like This/Something Just Like This.pdf"
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
+    "category": "单曲",
     "song_group": "Something Just Like This",
     "contributor": {
       "name": "fw",
@@ -119,7 +119,7 @@ const tabsData = [
         "assets/tabs/call of silence/call of silence.jpeg"
       ]
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
+    "category": "单曲",
     "song_group": "call of silence",
     "contributor": {
       "name": "fw",
@@ -136,7 +136,7 @@ const tabsData = [
     "files": {
       "pdf": "assets/tabs/stay/Stay.pdf"
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
+    "category": "单曲",
     "song_group": "stay",
     "contributor": {
       "name": "fw",
@@ -152,12 +152,12 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/undertale/(ut)his theme/his theme/his themeÃ¯Â¼Â1.jpg",
-        "assets/tabs/undertale/(ut)his theme/his theme/his themeÃ¯Â¼Â2.jpg"
+        "assets/tabs/undertale/(ut)his theme/his theme/his theme（1.jpg",
+        "assets/tabs/undertale/(ut)his theme/his theme/his theme（2.jpg"
       ]
     },
     "category": "undertale",
-    "song_group": "(ut)his theme",
+    "song_group": "his theme",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -165,18 +165,18 @@ const tabsData = [
   },
   {
     "id": 9,
-    "title": "Ã¤Â¹ÂÃ¦ÂÂ¯his theme",
+    "title": "也是his theme",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/undertale/(ut)his theme/Ã¤Â¹ÂÃ¦ÂÂ¯his theme/Ã¤Â¹ÂÃ¦ÂÂ¯his theme.png"
+        "assets/tabs/undertale/(ut)his theme/也是his theme/也是his theme.png"
       ]
     },
     "category": "undertale",
-    "song_group": "(ut)his theme",
+    "song_group": "也是his theme",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -184,18 +184,18 @@ const tabsData = [
   },
   {
     "id": 10,
-    "title": "Ã¨Â¿ÂÃ¦ÂÂ¯his themeÃ¯Â¼ÂÃ¯Â¼Â",
+    "title": "还是his theme（？",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/undertale/(ut)his theme/Ã¨Â¿ÂÃ¦ÂÂ¯his themeÃ¯Â¼ÂÃ¯Â¼Â/Ã¨Â¿ÂÃ¦ÂÂ¯his themeÃ¯Â¼ÂÃ¯Â¼Â.png"
+        "assets/tabs/undertale/(ut)his theme/还是his theme（？/还是his theme（？.png"
       ]
     },
     "category": "undertale",
-    "song_group": "(ut)his theme",
+    "song_group": "还是his theme（？",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -203,18 +203,18 @@ const tabsData = [
   },
   {
     "id": 11,
-    "title": "Asgore[Ã¨Â¿ÂÃ¥ÂÂÃ¤Â½ÂÃ¦ÂÂ¯Ã¦ÂÂÃ§ÂÂ¹Ã©ÂÂ¾",
+    "title": "Asgore[还原但是有点难",
     "artist": "",
     "formats": [
       "gpx",
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/undertale/Asgore[Ã¨Â¿ÂÃ¥ÂÂÃ¤Â½ÂÃ¦ÂÂ¯Ã¦ÂÂÃ§ÂÂ¹Ã©ÂÂ¾/Asgore.gpx",
-      "pdf": "assets/tabs/undertale/Asgore[Ã¨Â¿ÂÃ¥ÂÂÃ¤Â½ÂÃ¦ÂÂ¯Ã¦ÂÂÃ§ÂÂ¹Ã©ÂÂ¾/Asgore.pdf"
+      "gpx": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.gpx",
+      "pdf": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.pdf"
     },
     "category": "undertale",
-    "song_group": "Asgore[Ã¨Â¿ÂÃ¥ÂÂÃ¤Â½ÂÃ¦ÂÂ¯Ã¦ÂÂÃ§ÂÂ¹Ã©ÂÂ¾",
+    "song_group": "Asgore[还原但是有点难",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -277,18 +277,18 @@ const tabsData = [
   },
   {
     "id": 15,
-    "title": "ShanghaivaniaÃ¯Â¼ÂÃ¦ÂÂÃ¥ÂÂÃ§ÂÂÃ¨ÂÂ²Ã¥Â½Â©Ã¨Â¿ÂÃ¦ÂÂ¯Ã¥ÂÂ¥Ã§ÂÂ©Ã¦ÂÂÃ¦ÂÂ¥Ã§ÂÂÃ¯Â¼ÂÃ¥ÂÂÃ¤ÂºÂºÃ©ÂÂ³Ã¤Â¹ÂÃ¥ÂÂÃ¦Â­Â£",
+    "title": "Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正",
     "artist": "",
     "formats": [
       "gpx",
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/undertale/ShanghaivaniaÃ¯Â¼ÂÃ¦ÂÂÃ¥ÂÂÃ§ÂÂÃ¨ÂÂ²Ã¥Â½Â©Ã¨Â¿ÂÃ¦ÂÂ¯Ã¥ÂÂ¥Ã§ÂÂ©Ã¦ÂÂÃ¦ÂÂ¥Ã§ÂÂÃ¯Â¼ÂÃ¥ÂÂÃ¤ÂºÂºÃ©ÂÂ³Ã¤Â¹ÂÃ¥ÂÂÃ¦Â­Â£/Shanghaivania.gp",
-      "pdf": "assets/tabs/undertale/ShanghaivaniaÃ¯Â¼ÂÃ¦ÂÂÃ¥ÂÂÃ§ÂÂÃ¨ÂÂ²Ã¥Â½Â©Ã¨Â¿ÂÃ¦ÂÂ¯Ã¥ÂÂ¥Ã§ÂÂ©Ã¦ÂÂÃ¦ÂÂ¥Ã§ÂÂÃ¯Â¼ÂÃ¥ÂÂÃ¤ÂºÂºÃ©ÂÂ³Ã¤Â¹ÂÃ¥ÂÂÃ¦Â­Â£/Shanghaivania.pdf"
+      "gpx": "assets/tabs/undertale/Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正/Shanghaivania.gp",
+      "pdf": "assets/tabs/undertale/Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正/Shanghaivania.pdf"
     },
     "category": "undertale",
-    "song_group": "ShanghaivaniaÃ¯Â¼ÂÃ¦ÂÂÃ¥ÂÂÃ§ÂÂÃ¨ÂÂ²Ã¥Â½Â©Ã¨Â¿ÂÃ¦ÂÂ¯Ã¥ÂÂ¥Ã§ÂÂ©Ã¦ÂÂÃ¦ÂÂ¥Ã§ÂÂÃ¯Â¼ÂÃ¥ÂÂÃ¤ÂºÂºÃ©ÂÂ³Ã¤Â¹ÂÃ¥ÂÂÃ¦Â­Â£",
+    "song_group": "Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -353,18 +353,18 @@ const tabsData = [
   },
   {
     "id": 19,
-    "title": "Tokyovania(Ã¤Â¹ÂÃ¦ÂÂ¯Ã¥ÂÂÃ¤ÂºÂºÃ¯Â¼ÂÃ¯Â¼ÂUndertronic Remix",
+    "title": "Tokyovania(也是同人）（Undertronic Remix",
     "artist": "",
     "formats": [
       "gpx",
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/undertale/Tokyovania(Ã¤Â¹ÂÃ¦ÂÂ¯Ã¥ÂÂÃ¤ÂºÂºÃ¯Â¼ÂÃ¯Â¼ÂUndertronic Remix/TokyovaniaÃ¯Â¼ÂUndertronic RemixÃ¯Â¼Âgtp.gp",
-      "pdf": "assets/tabs/undertale/Tokyovania(Ã¤Â¹ÂÃ¦ÂÂ¯Ã¥ÂÂÃ¤ÂºÂºÃ¯Â¼ÂÃ¯Â¼ÂUndertronic Remix/TokyovaniaÃ¯Â¼ÂUndertronic RemixÃ¯Â¼Âgtp.pdf"
+      "gpx": "assets/tabs/undertale/Tokyovania(也是同人）（Undertronic Remix/Tokyovania（Undertronic Remix）gtp.gp",
+      "pdf": "assets/tabs/undertale/Tokyovania(也是同人）（Undertronic Remix/Tokyovania（Undertronic Remix）gtp.pdf"
     },
     "category": "undertale",
-    "song_group": "Tokyovania(Ã¤Â¹ÂÃ¦ÂÂ¯Ã¥ÂÂÃ¤ÂºÂºÃ¯Â¼ÂÃ¯Â¼ÂUndertronic Remix",
+    "song_group": "Tokyovania(也是同人）（Undertronic Remix",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -372,18 +372,18 @@ const tabsData = [
   },
   {
     "id": 20,
-    "title": "Ã¤Â¸ÂÃ¤Â½Â Ã¥ÂÂÃ¥ÂÂ¨",
+    "title": "与你同在",
     "artist": "",
     "formats": [
       "gpx",
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/Ã¤Â¸ÂÃ¤Â½Â Ã¥ÂÂÃ¥ÂÂ¨/Always With Me(Ã¤Â¸ÂÃ¤Â½Â Ã¥ÂÂÃ¥ÂÂ¨).gp5",
-      "pdf": "assets/tabs/Ã¤Â¸ÂÃ¤Â½Â Ã¥ÂÂÃ¥ÂÂ¨/Ã¥ÂÂÃ¤Â¸ÂÃ¥ÂÂÃ¥Â¯Â» - Ã¤Â¸ÂÃ¤Â½Â Ã¥ÂÂÃ¥ÂÂ¨(Always With Me)(Ã¦ÂÂÃ¥Â¼Â¹Ã§ÂÂ).pdf"
+      "gpx": "assets/tabs/与你同在/Always With Me(与你同在).gp5",
+      "pdf": "assets/tabs/与你同在/千与千寻 - 与你同在(Always With Me)(指弹版).pdf"
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã¤Â¸ÂÃ¤Â½Â Ã¥ÂÂÃ¥ÂÂ¨",
+    "category": "单曲",
+    "song_group": "与你同在",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -391,18 +391,18 @@ const tabsData = [
   },
   {
     "id": 21,
-    "title": "Ã¥ÂÂ¶Ã¤Â»ÂÃ¯Â¼ÂÃ¦ÂÂÃ¥Â¿ÂÃ¤ÂºÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂ¥Ã§ÂÂ",
+    "title": "其他（我忘了名字啥的",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/Ã¥ÂÂ¶Ã¤Â»ÂÃ¯Â¼ÂÃ¦ÂÂÃ¥Â¿ÂÃ¤ÂºÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂ¥Ã§ÂÂ/Ã§ÂÂ¥Ã©ÂÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂ¯Ã¤Â»Â¥Ã¥ÂÂÃ¦ÂÂÃ¨Â¯Â´Ã¤Â¸ÂÃ¥Â£Â°.png"
+        "assets/tabs/其他（我忘了名字啥的/知道名字可以和我说一声.png"
       ]
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã¥ÂÂ¶Ã¤Â»ÂÃ¯Â¼ÂÃ¦ÂÂÃ¥Â¿ÂÃ¤ÂºÂÃ¥ÂÂÃ¥Â­ÂÃ¥ÂÂ¥Ã§ÂÂ",
+    "category": "单曲",
+    "song_group": "其他（我忘了名字啥的",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -410,16 +410,16 @@ const tabsData = [
   },
   {
     "id": 22,
-    "title": "Ã¥ÂÂ³Ã¤Â¼Â¦Ã¦ÂÂ¯Ã¥ÂÂÃ§ÂÂÃÂÃ§ÂºÂ¯Ã¦ÂÂÃ¦Â´Â»Ã¦Â³Â¼Ã¥Â°ÂÃ¥Â§ÂÃ¥Â¨ÂÃ¯Â¼ÂÃ¦Â·Â·Ã¥ÂÂÃ¨Â°Â±",
+    "title": "劳伦斯先生×纯情活泼小姑娘（混合谱",
     "artist": "",
     "formats": [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/Ã¥ÂÂ³Ã¤Â¼Â¦Ã¦ÂÂ¯Ã¥ÂÂÃ§ÂÂÃÂÃ§ÂºÂ¯Ã¦ÂÂÃ¦Â´Â»Ã¦Â³Â¼Ã¥Â°ÂÃ¥Â§ÂÃ¥Â¨ÂÃ¯Â¼ÂÃ¦Â·Â·Ã¥ÂÂÃ¨Â°Â±/Merry Cristmas,Miss Cirno.pdf"
+      "pdf": "assets/tabs/劳伦斯先生×纯情活泼小姑娘（混合谱/Merry Cristmas,Miss Cirno.pdf"
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã¥ÂÂ³Ã¤Â¼Â¦Ã¦ÂÂ¯Ã¥ÂÂÃ§ÂÂÃÂÃ§ÂºÂ¯Ã¦ÂÂÃ¦Â´Â»Ã¦Â³Â¼Ã¥Â°ÂÃ¥Â§ÂÃ¥Â¨ÂÃ¯Â¼ÂÃ¦Â·Â·Ã¥ÂÂÃ¨Â°Â±",
+    "category": "单曲",
+    "song_group": "劳伦斯先生×纯情活泼小姑娘（混合谱",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -427,20 +427,20 @@ const tabsData = [
   },
   {
     "id": 23,
-    "title": "Ã¥ÂÂÃ¤Â»Â - Ã¨ÂÂ«Ã¦ÂÂÃ¤Â¹Â¡",
+    "title": "吉他 - 莫愁乡",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/Ã¥ÂÂÃ¤Â»Â - Ã¨ÂÂ«Ã¦ÂÂÃ¤Â¹Â¡/1.jpg",
-        "assets/tabs/Ã¥ÂÂÃ¤Â»Â - Ã¨ÂÂ«Ã¦ÂÂÃ¤Â¹Â¡/2.jpg",
-        "assets/tabs/Ã¥ÂÂÃ¤Â»Â - Ã¨ÂÂ«Ã¦ÂÂÃ¤Â¹Â¡/3.jpg"
+        "assets/tabs/吉他 - 莫愁乡/1.jpg",
+        "assets/tabs/吉他 - 莫愁乡/2.jpg",
+        "assets/tabs/吉他 - 莫愁乡/3.jpg"
       ]
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã¥ÂÂÃ¤Â»Â - Ã¨ÂÂ«Ã¦ÂÂÃ¤Â¹Â¡",
+    "category": "单曲",
+    "song_group": "吉他 - 莫愁乡",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -448,18 +448,18 @@ const tabsData = [
   },
   {
     "id": 24,
-    "title": "Ã¥Â°ÂÃ¦ÂÂÃ¦Â­Â",
+    "title": "小情歌",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/Ã¥Â°ÂÃ¦ÂÂÃ¦Â­Â/021950r8ukrbatuvryvz88.webp"
+        "assets/tabs/小情歌/021950r8ukrbatuvryvz88.webp"
       ]
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã¥Â°ÂÃ¦ÂÂÃ¦Â­Â",
+    "category": "单曲",
+    "song_group": "小情歌",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -467,18 +467,18 @@ const tabsData = [
   },
   {
     "id": 25,
-    "title": "Ã¦ÂÂÃ§ÂÂ±Ã¥Â¾ÂªÃ§ÂÂ¯",
+    "title": "恋爱循环",
     "artist": "",
     "formats": [
       "jpg"
     ],
     "files": {
       "images": [
-        "assets/tabs/Ã¦ÂÂÃ§ÂÂ±Ã¥Â¾ÂªÃ§ÂÂ¯/Ã¦ÂÂÃ§ÂÂ±Ã¥Â¾ÂªÃ§ÂÂ¯.jpeg"
+        "assets/tabs/恋爱循环/恋爱循环.jpeg"
       ]
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã¦ÂÂÃ§ÂÂ±Ã¥Â¾ÂªÃ§ÂÂ¯",
+    "category": "单曲",
+    "song_group": "恋爱循环",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -493,10 +493,10 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/Ã¦ÂÂÃ§ÂÂÃ¤Â¸ÂÃ§ÂÂ/haggstorm/haggstorm.jpg"
+        "assets/tabs/我的世界/haggstorm/haggstorm.jpg"
       ]
     },
-    "category": "Ã¦ÂÂÃ§ÂÂÃ¤Â¸ÂÃ§ÂÂ",
+    "category": "我的世界",
     "song_group": "haggstorm",
     "contributor": {
       "name": "fw",
@@ -505,18 +505,18 @@ const tabsData = [
   },
   {
     "id": 27,
-    "title": "RequiemÃ¯Â¼ÂÃ©ÂÂÃ¦ÂÂEP",
+    "title": "Requiem（霜星EP",
     "artist": "",
     "formats": [
       "gpx",
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/Ã¦ÂÂÃ¦ÂÂ¥Ã¦ÂÂ¹Ã¨ÂÂ/RequiemÃ¯Â¼ÂÃ©ÂÂÃ¦ÂÂEP/Requiem.gpx",
-      "pdf": "assets/tabs/Ã¦ÂÂÃ¦ÂÂ¥Ã¦ÂÂ¹Ã¨ÂÂ/RequiemÃ¯Â¼ÂÃ©ÂÂÃ¦ÂÂEP/Requiem.pdf"
+      "gpx": "assets/tabs/明日方舟/Requiem（霜星EP/Requiem.gpx",
+      "pdf": "assets/tabs/明日方舟/Requiem（霜星EP/Requiem.pdf"
     },
-    "category": "Ã¦ÂÂÃ¦ÂÂ¥Ã¦ÂÂ¹Ã¨ÂÂ",
-    "song_group": "RequiemÃ¯Â¼ÂÃ©ÂÂÃ¦ÂÂEP",
+    "category": "明日方舟",
+    "song_group": "Requiem（霜星EP",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -524,18 +524,18 @@ const tabsData = [
   },
   {
     "id": 28,
-    "title": "Ã¦ÂÂ¥Ã¥Â¼Â¦",
+    "title": "春弦",
     "artist": "",
     "formats": [
       "gpx",
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/Ã¦ÂÂÃ¦ÂÂ¥Ã¦ÂÂ¹Ã¨ÂÂ/Ã¦ÂÂ¥Ã¥Â¼Â¦/Ã¦ÂÂ¥Ã¥Â¼Â¦.gpx",
-      "pdf": "assets/tabs/Ã¦ÂÂÃ¦ÂÂ¥Ã¦ÂÂ¹Ã¨ÂÂ/Ã¦ÂÂ¥Ã¥Â¼Â¦/Ã¦ÂÂ¥Ã¥Â¼Â¦.pdf"
+      "gpx": "assets/tabs/明日方舟/春弦/春弦.gpx",
+      "pdf": "assets/tabs/明日方舟/春弦/春弦.pdf"
     },
-    "category": "Ã¦ÂÂÃ¦ÂÂ¥Ã¦ÂÂ¹Ã¨ÂÂ",
-    "song_group": "Ã¦ÂÂ¥Ã¥Â¼Â¦",
+    "category": "明日方舟",
+    "song_group": "春弦",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -543,16 +543,16 @@ const tabsData = [
   },
   {
     "id": 29,
-    "title": "Ã¦ÂÂ´Ã¥Â¤Â©",
+    "title": "晴天",
     "artist": "",
     "formats": [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/Ã¦ÂÂ´Ã¥Â¤Â©/Ã¦ÂÂ´Ã¥Â¤Â©_1777565102341.pdf"
+      "pdf": "assets/tabs/晴天/晴天_1777565102341.pdf"
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã¦ÂÂ´Ã¥Â¤Â©",
+    "category": "单曲",
+    "song_group": "晴天",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -560,18 +560,18 @@ const tabsData = [
   },
   {
     "id": 30,
-    "title": "Ã¦Â¬Â¢Ã¤Â¹ÂÃ©Â¢Â",
+    "title": "欢乐颂",
     "artist": "",
     "formats": [
       "gpx",
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/Ã¦Â¬Â¢Ã¤Â¹ÂÃ©Â¢Â/Ã¦Â¬Â¢Ã¤Â¹ÂÃ©Â¢Â.gpx",
-      "pdf": "assets/tabs/Ã¦Â¬Â¢Ã¤Â¹ÂÃ©Â¢Â/Ã¦Â¬Â¢Ã¤Â¹ÂÃ©Â¢Â.pdf"
+      "gpx": "assets/tabs/欢乐颂/欢乐颂.gpx",
+      "pdf": "assets/tabs/欢乐颂/欢乐颂.pdf"
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã¦Â¬Â¢Ã¤Â¹ÂÃ©Â¢Â",
+    "category": "单曲",
+    "song_group": "欢乐颂",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -579,16 +579,16 @@ const tabsData = [
   },
   {
     "id": 31,
-    "title": "Ã¦Â±ÂÃ§ÂÂÃ¤Â¹ÂÃ¨Â·Â¯ dead center",
+    "title": "求生之路 dead center",
     "artist": "",
     "formats": [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/Ã¦Â±ÂÃ§ÂÂÃ¤Â¹ÂÃ¨Â·Â¯ dead center/Ã¦Â±ÂÃ§ÂÂÃ¤Â¹ÂÃ¨Â·Â¯ dead center.pdf"
+      "pdf": "assets/tabs/求生之路 dead center/求生之路 dead center.pdf"
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã¦Â±ÂÃ§ÂÂÃ¤Â¹ÂÃ¨Â·Â¯ dead center",
+    "category": "单曲",
+    "song_group": "求生之路 dead center",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -596,18 +596,16 @@ const tabsData = [
   },
   {
     "id": 32,
-    "title": "Ã§Â©ÂºÃ§ÂÂ½Ã¨Â°Â±Ã¥ÂÂ¾Ã§ÂÂ",
+    "title": "API测试歌曲",
     "artist": "",
     "formats": [
-      "jpg"
+      "gpx"
     ],
     "files": {
-      "images": [
-        "assets/tabs/Ã§Â©ÂºÃ§ÂÂ½Ã¨Â°Â±Ã¥ÂÂ¾Ã§ÂÂ/Ã§Â¤ÂºÃ¤Â¾Â.jpg"
-      ]
+      "gpx": "assets/tabs/测试分类/API测试歌曲/test.gpx"
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã§Â©ÂºÃ§ÂÂ½Ã¨Â°Â±Ã¥ÂÂ¾Ã§ÂÂ",
+    "category": "测试分类",
+    "song_group": "API测试歌曲",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -615,16 +613,18 @@ const tabsData = [
   },
   {
     "id": 33,
-    "title": "Ã§Â¾ÂÃ¤Â¸Â½Ã§ÂÂÃ¦ÂÂ­Ã¦Â¡Â£Ã¯Â¼ÂÃ¦ÂÂ±Ã¤Â¸ÂÃ¤Â¸Â¹Ã§ÂÂÃ¦ÂÂ¯Ã§ÂÂ¥Ã§ÂÂÃ¦Â´Â»Ã¨ÂÂÃ¦ÂÂ¯Ã©ÂÂ³Ã¤Â¹Â",
+    "title": "空白谱图片",
     "artist": "",
     "formats": [
-      "pdf"
+      "jpg"
     ],
     "files": {
-      "pdf": "assets/tabs/Ã§Â¾ÂÃ¤Â¸Â½Ã§ÂÂÃ¦ÂÂ­Ã¦Â¡Â£Ã¯Â¼ÂÃ¦ÂÂ±Ã¤Â¸ÂÃ¤Â¸Â¹Ã§ÂÂÃ¦ÂÂ¯Ã§ÂÂ¥Ã§ÂÂÃ¦Â´Â»Ã¨ÂÂÃ¦ÂÂ¯Ã©ÂÂ³Ã¤Â¹Â/Ã§Â¾ÂÃ¤Â¸Â½Ã§ÂÂÃ¦ÂÂ­Ã¦Â¡Â£.pdf"
+      "images": [
+        "assets/tabs/空白谱图片/示例.jpg"
+      ]
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã§Â¾ÂÃ¤Â¸Â½Ã§ÂÂÃ¦ÂÂ­Ã¦Â¡Â£Ã¯Â¼ÂÃ¦ÂÂ±Ã¤Â¸ÂÃ¤Â¸Â¹Ã§ÂÂÃ¦ÂÂ¯Ã§ÂÂ¥Ã§ÂÂÃ¦Â´Â»Ã¨ÂÂÃ¦ÂÂ¯Ã©ÂÂ³Ã¤Â¹Â",
+    "category": "单曲",
+    "song_group": "空白谱图片",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -632,21 +632,16 @@ const tabsData = [
   },
   {
     "id": 34,
-    "title": "Ã¨Â¯Â´Ã¨Â°ÂÃ§ÂÂÃ©Â©Â¬Ã¥ÂÂ¡Ã©Â¾Â",
+    "title": "美丽的搭档（朱一丹的枯燥生活背景音乐",
     "artist": "",
     "formats": [
-      "jpg"
+      "pdf"
     ],
     "files": {
-      "images": [
-        "assets/tabs/Ã¨Â¯Â´Ã¨Â°ÂÃ§ÂÂÃ©Â©Â¬Ã¥ÂÂ¡Ã©Â¾Â/Ã¨Â¯Â´Ã¨Â°ÂÃ§ÂÂÃ©Â©Â¬Ã¥ÂÂ¡Ã©Â¾Â (1).png",
-        "assets/tabs/Ã¨Â¯Â´Ã¨Â°ÂÃ§ÂÂÃ©Â©Â¬Ã¥ÂÂ¡Ã©Â¾Â/Ã¨Â¯Â´Ã¨Â°ÂÃ§ÂÂÃ©Â©Â¬Ã¥ÂÂ¡Ã©Â¾Â (2).png",
-        "assets/tabs/Ã¨Â¯Â´Ã¨Â°ÂÃ§ÂÂÃ©Â©Â¬Ã¥ÂÂ¡Ã©Â¾Â/Ã¨Â¯Â´Ã¨Â°ÂÃ§ÂÂÃ©Â©Â¬Ã¥ÂÂ¡Ã©Â¾Â (3).png",
-        "assets/tabs/Ã¨Â¯Â´Ã¨Â°ÂÃ§ÂÂÃ©Â©Â¬Ã¥ÂÂ¡Ã©Â¾Â/Ã¨Â¯Â´Ã¨Â°ÂÃ§ÂÂÃ©Â©Â¬Ã¥ÂÂ¡Ã©Â¾Â (4).png"
-      ]
+      "pdf": "assets/tabs/美丽的搭档（朱一丹的枯燥生活背景音乐/美丽的搭档.pdf"
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã¨Â¯Â´Ã¨Â°ÂÃ§ÂÂÃ©Â©Â¬Ã¥ÂÂ¡Ã©Â¾Â",
+    "category": "单曲",
+    "song_group": "美丽的搭档（朱一丹的枯燥生活背景音乐",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -654,18 +649,21 @@ const tabsData = [
   },
   {
     "id": 35,
-    "title": "Ã©Â£ÂÃ¤Â¹ÂÃ¨Â¯Â",
+    "title": "说谎的马卡龙",
     "artist": "",
     "formats": [
-      "gpx",
-      "pdf"
+      "jpg"
     ],
     "files": {
-      "gpx": "assets/tabs/Ã©Â£ÂÃ¤Â¹ÂÃ¨Â¯Â/Ã©Â£ÂÃ¤Â¹ÂÃ¨Â¯Â.gpx",
-      "pdf": "assets/tabs/Ã©Â£ÂÃ¤Â¹ÂÃ¨Â¯Â/Ã©Â£ÂÃ¤Â¹ÂÃ¨Â¯Â.pdf"
+      "images": [
+        "assets/tabs/说谎的马卡龙/说谎的马卡龙 (1).png",
+        "assets/tabs/说谎的马卡龙/说谎的马卡龙 (2).png",
+        "assets/tabs/说谎的马卡龙/说谎的马卡龙 (3).png",
+        "assets/tabs/说谎的马卡龙/说谎的马卡龙 (4).png"
+      ]
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã©Â£ÂÃ¤Â¹ÂÃ¨Â¯Â",
+    "category": "单曲",
+    "song_group": "说谎的马卡龙",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -673,18 +671,18 @@ const tabsData = [
   },
   {
     "id": 36,
-    "title": "Ã©Â»ÂÃ©ÂÂÃ¤Â¹ÂÃ©Â£Â",
+    "title": "风之诗",
     "artist": "",
     "formats": [
       "gpx",
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/Ã©Â»ÂÃ©ÂÂÃ¤Â¹ÂÃ©Â£Â/Ã©Â»ÂÃ©ÂÂÃ¤Â¹ÂÃ©Â£Â.gpx",
-      "pdf": "assets/tabs/Ã©Â»ÂÃ©ÂÂÃ¤Â¹ÂÃ©Â£Â/Ã©Â»ÂÃ©ÂÂÃ¤Â¹ÂÃ©Â£Â.pdf"
+      "gpx": "assets/tabs/风之诗/风之诗.gpx",
+      "pdf": "assets/tabs/风之诗/风之诗.pdf"
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã©Â»ÂÃ©ÂÂÃ¤Â¹ÂÃ©Â£Â",
+    "category": "单曲",
+    "song_group": "风之诗",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -692,18 +690,18 @@ const tabsData = [
   },
   {
     "id": 37,
-    "title": "Ã¥ÂÂÃ¦Â¢Â¦Ã§ÂÂÃ¤ÂºÂºÃ¥ÂÂ¶Ã¯Â¼ÂÃ¤Â¸ÂÃ©ÂÂ³Ã¥ÂÂ¬Ã¥ÂÂ­Ã¨ÂÂÃ¦Â Â¼Ã¦ÂÂ",
+    "title": "黄金之风",
     "artist": "",
     "formats": [
       "gpx",
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/Ã©Â»ÂÃ¦ÂÂÃ¤Â¹ÂÃ©Â­ÂÃ¯Â¼Âblacksouls/Ã¥ÂÂÃ¦Â¢Â¦Ã§ÂÂÃ¤ÂºÂºÃ¥ÂÂ¶Ã¯Â¼ÂÃ¤Â¸ÂÃ©ÂÂ³Ã¥ÂÂ¬Ã¥ÂÂ­Ã¨ÂÂÃ¦Â Â¼Ã¦ÂÂ/Ã¥ÂÂÃ¦Â¢Â¦Ã§ÂÂÃ¤ÂºÂºÃ¥ÂÂ¶.gp5",
-      "pdf": "assets/tabs/Ã©Â»ÂÃ¦ÂÂÃ¤Â¹ÂÃ©Â­ÂÃ¯Â¼Âblacksouls/Ã¥ÂÂÃ¦Â¢Â¦Ã§ÂÂÃ¤ÂºÂºÃ¥ÂÂ¶Ã¯Â¼ÂÃ¤Â¸ÂÃ©ÂÂ³Ã¥ÂÂ¬Ã¥ÂÂ­Ã¨ÂÂÃ¦Â Â¼Ã¦ÂÂ/Ã¥ÂÂÃ¦Â¢Â¦Ã§ÂÂÃ¤ÂºÂºÃ¥ÂÂ¶.pdf"
+      "gpx": "assets/tabs/黄金之风/黄金之风.gpx",
+      "pdf": "assets/tabs/黄金之风/黄金之风.pdf"
     },
-    "category": "Ã©Â»ÂÃ¦ÂÂÃ¤Â¹ÂÃ©Â­ÂÃ¯Â¼Âblacksouls",
-    "song_group": "Ã¥ÂÂÃ¦Â¢Â¦Ã§ÂÂÃ¤ÂºÂºÃ¥ÂÂ¶Ã¯Â¼ÂÃ¤Â¸ÂÃ©ÂÂ³Ã¥ÂÂ¬Ã¥ÂÂ­Ã¨ÂÂÃ¦Â Â¼Ã¦ÂÂ",
+    "category": "单曲",
+    "song_group": "黄金之风",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -711,18 +709,18 @@ const tabsData = [
   },
   {
     "id": 38,
-    "title": "Ã¦ÂÂ´Ã©ÂÂ¡Ã§ÂÂ«Ã¯Â¼ÂÃ¥ÂÂµÃ¥ÂÂ",
+    "title": "做梦的人偶（三音听哭老格林",
     "artist": "",
     "formats": [
       "gpx",
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/Ã©Â»ÂÃ¦ÂÂÃ¤Â¹ÂÃ©Â­ÂÃ¯Â¼Âblacksouls/Ã¦ÂÂ´Ã©ÂÂ¡Ã§ÂÂ«Ã¯Â¼ÂÃ¥ÂÂµÃ¥ÂÂ/Ã¦ÂÂ´Ã©ÂÂ¡Ã§ÂÂ«Ã¯Â¼ÂÃ¥Â¥Â½Ã¥ÂÂÃ¦ÂÂÃ¥ÂÂÃ¤ÂºÂ.gpx",
-      "pdf": "assets/tabs/Ã©Â»ÂÃ¦ÂÂÃ¤Â¹ÂÃ©Â­ÂÃ¯Â¼Âblacksouls/Ã¦ÂÂ´Ã©ÂÂ¡Ã§ÂÂ«Ã¯Â¼ÂÃ¥ÂÂµÃ¥ÂÂ/Ã¦ÂÂ´Ã©ÂÂ¡Ã§ÂÂ«.pdf"
+      "gpx": "assets/tabs/黑暗之魂（blacksouls/做梦的人偶（三音听哭老格林/做梦的人偶.gp5",
+      "pdf": "assets/tabs/黑暗之魂（blacksouls/做梦的人偶（三音听哭老格林/做梦的人偶.pdf"
     },
-    "category": "Ã©Â»ÂÃ¦ÂÂÃ¤Â¹ÂÃ©Â­ÂÃ¯Â¼Âblacksouls",
-    "song_group": "Ã¦ÂÂ´Ã©ÂÂ¡Ã§ÂÂ«Ã¯Â¼ÂÃ¥ÂÂµÃ¥ÂÂ",
+    "category": "黑暗之魂（blacksouls",
+    "song_group": "做梦的人偶（三音听哭老格林",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -730,16 +728,52 @@ const tabsData = [
   },
   {
     "id": 39,
-    "title": "Ã¯Â¼ÂÃ¥Â¯ÂÃ¨ÂÂÃ©Â¸Â£Ã¦Â³Â£Ã¤Â¹ÂÃ¦ÂÂ¶Ã¯Â¼ÂYOU",
+    "title": "柴郡猫（喵呜",
+    "artist": "",
+    "formats": [
+      "gpx",
+      "pdf"
+    ],
+    "files": {
+      "gpx": "assets/tabs/黑暗之魂（blacksouls/柴郡猫（喵呜/柴郡猫（好像损坏了.gpx",
+      "pdf": "assets/tabs/黑暗之魂（blacksouls/柴郡猫（喵呜/柴郡猫.pdf"
+    },
+    "category": "黑暗之魂（blacksouls",
+    "song_group": "柴郡猫（喵呜",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 40,
+    "title": "（寒蝉鸣泣之时）YOU",
     "artist": "",
     "formats": [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/Ã¯Â¼ÂÃ¥Â¯ÂÃ¨ÂÂÃ©Â¸Â£Ã¦Â³Â£Ã¤Â¹ÂÃ¦ÂÂ¶Ã¯Â¼ÂYOU/YOU.pdf"
+      "pdf": "assets/tabs/（寒蝉鸣泣之时）YOU/YOU.pdf"
     },
-    "category": "Ã¥ÂÂÃ¦ÂÂ²",
-    "song_group": "Ã¯Â¼ÂÃ¥Â¯ÂÃ¨ÂÂÃ©Â¸Â£Ã¦Â³Â£Ã¤Â¹ÂÃ¦ÂÂ¶Ã¯Â¼ÂYOU",
+    "category": "单曲",
+    "song_group": "（寒蝉鸣泣之时）YOU",
+    "contributor": {
+      "name": "fw",
+      "bilibili": "https://space.bilibili.com/590547783"
+    }
+  },
+  {
+    "id": 41,
+    "title": "API���ղ���",
+    "artist": "",
+    "formats": [
+      "gpx"
+    ],
+    "files": {
+      "gpx": "assets/tabs/���Է���/API���ղ���/test.gpx"
+    },
+    "category": "���Է���",
+    "song_group": "API���ղ���",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
