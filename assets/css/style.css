@@ -40,10 +40,19 @@ header {
 }
 
 .header-text h1 {
-  font-size: var(--fs-xl);
-  font-weight: var(--fw-semibold);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
   color: var(--c-text);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  line-height: var(--lh-tight);
+}
+
+.header-text h1 .signature {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-normal);
+  color: var(--c-accent);
+  margin-left: var(--sp-2);
+  vertical-align: middle;
 }
 
 .subtitle {
@@ -56,6 +65,7 @@ header {
   display: flex;
   gap: var(--sp-2);
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .link-item {
@@ -947,20 +957,32 @@ header {
 
 /* ===== 底部 ===== */
 footer {
-  text-align: center;
   padding: var(--sp-5) var(--sp-4);
-  color: var(--c-text-faint);
-  font-size: var(--fs-sm);
   border-top: 1px solid var(--c-border);
   margin-top: var(--sp-6);
+}
+
+.footer-disclaimer {
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--c-text-faint);
+  margin-bottom: var(--sp-3);
+  line-height: var(--lh-loose);
+}
+
+.footer-links {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--sp-1);
 }
 
-footer .divider {
+.footer-links .divider {
   margin: 0 var(--sp-1);
+  color: var(--c-text-faint);
 }
 
 .footer-link {
