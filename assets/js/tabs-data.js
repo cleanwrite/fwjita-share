@@ -222,7 +222,7 @@ const tabsData = [
   },
   {
     "id": 12,
-    "title": "Asgore[还原但是有点难",
+    "title": "Asgore",
     "artist": "",
     "formats": [
       "gpx",
@@ -233,7 +233,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.pdf"
     },
     "category": "undertale",
-    "song_group": "Asgore[还原但是有点难",
+    "song_group": "Asgore",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -296,7 +296,7 @@ const tabsData = [
   },
   {
     "id": 16,
-    "title": "Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正",
+    "title": "Shanghaivania",
     "artist": "",
     "formats": [
       "gpx",
@@ -307,7 +307,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正/Shanghaivania.pdf"
     },
     "category": "undertale",
-    "song_group": "Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正",
+    "song_group": "Shanghaivania",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -372,7 +372,7 @@ const tabsData = [
   },
   {
     "id": 20,
-    "title": "Tokyovania(也是同人）（Undertronic Remix",
+    "title": "Tokyovania (Undertronic Remix)",
     "artist": "",
     "formats": [
       "gpx",
@@ -383,7 +383,7 @@ const tabsData = [
       "pdf": "assets/tabs/undertale/Tokyovania(也是同人）（Undertronic Remix/Tokyovania（Undertronic Remix）gtp.pdf"
     },
     "category": "undertale",
-    "song_group": "Tokyovania(也是同人）（Undertronic Remix",
+    "song_group": "Tokyovania (Undertronic Remix)",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -410,7 +410,7 @@ const tabsData = [
   },
   {
     "id": 22,
-    "title": "其他（我忘了名字啥的",
+    "title": "未知曲目",
     "artist": "",
     "formats": [
       "jpg"
@@ -421,7 +421,7 @@ const tabsData = [
       ]
     },
     "category": "单曲",
-    "song_group": "其他（我忘了名字啥的",
+    "song_group": "未知曲目",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -524,7 +524,7 @@ const tabsData = [
   },
   {
     "id": 28,
-    "title": "Requiem（霜星EP",
+    "title": "Requiem",
     "artist": "",
     "formats": [
       "gpx",
@@ -535,7 +535,7 @@ const tabsData = [
       "pdf": "assets/tabs/明日方舟/Requiem（霜星EP/Requiem.pdf"
     },
     "category": "明日方舟",
-    "song_group": "Requiem（霜星EP",
+    "song_group": "Requiem",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -598,7 +598,7 @@ const tabsData = [
   },
   {
     "id": 32,
-    "title": "求生之路 dead center",
+    "title": "Dead Center (求生之路)",
     "artist": "",
     "formats": [
       "pdf"
@@ -607,7 +607,7 @@ const tabsData = [
       "pdf": "assets/tabs/求生之路 dead center/求生之路 dead center.pdf"
     },
     "category": "单曲",
-    "song_group": "求生之路 dead center",
+    "song_group": "Dead Center (求生之路)",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -709,7 +709,7 @@ const tabsData = [
   },
   {
     "id": 38,
-    "title": "做梦的人偶（三音听哭老格林",
+    "title": "做梦的人偶",
     "artist": "",
     "formats": [
       "gpx",
@@ -719,8 +719,8 @@ const tabsData = [
       "gpx": "assets/tabs/黑暗之魂（blacksouls/做梦的人偶（三音听哭老格林/做梦的人偶.gp5",
       "pdf": "assets/tabs/黑暗之魂（blacksouls/做梦的人偶（三音听哭老格林/做梦的人偶.pdf"
     },
-    "category": "黑暗之魂（blacksouls",
-    "song_group": "做梦的人偶（三音听哭老格林",
+    "category": "黑暗之魂",
+    "song_group": "做梦的人偶",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -728,7 +728,7 @@ const tabsData = [
   },
   {
     "id": 39,
-    "title": "柴郡猫（喵呜",
+    "title": "柴郡猫",
     "artist": "",
     "formats": [
       "gpx",
@@ -738,8 +738,8 @@ const tabsData = [
       "gpx": "assets/tabs/黑暗之魂（blacksouls/柴郡猫（喵呜/柴郡猫（好像损坏了.gpx",
       "pdf": "assets/tabs/黑暗之魂（blacksouls/柴郡猫（喵呜/柴郡猫.pdf"
     },
-    "category": "黑暗之魂（blacksouls",
-    "song_group": "柴郡猫（喵呜",
+    "category": "黑暗之魂",
+    "song_group": "柴郡猫",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
@@ -747,7 +747,7 @@ const tabsData = [
   },
   {
     "id": 40,
-    "title": "（寒蝉鸣泣之时）YOU",
+    "title": "YOU (寒蝉鸣泣之时)",
     "artist": "",
     "formats": [
       "pdf"
@@ -756,7 +756,7 @@ const tabsData = [
       "pdf": "assets/tabs/（寒蝉鸣泣之时）YOU/YOU.pdf"
     },
     "category": "单曲",
-    "song_group": "（寒蝉鸣泣之时）YOU",
+    "song_group": "YOU (寒蝉鸣泣之时)",
     "contributor": {
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"

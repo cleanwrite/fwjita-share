@@ -129,8 +129,10 @@
     var icons = {
       'undertale': '⚔️',
       '明日方舟': '🏴',
-      '黑暗之魂（blacksouls': '🔥',
+      '黑暗之魂': '🔥',
       '我的世界': '⛏️',
+      'Marcin Patrzalek': '🎸',
+      '郑晟河': '🎸',
       '单曲': '🎵'
     };
     return icons[cat] || '📁';
@@ -237,14 +239,20 @@
 
     clearTimeout(searchTimer);
     searchTimer = setTimeout(function () {
-      // 空搜索 → 显示分类卡片
+      // 空搜索 → 回到当前视图
       if (!keyword) {
-        renderCategories();
+        if (currentView === 'tabs') {
+          renderTabList(currentCategory);
+        } else {
+          renderCategories();
+        }
         return;
       }
 
-      // 全局搜索：匹配歌名、分类名
-      var matched = tabsData.filter(function (tab) {
+      // 搜索范围：如果在分类内则只搜该分类，否则全局搜索
+      var scope = currentView === 'tabs' ? tabsData.filter(function (t) { return t.category === currentCategory; }) : tabsData;
+
+      var matched = scope.filter(function (tab) {
         return tab.title.toLowerCase().includes(keyword) ||
                (tab.song_group && tab.song_group.toLowerCase().includes(keyword)) ||
                tab.category.toLowerCase().includes(keyword);
@@ -474,9 +482,6 @@
   var API_BASE = ''; // 同域，Worker 反代
 
   function openSubmitModal() {
-    var modal = document.getElementById('submitModal');
-    modal.classList.remove('hidden');
-
     var select = document.getElementById('submitCategory');
     select.innerHTML = '<option value="">-- 选择分类 --</option>';
     fetch(API_BASE + '/api/categories')
@@ -497,12 +502,6 @@
     newOpt.value = '__new__';
     newOpt.textContent = '+ 新建分类';
     select.appendChild(newOpt);
-
-    var fileInput = document.getElementById('submitFiles');
-    if (!fileInput._bound) {
-      fileInput.addEventListener('change', handleFileSelect);
-      fileInput._bound = true;
-    }
 
     openModal('submitModal', document.activeElement);
   }
@@ -618,7 +617,6 @@
   // === 管理员面板 ===
 
   function openAdminPanel() {
-    document.getElementById('adminModal').classList.remove('hidden');
     document.getElementById('adminContent').style.display = 'none';
     document.getElementById('adminPassword').value = '';
     adminAuthed = false;
@@ -693,9 +691,9 @@
       .catch(function () { container.innerHTML = '<p class="error-text">加载失败</p>'; });
   }
 
-  function switchAdminTab(tab) {
+  function switchAdminTab(tab, btnEl) {
     document.querySelectorAll('.admin-tab').forEach(function (t) { t.classList.remove('active'); });
-    event.target.classList.add('active');
+    (btnEl || document.querySelector('.admin-tab[data-tab="' + tab + '"]')).classList.add('active');
     if (tab === 'tabs') showAdminTabList();
     else if (tab === 'logs') showAdminLogs();
   }
@@ -837,6 +835,11 @@
       if (!document.getElementById('adminModal').classList.contains('hidden')) closeAdminPanel();
     });
 
+    // 头部按钮
+    document.getElementById('openSubmitBtn').addEventListener('click', openSubmitModal);
+    document.getElementById('openAdminBtn').addEventListener('click', openAdminPanel);
+    document.getElementById('credits-btn').addEventListener('click', showCredits);
+
     // 提交表单按钮
     document.getElementById('submitWish').addEventListener('click', submitTab);
     document.getElementById('submitFiles').addEventListener('change', handleFileSelect);
@@ -846,11 +849,27 @@
     document.getElementById('adminPassword').addEventListener('keydown', function (e) {
       if (e.key === 'Enter') loginAdmin();
     });
+
+    // 管理员 Tab 切换
+    document.querySelectorAll('.admin-tab').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        switchAdminTab(btn.dataset.tab, btn);
+      });
+    });
   }
 
   function goBack() {
+    document.getElementById('search-input').value = '';
     if (currentView === 'search') {
-      renderCategories();
+      // 搜索结果 → 回到之前的分类或首页
+      if (currentCategory) {
+        currentView = 'tabs';
+        document.getElementById('back-btn').style.display = 'block';
+        document.getElementById('back-btn').textContent = '← 返回分类';
+        renderTabList(currentCategory);
+      } else {
+        renderCategories();
+      }
     } else if (currentView === 'versions') {
       currentView = 'tabs';
       document.getElementById('search-input').style.display = 'block';
