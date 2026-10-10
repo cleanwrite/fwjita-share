@@ -744,22 +744,5 @@ const tabsData = [
       "name": "fw",
       "bilibili": "https://space.bilibili.com/590547783"
     }
-  },
-  {
-    "id": 40,
-    "title": "API测试歌曲",
-    "artist": "",
-    "formats": [
-      "gpx"
-    ],
-    "files": {
-      "gpx": "assets/tabs/测试分类/API测试歌曲/test.gpx"
-    },
-    "category": "测试分类",
-    "song_group": "API测试歌曲",
-    "contributor": {
-      "name": "API测试",
-      "bilibili": ""
-    }
   }
 ];
