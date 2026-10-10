@@ -185,28 +185,15 @@ function filterTabs() {
   const container = document.getElementById('tab-list');
 
   if (!keyword) {
-    if (currentView === 'categories') {
-      renderCategories();
-    } else {
-      renderTabList(currentCategory);
-    }
+    renderTabList(currentCategory);
     return;
   }
 
-  let searchPool;
-  let isGlobalSearch;
-
-  if (currentView === 'categories') {
-    searchPool = tabsData;
-    isGlobalSearch = true;
-  } else {
-    searchPool = tabsData.filter(tab => tab.category === currentCategory);
-    isGlobalSearch = false;
-  }
-
-  const matchedTabs = searchPool.filter(tab =>
-    tab.title.toLowerCase().includes(keyword) ||
-    (tab.song_group && tab.song_group.toLowerCase().includes(keyword))
+  // 只在当前分类内搜索
+  const matchedTabs = tabsData.filter(tab =>
+    tab.category === currentCategory &&
+    (tab.title.toLowerCase().includes(keyword) ||
+     (tab.song_group && tab.song_group.toLowerCase().includes(keyword)))
   );
 
   if (matchedTabs.length === 0) {
@@ -214,16 +201,13 @@ function filterTabs() {
     return;
   }
 
+  // 按歌名分组
   const groups = {};
   matchedTabs.forEach(tab => {
     const group = tab.song_group || tab.title;
     if (!groups[group]) groups[group] = [];
     groups[group].push(tab);
   });
-
-  currentView = 'search';
-  document.getElementById('back-btn').style.display = 'block';
-  document.getElementById('back-btn').textContent = isGlobalSearch ? '← 返回分类' : '← 返回谱子';
 
   const songs = Object.keys(groups).sort();
 
@@ -234,7 +218,6 @@ function filterTabs() {
     const contrib = versions[0].contributor
       ? `<a href="${versions[0].contributor.bilibili || versions[0].contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${versions[0].contributor.name || '匿名'}</a>`
       : '';
-    const category = versions[0].category;
 
     if (versionCount === 1) {
       const tab = versions[0];
@@ -243,7 +226,7 @@ function filterTabs() {
           <div class="card-info">
             <h3>${song}</h3>
             <div class="card-meta-row">
-              <span class="card-category">${category}</span>
+              <span class="card-category">${currentCategory}</span>
               ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
             </div>
           </div>
@@ -258,7 +241,7 @@ function filterTabs() {
         <div class="card-info">
           <h3>${song}</h3>
           <div class="card-meta-row">
-            <span class="card-category">${category}</span>
+            <span class="card-category">${currentCategory}</span>
             <span class="card-dot">·</span>
             <span class="card-versions">${versionCount} 个版本</span>
           </div>
