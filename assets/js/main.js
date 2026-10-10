@@ -1,826 +1,867 @@
-// 全局状态
-let alphaTabApi = null;
-let currentView = 'categories'; // 'categories' | 'tabs' | 'preview'
-let currentCategory = '';
-let currentPreviewTab = null;
-let currentPreviewMode = 'gpx';
+// ===== 吉他谱分享站 — 核心脚本 =====
+// 无外部依赖，纯原生 JS
 
-// 初始化
-document.addEventListener('DOMContentLoaded', () => {
-  renderCategories();
-});
+(function () {
+  'use strict';
 
-// ========== 第一层：分类卡片 ==========
+  // === 状态 ===
+  let alphaTabApi = null;
+  let currentView = 'categories'; // 'categories' | 'tabs' | 'search'
+  let currentCategory = '';
+  let currentPreviewTab = null;
+  let currentPreviewMode = 'gpx';
+  let isSubmitting = false;
+  let adminAuthed = false;
+  let searchTimer = null;
+  let lastTriggerElement = null; // 用于焦点恢复
 
-function renderCategories() {
-  currentView = 'categories';
-  document.getElementById('search-input').style.display = 'none';
-  document.getElementById('back-btn').style.display = 'none';
+  // === 工具函数 ===
 
-  const grouped = {};
-  tabsData.forEach(tab => {
-    if (!grouped[tab.category]) grouped[tab.category] = [];
-    grouped[tab.category].push(tab);
-  });
-
-  const container = document.getElementById('tab-list');
-  const categories = Object.keys(grouped).sort((a, b) => {
-    if (a === '单曲') return 1;
-    if (b === '单曲') return -1;
-    return a.localeCompare(b);
-  });
-
-  container.innerHTML = categories.map(cat => {
-    const tabs = grouped[cat];
-    const gpxCount = tabs.filter(t => t.formats.includes('gpx')).length;
-    const pdfCount = tabs.filter(t => t.formats.includes('pdf')).length;
-    const imgCount = tabs.filter(t => t.files.images).length;
-
-    return `
-      <div class="category-card" onclick="openCategory('${cat}')">
-        <div class="card-header">
-          <span class="category-icon">${getCategoryIcon(cat)}</span>
-          <h3>${cat}</h3>
-        </div>
-        <p class="card-meta">${tabs.length} 首</p>
-        <div class="category-formats">
-          ${gpxCount ? `<span class="fmt-count gpx">${gpxCount} GPX</span>` : ''}
-          ${pdfCount ? `<span class="fmt-count pdf">${pdfCount} PDF</span>` : ''}
-          ${imgCount ? `<span class="fmt-count img">${imgCount} 图片</span>` : ''}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function getCategoryIcon(cat) {
-  const icons = {
-    'undertale': '⚔️',
-    '明日方舟': '🏴',
-    '黑暗之魂（blacksouls': '🔥',
-    '我的世界': '⛏️',
-    '单曲': '🎵'
-  };
-  return icons[cat] || '📁';
-}
-
-// ========== 第二层：谱子列表 ==========
-
-function openCategory(cat) {
-  currentView = 'tabs';
-  currentCategory = cat;
-  document.getElementById('search-input').style.display = 'block';
-  document.getElementById('search-input').value = '';
-  document.getElementById('search-input').placeholder = `在「${cat}」中搜索...`;
-  document.getElementById('back-btn').style.display = 'block';
-  document.getElementById('back-btn').textContent = '← 返回分类';
-
-  renderTabList(cat);
-}
-
-function renderTabList(cat) {
-  const container = document.getElementById('tab-list');
-  const tabs = tabsData.filter(t => t.category === cat);
-
-  if (tabs.length === 0) {
-    container.innerHTML = '<p style="text-align:center;color:var(--fg-muted);padding:40px;">该分类下没有谱子</p>';
-    return;
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
   }
 
-  // 按歌名分组
-  const groups = {};
-  tabs.forEach(tab => {
-    const group = tab.song_group || tab.title;
-    if (!groups[group]) groups[group] = [];
-    groups[group].push(tab);
-  });
-
-  const songs = Object.keys(groups).sort();
-
-  container.innerHTML = songs.map(song => {
-    const versions = groups[song];
-    const versionCount = versions.length;
-    const formats = [...new Set(versions.flatMap(t => t.formats))];
-    const contrib = versions[0].contributor
-      ? `<a href="${versions[0].contributor.bilibili || versions[0].contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${versions[0].contributor.name || '匿名'}</a>`
-      : '';
-
-    if (versionCount === 1) {
-      const tab = versions[0];
-      return `
-        <div class="tab-card" onclick="openPreview(${tab.id})">
-          <div class="card-info">
-            <h3>${song}</h3>
-            <div class="card-meta-row">
-              <span class="card-category">${cat}</span>
-              ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
-            </div>
-          </div>
-          <div class="formats">
-            ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
-          </div>
-        </div>`;
-    }
-
-    // 多版本
-    return `
-      <div class="tab-card song-group-card" onclick="openSongGroup('${song}')">
-        <div class="card-info">
-          <h3>${song}</h3>
-          <div class="card-meta-row">
-            <span class="card-category">${cat}</span>
-            <span class="card-dot">·</span>
-            <span class="card-versions">${versionCount} 个版本</span>
-          </div>
-        </div>
-        <div class="formats">
-          ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
-        </div>
-      </div>`;
-  }).join('');
-}
-
-function openSongGroup(songName) {
-  currentView = 'versions';
-  document.getElementById('search-input').style.display = 'none';
-  document.getElementById('back-btn').style.display = 'block';
-  document.getElementById('back-btn').textContent = '← 返回谱子';
-
-  const container = document.getElementById('tab-list');
-  const versions = tabsData.filter(tab => {
-    const group = tab.song_group || tab.title;
-    return group === songName && tab.category === currentCategory;
-  });
-
-  if (versions.length === 0) {
-    container.innerHTML = '<p style="text-align:center;color:var(--fg-muted);padding:40px;">没有版本</p>';
-    return;
+  function encodeAssetPath(path) {
+    return path.split('/').map(function (s) { return encodeURIComponent(s); }).join('/');
   }
 
-  container.innerHTML = versions.map(tab => {
-    const contrib = tab.contributor
-      ? `<a href="${tab.contributor.bilibili || tab.contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${tab.contributor.name || '匿名'}</a>`
-      : '';
-
-    return `
-      <div class="tab-card version-card" onclick="openPreview(${tab.id})">
-        <div class="card-info">
-          <h3>${tab.title}</h3>
-          <div class="card-meta-row">
-            ${contrib ? `<span>·</span>${contrib}` : ''}
-          </div>
-        </div>
-        <div class="formats">
-          ${tab.formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-// ========== 搜索 =========
-
-function filterTabs() {
-  const keyword = document.getElementById('search-input').value.toLowerCase().trim();
-  const container = document.getElementById('tab-list');
-
-  if (!keyword) {
-    renderTabList(currentCategory);
-    return;
-  }
-
-  // 只在当前分类内搜索
-  const matchedTabs = tabsData.filter(tab =>
-    tab.category === currentCategory &&
-    (tab.title.toLowerCase().includes(keyword) ||
-     (tab.song_group && tab.song_group.toLowerCase().includes(keyword)))
-  );
-
-  if (matchedTabs.length === 0) {
-    container.innerHTML = `<p style="text-align:center;color:var(--fg-muted);padding:40px;">没有找到"${keyword}"相关的吉他谱</p>`;
-    return;
-  }
-
-  // 按歌名分组
-  const groups = {};
-  matchedTabs.forEach(tab => {
-    const group = tab.song_group || tab.title;
-    if (!groups[group]) groups[group] = [];
-    groups[group].push(tab);
-  });
-
-  const songs = Object.keys(groups).sort();
-
-  container.innerHTML = songs.map(song => {
-    const versions = groups[song];
-    const versionCount = versions.length;
-    const formats = [...new Set(versions.flatMap(t => t.formats))];
-    const contrib = versions[0].contributor
-      ? `<a href="${versions[0].contributor.bilibili || versions[0].contributor.url || '#'}" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">${versions[0].contributor.name || '匿名'}</a>`
-      : '';
-
-    if (versionCount === 1) {
-      const tab = versions[0];
-      return `
-        <div class="tab-card" onclick="openPreview(${tab.id})">
-          <div class="card-info">
-            <h3>${song}</h3>
-            <div class="card-meta-row">
-              <span class="card-category">${currentCategory}</span>
-              ${contrib ? `<span class="card-dot">·</span>${contrib}` : ''}
-            </div>
-          </div>
-          <div class="formats">
-            ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
-          </div>
-        </div>`;
-    }
-
-    return `
-      <div class="tab-card song-group-card" onclick="openSongGroup('${song}')">
-        <div class="card-info">
-          <h3>${song}</h3>
-          <div class="card-meta-row">
-            <span class="card-category">${currentCategory}</span>
-            <span class="card-dot">·</span>
-            <span class="card-versions">${versionCount} 个版本</span>
-          </div>
-        </div>
-        <div class="formats">
-          ${formats.map(f => `<span class="format-badge ${f}">${f}</span>`).join('')}
-        </div>
-      </div>`;
-  }).join('');
-}
-
-// ========== 预览弹窗 ==========
-
-function openPreview(id) {
-  currentPreviewTab = tabsData.find(t => t.id === id);
-  if (!currentPreviewTab) return;
-
-  const tab = currentPreviewTab;
-  const modal = document.getElementById('modal');
-  const titleEl = document.getElementById('modal-title');
-  const body = document.getElementById('modal-body');
-
-  titleEl.textContent = tab.category !== '单曲' ? `${tab.title} [${tab.category}]` : tab.title;
-  modal.classList.remove('hidden');
-
-  let contributorHtml = '';
-  if (tab.contributor) {
-    const name = tab.contributor.name || tab.contributor.uid || '匿名';
-    const url = tab.contributor.bilibili || tab.contributor.url || '#';
-    contributorHtml = `<div class="contributor-tag">感谢 <a href="${url}" target="_blank" rel="noopener">${name}</a> 提供谱子</div>`;
-  }
-
-  const hasGpx = tab.formats.includes('gpx') && tab.files.gpx;
-  const hasPdf = tab.formats.includes('pdf') && tab.files.pdf;
-  const hasImages = tab.files.images && tab.files.images.length > 0;
-  const hasMultiple = (hasGpx && hasPdf) || (hasGpx && hasImages) || (hasPdf && hasImages);
-
-  document.getElementById('modal-contributor').innerHTML = contributorHtml;
-
-  if (hasMultiple) {
-    renderPreviewModeSelector(tab, body);
-  } else if (hasGpx) {
-    renderGpxPreview(tab, body);
-  } else if (hasPdf) {
-    renderPdfPreview(tab, body);
-  } else if (hasImages) {
-    renderImagesPreview(tab, body);
-  } else {
-    body.innerHTML += '<p style="text-align:center;color:var(--fg-muted);padding:40px;">没有可预览的资源</p>';
-  }
-}
-
-function renderPreviewModeSelector(tab, body) {
-  const modes = [];
-  if (tab.files.gpx) modes.push({ key: 'gpx', label: '乐谱' });
-  if (tab.files.pdf) modes.push({ key: 'pdf', label: 'PDF' });
-  if (tab.files.images && tab.files.images.length > 0) modes.push({ key: 'images', label: '图片' });
-
-  body.innerHTML = `
-    <div class="preview-mode-selector">
-      ${modes.map(m => `
-        <button class="mode-btn ${m.key === 'gpx' ? 'active' : ''}" data-mode="${m.key}"
-                onclick="switchPreviewMode('${m.key}')">${m.label}</button>
-      `).join('')}
-    </div>
-    <div id="preview-content"></div>
-  `;
-
-  currentPreviewMode = 'gpx';
-  const content = document.getElementById('preview-content');
-  renderGpxPreview(tab, content);
-}
-
-function switchPreviewMode(mode) {
-  currentPreviewMode = mode;
-  const tab = currentPreviewTab;
-  if (!tab) return;
-
-  document.querySelectorAll('.mode-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.mode === mode);
-  });
-
-  const content = document.getElementById('preview-content');
-  if (mode === 'gpx') renderGpxPreview(tab, content);
-  else if (mode === 'pdf') renderPdfPreview(tab, content);
-  else if (mode === 'images') renderImagesPreview(tab, content);
-}
-
-function renderGpxPreview(tab, container) {
-  const gpxFilename = tab.files.gpx.split('/').pop();
-  container.innerHTML = `
-    <div class="player-controls">
-      <button onclick="playerPlay()">▶ 播放</button>
-      <button onclick="playerPause()">⏸ 暂停</button>
-      <button onclick="playerStop()">⏹ 停止</button>
-      <a href="${encodeAssetPath(tab.files.gpx)}" download="${gpxFilename}">下载 GPX</a>
-      <div class="speed-control">
-        <label>速度:</label>
-        <input type="range" id="speed-slider" min="25" max="150" value="100"
-               oninput="changeSpeed(this.value)">
-        <span id="speed-value">100%</span>
-      </div>
-    </div>
-    <div id="alphaTab-container" style="width:100%; min-height:400px; background:#fff; border-radius:8px; padding:16px; box-sizing:border-box; overflow-x:auto;">
-      <p style="color:#8b949e;text-align:center;padding:40px;">正在加载乐谱...</p>
-    </div>
-  `;
-  requestAnimationFrame(() => {
-    initAlphaTab(tab.files.gpx);
-  });
-}
-
-function renderPdfPreview(tab, container) {
-  container.innerHTML = `<iframe class="preview-pdf" src="${encodeAssetPath(tab.files.pdf)}"></iframe>`;
-}
-
-function renderImagesPreview(tab, container) {
-  container.innerHTML = `
-    <div class="image-gallery">
-      ${tab.files.images.map(img => {
-        const filename = img.split('/').pop();
-        return `
-        <div class="image-item">
-          <img class="preview-image" src="${encodeAssetPath(img)}" alt="${tab.title}" loading="lazy"
-               onclick="window.open('${encodeAssetPath(img)}', '_blank')">
-          <button class="img-download" onclick="event.stopPropagation(); window.open('${encodeAssetPath(img)}', '_blank')">
-            下载 ${filename}
-          </button>
-        </div>`;
-      }).join('')}
-    </div>
-  `;
-}
-
-function encodeAssetPath(path) {
-  return path.split('/').map(s => encodeURIComponent(s)).join('/');
-}
-
-function initAlphaTab(gpxPath) {
-  const container = document.getElementById('alphaTab-container');
-  if (!container) return;
-
-  if (alphaTabApi) {
-    try { alphaTabApi.destroy(); } catch(e) {}
-    alphaTabApi = null;
-  }
-
-  container.innerHTML = '<p style="color:#8b949e;text-align:center;padding:40px;">正在加载乐谱文件...</p>';
-
-  const encodedUrl = encodeAssetPath(gpxPath);
-
-  fetch(encodedUrl)
-    .then(response => {
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      return response.arrayBuffer();
-    })
-    .then(buffer => {
-      container.innerHTML = '';
-      setupAlphaTab(container, buffer);
-    })
-    .catch(err => {
-      console.error('GPX load error:', err);
-      container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">
-        ⚠️ 乐谱文件加载失败：${err.message}<br>
-        <small>路径: ${gpxPath}</small>
-      </p>`;
-    });
-}
-
-function setupAlphaTab(container, buffer) {
-  if (!container.offsetWidth) {
-    container.style.width = '100%';
-    container.style.minWidth = '600px';
-  }
-
-  const settings = {
-    core: { engine: 'svg', logLevel: 1, useWorkers: false },
-    display: { staveProfile: 0, scale: 1.0 },
-    player: {
-      enablePlayer: true,
-      enableCursor: true,
-      enableUserInteraction: true,
-      soundFont: 'https://cdn.jsdelivr.net/npm/@coderline/alphatab@latest/dist/soundfont/sonivox.sf2'
-    }
-  };
-
-  try {
-    alphaTabApi = new alphaTab.AlphaTabApi(container, settings);
-  } catch (e) {
-    console.error('alphaTab init error:', e);
-    container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">⚠️ alphaTab 初始化失败: ${e.message}</p>`;
-    return;
-  }
-
-  alphaTabApi.error.on((error) => {
-    console.error('alphaTab Error:', error);
-  });
-
-  alphaTabApi.scoreLoaded.on((score) => {
-    console.log('Score loaded:', score?.title, 'Tracks:', score?.tracks?.length);
-    if (score?.stylesheet) {
-      const ss = score.stylesheet;
-      if (!ss.perTrackMultiBarRest) ss.perTrackMultiBarRest = new Map();
-      if (!ss.perTrackDisplayTuning) ss.perTrackDisplayTuning = new Map();
-      if (!ss.perTrackChordDiagramsOnTop) ss.perTrackChordDiagramsOnTop = new Map();
-    }
-  });
-
-  try {
-    const uint8 = new Uint8Array(buffer);
-    const success = alphaTabApi.load(uint8);
-    console.log('alphaTab load returned:', success);
-    if (!success) {
-      container.innerHTML = '<p style="color:#f85149;text-align:center;padding:20px;">⚠️ 乐谱解析失败</p>';
-    }
-  } catch (e) {
-    console.error('alphaTab load exception:', e);
-    container.innerHTML = `<p style="color:#f85149;text-align:center;padding:20px;">⚠️ 加载异常: ${e.message}</p>`;
-  }
-}
-
-// 返回按钮
-function goBack() {
-  if (currentView === 'versions') {
-    currentView = 'tabs';
-    document.getElementById('search-input').style.display = 'block';
-    document.getElementById('back-btn').textContent = '← 返回分类';
-    renderTabList(currentCategory);
-  } else if (currentView === 'tabs' || currentView === 'search') {
-    renderCategories();
-  }
-}
-
-// 播放器控制
-function playerPlay() { if (alphaTabApi) alphaTabApi.play(); }
-function playerPause() { if (alphaTabApi) alphaTabApi.pause(); }
-function playerStop() { if (alphaTabApi) alphaTabApi.stop(); }
-function changeSpeed(percent) {
-  if (alphaTabApi) {
-    alphaTabApi.playbackSpeed = percent / 100;
-    document.getElementById('speed-value').textContent = percent + '%';
-  }
-}
-
-function closeModal() {
-  document.getElementById('modal').classList.add('hidden');
-  if (alphaTabApi) alphaTabApi.pause();
-  currentPreviewTab = null;
-  currentPreviewMode = 'gpx';
-}
-
-document.getElementById('modal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('modal')) closeModal();
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeModal();
-    closeCredits();
-  }
-});
-
-// ===== 提交谱子 =====
-
-const API_BASE = ''; // 同域，Worker 反代
-let isSubmitting = false;
-
-async function openSubmitModal() {
-  const modal = document.getElementById('submitModal');
-  modal.classList.remove('hidden');
-
-  const select = document.getElementById('submitCategory');
-  select.innerHTML = '<option value="">-- 选择分类 --</option>';
-  try {
-    const resp = await fetch(API_BASE + '/api/categories');
-    const data = await resp.json();
-    if (data.success) {
-      data.categories.forEach(cat => {
-        const opt = document.createElement('option');
-        opt.value = cat;
-        opt.textContent = cat;
-        select.appendChild(opt);
-      });
-    }
-  } catch (e) {
-    console.error('Failed to load categories:', e);
-  }
-  const newOpt = document.createElement('option');
-  newOpt.value = '__new__';
-  newOpt.textContent = '+ 新建分类';
-  select.appendChild(newOpt);
-
-  const fileInput = document.getElementById('submitFiles');
-  if (!fileInput.dataset.bound) {
-    fileInput.addEventListener('change', handleFileSelect);
-    fileInput.dataset.bound = '1';
-  }
-}
-
-function handleFileSelect(e) {
-  const tags = document.getElementById('fileTags');
-  tags.innerHTML = '';
-  const files = e.target.files;
-  let totalSize = 0;
-
-  for (const file of files) {
-    totalSize += file.size;
-    const ext = '.' + (file.name.split('.').pop() || '').toLowerCase();
-    let type = 'unknown';
-    if (['.gp', '.gp3', '.gp4', '.gp5', '.gp7', '.gp8', '.gpx'].includes(ext)) type = 'GPX';
-    else if (ext === '.pdf') type = 'PDF';
-    else if (['.jpg', '.jpeg', '.png', '.webp', '.gif', '.bmp'].includes(ext)) type = '图片';
-
-    const tag = document.createElement('span');
-    tag.className = 'file-tag ' + (type === 'unknown' ? 'unsupported' : type.toLowerCase());
-    tag.textContent = `${file.name} (${type}${file.size > 1024 * 1024 ? ' ' + (file.size / 1024 / 1024).toFixed(1) + 'MB' : ''})`;
-    tags.appendChild(tag);
-  }
-
-  if (files.length > 0) {
-    const sizeTag = document.createElement('span');
-    sizeTag.className = 'file-tag total';
-    sizeTag.textContent = `总计: ${(totalSize / 1024 / 1024).toFixed(1)}MB / 50MB`;
-    sizeTag.style.background = totalSize > 50 * 1024 * 1024 ? 'rgba(248,81,73,0.2)' : '';
-    tags.appendChild(sizeTag);
-  }
-}
-
-function closeSubmitModal() {
-  document.getElementById('submitModal').classList.add('hidden');
-  document.getElementById('submitForm').reset();
-  document.getElementById('fileTags').innerHTML = '';
-  document.getElementById('submitResult').innerHTML = '';
-  document.getElementById('newCategory').style.display = 'none';
-  isSubmitting = false;
-}
-
-async function submitTab() {
-  if (isSubmitting) return;
-  isSubmitting = true;
-
-  const btn = document.querySelector('.submit-form-btn');
-  const result = document.getElementById('submitResult');
-  btn.disabled = true;
-  btn.textContent = '提交中...';
-  result.innerHTML = '<p class="result-loading">⏳ 上传中，请稍候...</p>';
-
-  const category = document.getElementById('submitCategory').value === '__new__'
-    ? document.getElementById('newCategory').value.trim()
-    : document.getElementById('submitCategory').value;
-  const songGroup = document.getElementById('submitSongGroup').value.trim();
-  const contributor = document.getElementById('submitContributor').value.trim();
-  const bilibili = document.getElementById('submitBilibili').value.trim();
-  const password = document.getElementById('submitPassword').value;
-  const files = document.getElementById('submitFiles').files;
-
-  if (!category || !songGroup) {
-    result.innerHTML = '<p class="result-error">请填写分类和歌曲名</p>';
-    resetSubmitBtn(btn);
-    return;
-  }
-  if (files.length === 0) {
-    result.innerHTML = '<p class="result-error">请至少上传一个文件</p>';
-    resetSubmitBtn(btn);
-    return;
-  }
-  if (!password) {
-    result.innerHTML = '<p class="result-error">请输入提交密码</p>';
-    resetSubmitBtn(btn);
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append('category', category);
-  formData.append('songGroup', songGroup);
-  formData.append('contributor', contributor);
-  formData.append('bilibili', bilibili);
-  formData.append('password', password);
-  for (const file of files) {
-    formData.append('files', file);
-  }
-
-  try {
-    const resp = await fetch(API_BASE + '/api/submit', {
-      method: 'POST',
-      body: formData,
-    });
-    const data = await resp.json();
-    if (data.success) {
-      result.innerHTML = `<p class="result-success">✅ ${data.message}</p>`;
-      btn.textContent = '提交成功！';
-      setTimeout(() => closeSubmitModal(), 2000);
-    } else {
-      result.innerHTML = `<p class="result-error">❌ ${data.error}</p>`;
-      resetSubmitBtn(btn);
-    }
-  } catch (e) {
-    result.innerHTML = `<p class="result-error">❌ 网络错误，请稍后重试</p>`;
-    resetSubmitBtn(btn);
-  }
-}
-
-function resetSubmitBtn(btn) {
-  isSubmitting = false;
-  btn.disabled = false;
-  btn.textContent = '提交';
-}
-
-// ===== 管理员面板 =====
-
-let adminAuthed = false;
-
-function openAdminPanel() {
-  document.getElementById('adminModal').classList.remove('hidden');
-  document.getElementById('adminContent').style.display = 'none';
-  document.getElementById('adminPassword').value = '';
-  adminAuthed = false;
-}
-
-function closeAdminPanel() {
-  document.getElementById('adminModal').classList.add('hidden');
-}
-
-async function loginAdmin() {
-  const pwd = document.getElementById('adminPassword').value;
-  if (!pwd) return;
-
-  try {
-    const resp = await fetch(API_BASE + '/api/tabs-data', {
-      headers: { Authorization: `Bearer ${pwd}` }
-    });
-    const data = await resp.json();
-
-    if (data.success) {
-      adminAuthed = true;
-      document.getElementById('adminContent').style.display = 'block';
-      document.querySelector('.admin-auth').style.display = 'none';
-      window._adminTabsData = data.data;
-      showAdminTab('tabs');
-    } else {
-      alert('密码错误');
-    }
-  } catch (e) {
-    alert('登录失败');
-  }
-}
-
-function showAdminTab(tab) {
-  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-  event.target.classList.add('active');
-  const content = document.getElementById('adminTabContent');
-
-  if (tab === 'tabs') {
-    renderAdminTabs(content);
-  } else if (tab === 'logs') {
-    renderAdminLogs(content);
-  }
-}
-
-function renderAdminTabs(container) {
-  const tabs = window._adminTabsData || [];
-  if (tabs.length === 0) {
-    container.innerHTML = '<p style="color:var(--fg-muted);text-align:center;padding:40px;">暂无谱子</p>';
-    return;
-  }
-
-  container.innerHTML = `<div class="admin-actions">
-    <span>${tabs.length} 首谱子</span>
-    <button onclick="refreshAdminData()" class="admin-refresh-btn">刷新</button>
-  </div>` + tabs.map(t => `
-    <div class="admin-tab-item">
-      <div class="admin-tab-info">
-        <strong>${t.title}</strong>
-        <span class="admin-tag">${t.category}</span>
-        <span class="admin-tag">${t.formats?.join(', ') || ''}</span>
-        <span class="admin-contrib">${t.contributor?.name || ''}</span>
-      </div>
-      <button onclick="deleteTab(${t.id})" class="admin-delete-btn">删除</button>
-    </div>
-  `).join('');
-}
-
-async function renderAdminLogs(container) {
-  container.innerHTML = '<p style="text-align:center;padding:20px;">加载中...</p>';
-  try {
-    const resp = await fetch(API_BASE + '/api/admin/logs', {
-      headers: { Authorization: `Bearer ${document.getElementById('adminPassword').value}` }
-    });
-    const data = await resp.json();
-    if (!data.success || data.logs.length === 0) {
-      container.innerHTML = '<p style="color:var(--fg-muted);text-align:center;padding:40px;">暂无日志</p>';
-      return;
-    }
-    container.innerHTML = data.logs.map(log => `
-      <div class="admin-log-item">
-        <span class="log-action ${log.action}">${log.action === 'submit' ? '新增' : '删除'}</span>
-        <span class="log-title">${log.title}</span>
-        <span class="log-meta">${log.category || ''} · ${log.contributor || ''}</span>
-        <span class="log-time">${log.time ? log.time.replace('T', ' ').slice(0, 16) : ''}</span>
-      </div>
-    `).join('');
-  } catch (e) {
-    container.innerHTML = '<p style="color:#f85149;text-align:center;">加载失败</p>';
-  }
-}
-
-async function deleteTab(id) {
-  if (!confirm('确定要删除这首谱子吗？此操作不可恢复。')) return;
-
-  const pwd = document.getElementById('adminPassword').value;
-  try {
-    const resp = await fetch(API_BASE + `/api/tabs/${id}`, {
-      method: 'DELETE',
-      headers: { Authorization: `Bearer ${pwd}` }
-    });
-    const data = await resp.json();
-    if (data.success) {
-      window._adminTabsData = window._adminTabsData.filter(t => t.id !== id);
-      renderAdminTabs(document.getElementById('adminTabContent'));
-    } else {
-      alert('删除失败: ' + data.error);
-    }
-  } catch (e) {
-    alert('删除失败');
-  }
-}
-
-async function refreshAdminData() {
-  const pwd = document.getElementById('adminPassword').value;
-  const resp = await fetch(API_BASE + '/api/tabs-data', {
-    headers: { Authorization: `Bearer ${pwd}` }
-  });
-  const data = await resp.json();
-  if (data.success) {
-    window._adminTabsData = data.data;
-    renderAdminTabs(document.getElementById('adminTabContent'));
-  }
-}
-
-// ===== 致谢墙 =====
-
-function showCredits() {
-  const modal = document.getElementById('credits-modal');
-  const list = document.getElementById('credits-list');
-
-  const contributors = new Map();
-  tabsData.forEach(tab => {
-    if (tab.contributor) {
-      const key = tab.contributor.bilibili || tab.contributor.name || tab.contributor.uid;
-      if (!contributors.has(key)) {
-        contributors.set(key, {
-          name: tab.contributor.name || tab.contributor.uid || '匿名',
-          bilibili: tab.contributor.bilibili || tab.contributor.url || null,
-          count: 1
-        });
+  // === 焦点陷阱 ===
+  function trapFocus(modal) {
+    var focusable = modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length === 0) return;
+
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+
+    first.focus();
+
+    function handleTab(e) {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
       } else {
-        contributors.get(key).count++;
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     }
-  });
 
-  if (contributors.size === 0) {
-    list.innerHTML = `<li class="credits-empty">还没有贡献者，等你来当第一个！</li>`;
-  } else {
-    list.innerHTML = Array.from(contributors.values()).map(c => {
-      const link = c.bilibili
-        ? `<a href="${c.bilibili}" target="_blank" rel="noopener">${c.name}</a>`
-        : c.name;
-      return `<li><span class="credits-name">${link}</span><span class="credits-count">贡献 ${c.count} 首</span></li>`;
+    modal.addEventListener('keydown', handleTab);
+    modal._trapHandler = handleTab;
+  }
+
+  function releaseFocus(modal) {
+    if (modal._trapHandler) {
+      modal.removeEventListener('keydown', modal._trapHandler);
+      modal._trapHandler = null;
+    }
+  }
+
+  function openModal(modalId, triggerEl) {
+    var modal = document.getElementById(modalId);
+    modal.classList.remove('hidden');
+    lastTriggerElement = triggerEl || null;
+    trapFocus(modal);
+  }
+
+  function closeModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.classList.add('hidden');
+    releaseFocus(modal);
+    if (lastTriggerElement) {
+      lastTriggerElement.focus();
+      lastTriggerElement = null;
+    }
+  }
+
+  // === 第一层：分类卡片 ===
+
+  function renderCategories() {
+    currentView = 'categories';
+    document.getElementById('search-input').style.display = 'none';
+    document.getElementById('back-btn').style.display = 'none';
+
+    var grouped = {};
+    tabsData.forEach(function (tab) {
+      if (!grouped[tab.category]) grouped[tab.category] = [];
+      grouped[tab.category].push(tab);
+    });
+
+    var container = document.getElementById('tab-list');
+    var categories = Object.keys(grouped).sort(function (a, b) {
+      if (a === '单曲') return 1;
+      if (b === '单曲') return -1;
+      return a.localeCompare(b);
+    });
+
+    container.innerHTML = categories.map(function (cat) {
+      var tabs = grouped[cat];
+      var gpxCount = tabs.filter(function (t) { return t.formats.includes('gpx'); }).length;
+      var pdfCount = tabs.filter(function (t) { return t.formats.includes('pdf'); }).length;
+      var imgCount = tabs.filter(function (t) { return t.files.images; }).length;
+
+      return '<div class="category-card" data-category="' + escapeHtml(cat) + '" role="button" tabindex="0">' +
+        '<div class="card-header">' +
+          '<span class="category-icon">' + getCategoryIcon(cat) + '</span>' +
+          '<h3>' + escapeHtml(cat) + '</h3>' +
+        '</div>' +
+        '<p class="card-meta">' + tabs.length + ' 首</p>' +
+        '<div class="category-formats">' +
+          (gpxCount ? '<span class="fmt-count gpx">' + gpxCount + ' GPX</span>' : '') +
+          (pdfCount ? '<span class="fmt-count pdf">' + pdfCount + ' PDF</span>' : '') +
+          (imgCount ? '<span class="fmt-count img">' + imgCount + ' 图片</span>' : '') +
+        '</div>' +
+      '</div>';
     }).join('');
   }
 
-  modal.classList.remove('hidden');
-}
+  function getCategoryIcon(cat) {
+    var icons = {
+      'undertale': '⚔️',
+      '明日方舟': '🏴',
+      '黑暗之魂（blacksouls': '🔥',
+      '我的世界': '⛏️',
+      '单曲': '🎵'
+    };
+    return icons[cat] || '📁';
+  }
 
-function closeCredits() {
-  document.getElementById('credits-modal').classList.add('hidden');
-}
+  // === 第二层：谱子列表 ===
 
-document.getElementById('credits-modal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('credits-modal')) closeCredits();
-});
+  function openCategory(cat) {
+    currentView = 'tabs';
+    currentCategory = cat;
+    document.getElementById('search-input').style.display = 'block';
+    document.getElementById('search-input').value = '';
+    document.getElementById('search-input').placeholder = '在「' + cat + '」中搜索...';
+    document.getElementById('back-btn').style.display = 'block';
+    document.getElementById('back-btn').textContent = '← 返回分类';
+    renderTabList(cat);
+  }
+
+  function renderTabList(cat) {
+    var container = document.getElementById('tab-list');
+    var tabs = tabsData.filter(function (t) { return t.category === cat; });
+
+    if (tabs.length === 0) {
+      container.innerHTML = '<p class="empty-state">该分类下没有谱子</p>';
+      return;
+    }
+
+    container.innerHTML = renderGroupedTabs(tabs, cat);
+  }
+
+  // 通用分组渲染（搜索结果和分类列表共用）
+  function renderGroupedTabs(tabs, category) {
+    var groups = {};
+    tabs.forEach(function (tab) {
+      var group = tab.song_group || tab.title;
+      if (!groups[group]) groups[group] = [];
+      groups[group].push(tab);
+    });
+
+    var songs = Object.keys(groups).sort();
+
+    return songs.map(function (song) {
+      var versions = groups[song];
+      var versionCount = versions.length;
+      var formats = [];
+      versions.forEach(function (t) { t.formats.forEach(function (f) { if (formats.indexOf(f) === -1) formats.push(f); }); });
+      var contrib = versions[0].contributor
+        ? '<a href="' + (versions[0].contributor.bilibili || versions[0].contributor.url || '#') + '" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">' + escapeHtml(versions[0].contributor.name || '匿名') + '</a>'
+        : '';
+
+      if (versionCount === 1) {
+        var tab = versions[0];
+        return '<div class="tab-card" data-id="' + tab.id + '" role="button" tabindex="0">' +
+          '<div class="card-info"><h3>' + escapeHtml(song) + '</h3>' +
+          '<div class="card-meta-row"><span class="card-category">' + escapeHtml(category) + '</span>' +
+          (contrib ? '<span class="card-dot">·</span>' + contrib : '') + '</div></div>' +
+          '<div class="formats">' + formats.map(function (f) { return '<span class="format-badge ' + f + '">' + f + '</span>'; }).join('') + '</div>' +
+        '</div>';
+      }
+
+      return '<div class="tab-card song-group-card" data-song="' + escapeHtml(song) + '" role="button" tabindex="0">' +
+        '<div class="card-info"><h3>' + escapeHtml(song) + '</h3>' +
+        '<div class="card-meta-row"><span class="card-category">' + escapeHtml(category) + '</span>' +
+        '<span class="card-dot">·</span><span class="card-versions">' + versionCount + ' 个版本</span></div></div>' +
+        '<div class="formats">' + formats.map(function (f) { return '<span class="format-badge ' + f + '">' + f + '</span>'; }).join('') + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function openSongGroup(songName) {
+    currentView = 'search'; // 借用 search 状态表示版本列表
+    document.getElementById('search-input').style.display = 'none';
+    document.getElementById('back-btn').style.display = 'block';
+    document.getElementById('back-btn').textContent = '← 返回谱子';
+
+    var container = document.getElementById('tab-list');
+    var versions = tabsData.filter(function (tab) {
+      var group = tab.song_group || tab.title;
+      return group === songName && tab.category === currentCategory;
+    });
+
+    if (versions.length === 0) {
+      container.innerHTML = '<p class="empty-state">没有版本</p>';
+      return;
+    }
+
+    container.innerHTML = versions.map(function (tab) {
+      var contrib = tab.contributor
+        ? '<a href="' + (tab.contributor.bilibili || tab.contributor.url || '#') + '" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">' + escapeHtml(tab.contributor.name || '匿名') + '</a>'
+        : '';
+      return '<div class="tab-card version-card" data-id="' + tab.id + '" role="button" tabindex="0">' +
+        '<div class="card-info"><h3>' + escapeHtml(tab.title) + '</h3>' +
+        '<div class="card-meta-row">' + (contrib ? '<span>·</span>' + contrib : '') + '</div></div>' +
+        '<div class="formats">' + tab.formats.map(function (f) { return '<span class="format-badge ' + f + '">' + f + '</span>'; }).join('') + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // === 搜索（防抖 + 分类内搜索）===
+
+  function filterTabs() {
+    var keyword = document.getElementById('search-input').value.toLowerCase().trim();
+    var container = document.getElementById('tab-list');
+
+    // 防抖
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(function () {
+      if (!keyword) {
+        renderTabList(currentCategory);
+        return;
+      }
+
+      var matchedTabs = tabsData.filter(function (tab) {
+        return tab.category === currentCategory &&
+          (tab.title.toLowerCase().includes(keyword) ||
+           (tab.song_group && tab.song_group.toLowerCase().includes(keyword)));
+      });
+
+      if (matchedTabs.length === 0) {
+        container.innerHTML = '<p class="empty-state">没有找到"' + escapeHtml(keyword) + '"相关的吉他谱</p>';
+        return;
+      }
+
+      currentView = 'search';
+      document.getElementById('back-btn').style.display = 'block';
+      document.getElementById('back-btn').textContent = '← 返回谱子';
+      container.innerHTML = renderGroupedTabs(matchedTabs, currentCategory);
+    }, 150);
+  }
+
+  // === 预览弹窗 ===
+
+  function openPreviewById(id) {
+    currentPreviewTab = tabsData.find(function (t) { return t.id === id; });
+    if (!currentPreviewTab) return;
+
+    var tab = currentPreviewTab;
+    var modal = document.getElementById('modal');
+    var titleEl = document.getElementById('modal-title');
+    var body = document.getElementById('modal-body');
+
+    titleEl.textContent = tab.category !== '单曲' ? tab.title + ' [' + tab.category + ']' : tab.title;
+
+    var contributorHtml = '';
+    if (tab.contributor) {
+      var name = tab.contributor.name || tab.contributor.uid || '匿名';
+      var url = tab.contributor.bilibili || tab.contributor.url || '#';
+      contributorHtml = '<div class="contributor-tag">感谢 <a href="' + url + '" target="_blank" rel="noopener">' + escapeHtml(name) + '</a> 提供谱子</div>';
+    }
+    document.getElementById('modal-contributor').innerHTML = contributorHtml;
+
+    var hasGpx = tab.formats.includes('gpx') && tab.files.gpx;
+    var hasPdf = tab.formats.includes('pdf') && tab.files.pdf;
+    var hasImages = tab.files.images && tab.files.images.length > 0;
+    var hasMultiple = (hasGpx && hasPdf) || (hasGpx && hasImages) || (hasPdf && hasImages);
+
+    if (hasMultiple) {
+      renderPreviewModeSelector(tab, body);
+    } else if (hasGpx) {
+      renderGpxPreview(tab, body);
+    } else if (hasPdf) {
+      renderPdfPreview(tab, body);
+    } else if (hasImages) {
+      renderImagesPreview(tab, body);
+    } else {
+      body.innerHTML += '<p class="empty-state">没有可预览的资源</p>';
+    }
+
+    openModal('modal', document.activeElement);
+  }
+
+  function renderPreviewModeSelector(tab, body) {
+    var modes = [];
+    if (tab.files.gpx) modes.push({ key: 'gpx', label: '乐谱' });
+    if (tab.files.pdf) modes.push({ key: 'pdf', label: 'PDF' });
+    if (tab.files.images && tab.files.images.length > 0) modes.push({ key: 'images', label: '图片' });
+
+    body.innerHTML = '<div class="preview-mode-selector">' +
+      modes.map(function (m) {
+        return '<button class="mode-btn ' + (m.key === 'gpx' ? 'active' : '') + '" data-mode="' + m.key + '">' + m.label + '</button>';
+      }).join('') +
+    '</div><div id="preview-content"></div>';
+
+    currentPreviewMode = 'gpx';
+    renderGpxPreview(tab, document.getElementById('preview-content'));
+  }
+
+  function switchPreviewMode(mode) {
+    currentPreviewMode = mode;
+    var tab = currentPreviewTab;
+    if (!tab) return;
+
+    document.querySelectorAll('.mode-btn').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+
+    var content = document.getElementById('preview-content');
+    if (mode === 'gpx') renderGpxPreview(tab, content);
+    else if (mode === 'pdf') renderPdfPreview(tab, content);
+    else if (mode === 'images') renderImagesPreview(tab, content);
+  }
+
+  function renderGpxPreview(tab, container) {
+    var gpxFilename = tab.files.gpx.split('/').pop();
+    container.innerHTML = '<div class="player-controls">' +
+      '<button onclick="window._playerPlay()">▶ 播放</button>' +
+      '<button onclick="window._playerPause()">⏸ 暂停</button>' +
+      '<button onclick="window._playerStop()">⏹ 停止</button>' +
+      '<a href="' + encodeAssetPath(tab.files.gpx) + '" download="' + escapeHtml(gpxFilename) + '">下载 GPX</a>' +
+      '<div class="speed-control"><label>速度:</label><input type="range" id="speed-slider" min="25" max="150" value="100" oninput="window._changeSpeed(this.value)"><span id="speed-value">100%</span></div>' +
+    '</div>' +
+    '<div id="alphaTab-container" class="alpha-tab-container">' +
+      '<p class="loading-text">正在加载乐谱...</p>' +
+    '</div>';
+    requestAnimationFrame(function () { initAlphaTab(tab.files.gpx); });
+  }
+
+  function renderPdfPreview(tab, container) {
+    container.innerHTML = '<iframe class="preview-pdf" src="' + encodeAssetPath(tab.files.pdf) + '"></iframe>';
+  }
+
+  function renderImagesPreview(tab, container) {
+    container.innerHTML = '<div class="image-gallery">' + tab.files.images.map(function (img) {
+      var filename = img.split('/').pop();
+      return '<div class="image-item">' +
+        '<img class="preview-image" src="' + encodeAssetPath(img) + '" alt="' + escapeHtml(tab.title) + '" loading="lazy" onclick="window.open(\'' + encodeAssetPath(img) + '\', \'_blank\')">' +
+        '<button class="img-download" onclick="window.open(\'' + encodeAssetPath(img) + '\', \'_blank\')">下载 ' + escapeHtml(filename) + '</button>' +
+      '</div>';
+    }).join('') + '</div>';
+  }
+
+  function encodeAssetPath(path) {
+    return path.split('/').map(function (s) { return encodeURIComponent(s); }).join('/');
+  }
+
+  function initAlphaTab(gpxPath) {
+    var container = document.getElementById('alphaTab-container');
+    if (!container) return;
+
+    if (alphaTabApi) {
+      try { alphaTabApi.destroy(); } catch (e) {}
+      alphaTabApi = null;
+    }
+
+    container.innerHTML = '<p class="loading-text">正在加载乐谱文件...</p>';
+
+    var encodedUrl = encodeAssetPath(gpxPath);
+
+    fetch(encodedUrl)
+      .then(function (response) {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.arrayBuffer();
+      })
+      .then(function (buffer) {
+        container.innerHTML = '';
+        setupAlphaTab(container, buffer);
+      })
+      .catch(function (err) {
+        console.error('GPX load error:', err);
+        container.innerHTML = '<p class="error-text">⚠️ 乐谱文件加载失败：' + err.message + '<br><small>路径: ' + gpxPath + '</small></p>';
+      });
+  }
+
+  function setupAlphaTab(container, buffer) {
+    if (!container.offsetWidth) {
+      container.style.width = '100%';
+      container.style.minWidth = '600px';
+    }
+
+    var settings = {
+      core: { engine: 'svg', logLevel: 1, useWorkers: false },
+      display: { staveProfile: 0, scale: 1.0 },
+      player: {
+        enablePlayer: true,
+        enableCursor: true,
+        enableUserInteraction: true,
+        soundFont: 'https://cdn.jsdelivr.net/npm/@coderline/alphatab@latest/dist/soundfont/sonivox.sf2'
+      }
+    };
+
+    try {
+      alphaTabApi = new alphaTab.AlphaTabApi(container, settings);
+    } catch (e) {
+      console.error('alphaTab init error:', e);
+      container.innerHTML = '<p class="error-text">⚠️ alphaTab 初始化失败: ' + e.message + '</p>';
+      return;
+    }
+
+    alphaTabApi.error.on(function (error) {
+      console.error('alphaTab Error:', error);
+    });
+
+    alphaTabApi.scoreLoaded.on(function (score) {
+      console.log('Score loaded:', score ? score.title : 'null', 'Tracks:', score ? score.tracks.length : 0);
+      if (score && score.stylesheet) {
+        var ss = score.stylesheet;
+        if (!ss.perTrackMultiBarRest) ss.perTrackMultiBarRest = new Map();
+        if (!ss.perTrackDisplayTuning) ss.perTrackDisplayTuning = new Map();
+        if (!ss.perTrackChordDiagramsOnTop) ss.perTrackChordDiagramsOnTop = new Map();
+      }
+    });
+
+    try {
+      var uint8 = new Uint8Array(buffer);
+      var success = alphaTabApi.load(uint8);
+      console.log('alphaTab load returned:', success);
+      if (!success) {
+        container.innerHTML = '<p class="error-text">⚠️ 乐谱解析失败</p>';
+      }
+    } catch (e) {
+      console.error('alphaTab load exception:', e);
+      container.innerHTML = '<p class="error-text">⚠️ 加载异常: ' + e.message + '</p>';
+    }
+  }
+
+  // 播放器控制（挂到 window 供内联事件使用）
+  window._playerPlay = function () { if (alphaTabApi) alphaTabApi.play(); };
+  window._playerPause = function () { if (alphaTabApi) alphaTabApi.pause(); };
+  window._playerStop = function () { if (alphaTabApi) alphaTabApi.stop(); };
+  window._changeSpeed = function (percent) {
+    if (alphaTabApi) {
+      alphaTabApi.playbackSpeed = percent / 100;
+      document.getElementById('speed-value').textContent = percent + '%';
+    }
+  };
+
+  function closeMainModal() {
+    closeModal('modal');
+    if (alphaTabApi) {
+      alphaTabApi.destroy();
+      alphaTabApi = null;
+    }
+    currentPreviewTab = null;
+    currentPreviewMode = 'gpx';
+  }
+
+  // === 提交谱子 ===
+
+  var API_BASE = ''; // 同域，Worker 反代
+
+  function openSubmitModal() {
+    var modal = document.getElementById('submitModal');
+    modal.classList.remove('hidden');
+
+    var select = document.getElementById('submitCategory');
+    select.innerHTML = '<option value="">-- 选择分类 --</option>';
+    fetch(API_BASE + '/api/categories')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success) {
+          data.categories.forEach(function (cat) {
+            var opt = document.createElement('option');
+            opt.value = cat;
+            opt.textContent = cat;
+            select.appendChild(opt);
+          });
+        }
+      })
+      .catch(function () {});
+
+    var newOpt = document.createElement('option');
+    newOpt.value = '__new__';
+    newOpt.textContent = '+ 新建分类';
+    select.appendChild(newOpt);
+
+    var fileInput = document.getElementById('submitFiles');
+    if (!fileInput._bound) {
+      fileInput.addEventListener('change', handleFileSelect);
+      fileInput._bound = true;
+    }
+
+    openModal('submitModal', document.activeElement);
+  }
+
+  function handleFileSelect(e) {
+    var tags = document.getElementById('fileTags');
+    tags.innerHTML = '';
+    var files = e.target.files;
+    var totalSize = 0;
+
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      totalSize += file.size;
+      var ext = '.' + (file.name.split('.').pop() || '').toLowerCase();
+      var type = 'unknown';
+      if (['.gp', '.gp3', '.gp4', '.gp5', '.gp7', '.gp8', '.gpx'].includes(ext)) type = 'GPX';
+      else if (ext === '.pdf') type = 'PDF';
+      else if (['.jpg', '.jpeg', '.png', '.webp', '.gif', '.bmp'].includes(ext)) type = '图片';
+
+      var tag = document.createElement('span');
+      tag.className = 'file-tag ' + (type === 'unknown' ? 'unsupported' : type.toLowerCase());
+      tag.textContent = file.name + ' (' + type + (file.size > 1024 * 1024 ? ' ' + (file.size / 1024 / 1024).toFixed(1) + 'MB' : '') + ')';
+      tags.appendChild(tag);
+    }
+
+    if (files.length > 0) {
+      var sizeTag = document.createElement('span');
+      sizeTag.className = 'file-tag total';
+      sizeTag.textContent = '总计: ' + (totalSize / 1024 / 1024).toFixed(1) + 'MB / 50MB';
+      sizeTag.style.background = totalSize > 50 * 1024 * 1024 ? 'rgba(248,81,73,0.2)' : '';
+      tags.appendChild(sizeTag);
+    }
+  }
+
+  function closeSubmitModal() {
+    closeModal('submitModal');
+    document.getElementById('submitForm').reset();
+    document.getElementById('fileTags').innerHTML = '';
+    document.getElementById('submitResult').innerHTML = '';
+    document.getElementById('newCategory').style.display = 'none';
+    isSubmitting = false;
+  }
+
+  function submitTab() {
+    if (isSubmitting) return;
+    isSubmitting = true;
+
+    var btn = document.querySelector('.submit-form-btn');
+    var result = document.getElementById('submitResult');
+    btn.disabled = true;
+    btn.textContent = '提交中...';
+    result.innerHTML = '<p class="result-loading">⏳ 上传中，请稍候...</p>';
+
+    var category = document.getElementById('submitCategory').value === '__new__'
+      ? document.getElementById('newCategory').value.trim()
+      : document.getElementById('submitCategory').value;
+    var songGroup = document.getElementById('submitSongGroup').value.trim();
+    var contributor = document.getElementById('submitContributor').value.trim();
+    var bilibili = document.getElementById('submitBilibili').value.trim();
+    var password = document.getElementById('submitPassword').value;
+    var files = document.getElementById('submitFiles').files;
+
+    if (!category || !songGroup) {
+      result.innerHTML = '<p class="result-error">请填写分类和歌曲名</p>';
+      resetSubmitBtn(btn);
+      return;
+    }
+    if (files.length === 0) {
+      result.innerHTML = '<p class="result-error">请至少上传一个文件</p>';
+      resetSubmitBtn(btn);
+      return;
+    }
+    if (!password) {
+      result.innerHTML = '<p class="result-error">请输入提交密码</p>';
+      resetSubmitBtn(btn);
+      return;
+    }
+
+    var formData = new FormData();
+    formData.append('category', category);
+    formData.append('songGroup', songGroup);
+    formData.append('contributor', contributor);
+    formData.append('bilibili', bilibili);
+    formData.append('password', password);
+    for (var i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
+
+    fetch(API_BASE + '/api/submit', { method: 'POST', body: formData })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success) {
+          result.innerHTML = '<p class="result-success">✅ ' + data.message + '</p>';
+          btn.textContent = '提交成功！';
+          setTimeout(function () { closeSubmitModal(); }, 2000);
+        } else {
+          result.innerHTML = '<p class="result-error">❌ ' + data.error + '</p>';
+          resetSubmitBtn(btn);
+        }
+      })
+      .catch(function () {
+        result.innerHTML = '<p class="result-error">❌ 网络错误，请稍后重试</p>';
+        resetSubmitBtn(btn);
+      });
+  }
+
+  function resetSubmitBtn(btn) {
+    isSubmitting = false;
+    btn.disabled = false;
+    btn.textContent = '提交';
+  }
+
+  // === 管理员面板 ===
+
+  function openAdminPanel() {
+    document.getElementById('adminModal').classList.remove('hidden');
+    document.getElementById('adminContent').style.display = 'none';
+    document.getElementById('adminPassword').value = '';
+    adminAuthed = false;
+    openModal('adminModal', document.activeElement);
+  }
+
+  function closeAdminPanel() {
+    closeModal('adminModal');
+  }
+
+  function loginAdmin() {
+    var pwd = document.getElementById('adminPassword').value;
+    if (!pwd) return;
+
+    fetch(API_BASE + '/api/tabs-data', { headers: { Authorization: 'Bearer ' + pwd } })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success) {
+          adminAuthed = true;
+          document.getElementById('adminContent').style.display = 'block';
+          document.querySelector('.admin-auth').style.display = 'none';
+          window._adminTabsData = data.data;
+          showAdminTabList();
+        } else {
+          alert('密码错误');
+        }
+      })
+      .catch(function () { alert('登录失败'); });
+  }
+
+  function showAdminTabList() {
+    var container = document.getElementById('adminTabContent');
+    var tabs = window._adminTabsData || [];
+    if (tabs.length === 0) {
+      container.innerHTML = '<p class="empty-state">暂无谱子</p>';
+      return;
+    }
+    container.innerHTML = '<div class="admin-actions"><span>' + tabs.length + ' 首谱子</span>' +
+      '<button onclick="refreshAdminData()" class="admin-refresh-btn">刷新</button></div>' +
+      tabs.map(function (t) {
+        return '<div class="admin-tab-item">' +
+          '<div class="admin-tab-info">' +
+            '<strong>' + escapeHtml(t.title) + '</strong>' +
+            '<span class="admin-tag">' + escapeHtml(t.category) + '</span>' +
+            '<span class="admin-tag">' + (t.formats || []).join(', ') + '</span>' +
+            '<span class="admin-contrib">' + escapeHtml((t.contributor && t.contributor.name) || '') + '</span>' +
+          '</div>' +
+          '<button onclick="deleteTab(' + t.id + ')" class="admin-delete-btn">删除</button>' +
+        '</div>';
+      }).join('');
+  }
+
+  function showAdminLogs() {
+    var container = document.getElementById('adminTabContent');
+    container.innerHTML = '<p class="loading-text">加载中...</p>';
+    fetch(API_BASE + '/api/admin/logs', { headers: { Authorization: 'Bearer ' + document.getElementById('adminPassword').value } })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data.success || !data.logs.length) {
+          container.innerHTML = '<p class="empty-state">暂无日志</p>';
+          return;
+        }
+        container.innerHTML = data.logs.map(function (log) {
+          return '<div class="admin-log-item">' +
+            '<span class="log-action ' + log.action + '">' + (log.action === 'submit' ? '新增' : '删除') + '</span>' +
+            '<span class="log-title">' + escapeHtml(log.title) + '</span>' +
+            '<span class="log-meta">' + escapeHtml(log.category || '') + ' · ' + escapeHtml(log.contributor || '') + '</span>' +
+            '<span class="log-time">' + (log.time ? log.time.replace('T', ' ').slice(0, 16) : '') + '</span>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function () { container.innerHTML = '<p class="error-text">加载失败</p>'; });
+  }
+
+  function switchAdminTab(tab) {
+    document.querySelectorAll('.admin-tab').forEach(function (t) { t.classList.remove('active'); });
+    event.target.classList.add('active');
+    if (tab === 'tabs') showAdminTabList();
+    else if (tab === 'logs') showAdminLogs();
+  }
+
+  function deleteTab(id) {
+    if (!confirm('确定要删除这首谱子吗？此操作不可恢复。')) return;
+    var pwd = document.getElementById('adminPassword').value;
+    fetch(API_BASE + '/api/tabs/' + id, { method: 'DELETE', headers: { Authorization: 'Bearer ' + pwd } })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success) {
+          window._adminTabsData = window._adminTabsData.filter(function (t) { return t.id !== id; });
+          showAdminTabList();
+        } else {
+          alert('删除失败: ' + data.error);
+        }
+      })
+      .catch(function () { alert('删除失败'); });
+  }
+
+  function refreshAdminData() {
+    var pwd = document.getElementById('adminPassword').value;
+    fetch(API_BASE + '/api/tabs-data', { headers: { Authorization: 'Bearer ' + pwd } })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success) {
+          window._adminTabsData = data.data;
+          showAdminTabList();
+        }
+      });
+  }
+
+  // === 致谢墙 ===
+
+  function showCredits() {
+    var modal = document.getElementById('credits-modal');
+    var list = document.getElementById('credits-list');
+
+    var contributors = {};
+    tabsData.forEach(function (tab) {
+      if (tab.contributor) {
+        var key = tab.contributor.bilibili || tab.contributor.name || tab.contributor.uid;
+        if (!contributors[key]) {
+          contributors[key] = { name: tab.contributor.name || tab.contributor.uid || '匿名', bilibili: tab.contributor.bilibili || tab.contributor.url, count: 1 };
+        } else {
+          contributors[key].count++;
+        }
+      }
+    });
+
+    var keys = Object.keys(contributors);
+    if (keys.length === 0) {
+      list.innerHTML = '<li class="credits-empty">还没有贡献者，等你来当第一个！</li>';
+    } else {
+      list.innerHTML = keys.map(function (key) {
+        var c = contributors[key];
+        var link = c.bilibili ? '<a href="' + c.bilibili + '" target="_blank" rel="noopener">' + escapeHtml(c.name) + '</a>' : escapeHtml(c.name);
+        return '<li><span class="credits-name">' + link + '</span><span class="credits-count">贡献 ' + c.count + ' 首</span></li>';
+      }).join('');
+    }
+
+    openModal('credits-modal', document.activeElement);
+  }
+
+  function closeCredits() {
+    closeModal('credits-modal');
+  }
+
+  // === 事件绑定 ===
+
+  function bindEvents() {
+    // 分类卡片点击
+    document.getElementById('tab-list').addEventListener('click', function (e) {
+      var card = e.target.closest('.category-card');
+      if (card) {
+        openCategory(card.dataset.category);
+        return;
+      }
+
+      var tabCard = e.target.closest('.tab-card');
+      if (tabCard) {
+        if (tabCard.dataset.id) {
+          openPreviewById(parseInt(tabCard.dataset.id));
+        } else if (tabCard.dataset.song) {
+          openSongGroup(tabCard.dataset.song);
+        }
+      }
+    });
+
+    // 键盘支持
+    document.getElementById('tab-list').addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var card = e.target.closest('.category-card, .tab-card');
+      if (card) {
+        e.preventDefault();
+        card.click();
+      }
+    });
+
+    // 返回按钮
+    document.getElementById('back-btn').addEventListener('click', goBack);
+
+    // 搜索框清空时恢复
+    document.getElementById('search-input').addEventListener('input', filterTabs);
+
+    // 模态框关闭
+    document.getElementById('modal').addEventListener('click', function (e) {
+      if (e.target === this) closeMainModal();
+    });
+    document.getElementById('credits-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeCredits();
+    });
+    document.getElementById('submitModal').addEventListener('click', function (e) {
+      if (e.target === this) closeSubmitModal();
+    });
+    document.getElementById('adminModal').addEventListener('click', function (e) {
+      if (e.target === this) closeAdminPanel();
+    });
+
+    // ESC 关闭
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (!document.getElementById('modal').classList.contains('hidden')) closeMainModal();
+      if (!document.getElementById('credits-modal').classList.contains('hidden')) closeCredits();
+      if (!document.getElementById('submitModal').classList.contains('hidden')) closeSubmitModal();
+      if (!document.getElementById('adminModal').classList.contains('hidden')) closeAdminPanel();
+    });
+
+    // 提交表单按钮
+    document.getElementById('submitWish').addEventListener('click', submitTab);
+    document.getElementById('submitFiles').addEventListener('change', handleFileSelect);
+
+    // 管理员登录
+    document.getElementById('adminLoginBtn').addEventListener('click', loginAdmin);
+    document.getElementById('adminPassword').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') loginAdmin();
+    });
+  }
+
+  function goBack() {
+    if (currentView === 'search' || currentView === 'versions') {
+      currentView = 'tabs';
+      document.getElementById('search-input').style.display = 'block';
+      document.getElementById('back-btn').textContent = '← 返回分类';
+      renderTabList(currentCategory);
+    } else if (currentView === 'tabs') {
+      renderCategories();
+    }
+  }
+
+  // === 启动 ===
+  document.addEventListener('DOMContentLoaded', function () {
+    renderCategories();
+    bindEvents();
+  });
+
+  // 暴露给内联事件（兼容旧代码）
+  window.openPreview = openPreviewById;
+  window.openSubmitModal = openSubmitModal;
+  window.closeSubmitModal = closeSubmitModal;
+  window.openAdminPanel = openAdminPanel;
+  window.closeAdminPanel = closeAdminPanel;
+  window.showCredits = showCredits;
+  window.closeCredits = closeCredits;
+  window.submitTab = submitTab;
+  window.loginAdmin = loginAdmin;
+  window.switchAdminTab = switchAdminTab;
+  window.deleteTab = deleteTab;
+  window.refreshAdminData = refreshAdminData;
+  window.showAdminTab = showAdminTabList;
+  window.showAdminLogs = showAdminLogs;
+  window.handleFileSelect = handleFileSelect;
+})();

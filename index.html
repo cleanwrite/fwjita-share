@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>吉他谱分享站</title>
+  <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -14,8 +15,8 @@
         <p class="subtitle">GPX / PDF / 图片，在线预览即开即用</p>
       </div>
       <div class="header-links">
-        <button class="submit-btn" onclick="openSubmitModal()">+ 提交谱子</button>
-        <button class="admin-btn" onclick="openAdminPanel()">⚙ 管理</button>
+        <button class="submit-btn" id="openSubmitBtn">+ 提交谱子</button>
+        <button class="admin-btn" id="openAdminBtn">管理</button>
         <a href="https://wwatq.lanzn.com/b00v0d8wef" target="_blank" class="link-item">
           <span class="link-label">蓝奏云</span>
           <span class="link-meta">密码 ac6x</span>
@@ -30,106 +31,99 @@
 
   <main>
     <section class="toolbar">
-      <button id="back-btn" class="back-btn" onclick="goBack()"></button>
+      <button id="back-btn" class="back-btn">← 返回</button>
       <div class="search-box">
-        <input type="text" id="search-input" placeholder="搜索吉他谱..." oninput="filterTabs()">
+        <input type="text" id="search-input" placeholder="搜索吉他谱...">
       </div>
-      <button id="credits-btn" class="credits-btn" onclick="showCredits()">致谢</button>
+      <button id="credits-btn" class="credits-btn">致谢</button>
     </section>
 
-    <section id="tab-list" class="tab-list"></section>
-
-    <div id="modal" class="modal hidden">
-      <div class="modal-content">
-        <button class="close-btn" onclick="closeModal()" aria-label="关闭">&times;</button>
-        <h2 id="modal-title"></h2>
-        <div id="modal-contributor"></div>
-        <div id="modal-body"></div>
-      </div>
-    </div>
-
-    <div id="credits-modal" class="modal hidden">
-      <div class="modal-content credits-content">
-        <button class="close-btn" onclick="closeCredits()" aria-label="关闭">&times;</button>
-        <h2>致谢墙</h2>
-        <p class="credits-sub">感谢以下朋友提供曲谱</p>
-        <ul id="credits-list" class="credits-list"></ul>
-        <div class="credits-cta">
-          <p>想要贡献曲谱？</p>
-          <p>把你的谱子网盘链接发到以下任一渠道：</p>
-          <ul class="credits-contact">
-            <li><a href="https://space.bilibili.com/590547783" target="_blank" rel="noopener">B站私信</a></li>
-            <li>QQ：439109032</li>
-            <li><a href="https://github.com/cleanwrite/fwjita-share/issues" target="_blank" rel="noopener">GitHub Issue</a></li>
-          </ul>
-          <p class="credits-promise">上传后你的 B站昵称会作为贡献者显示在谱子上 ✨</p>
-        </div>
-      </div>
-    </div>
+    <section id="tab-list" class="tab-list" aria-label="吉他谱列表"></section>
   </main>
 
-  <!-- 提交谱子弹窗 -->
-  <div id="submitModal" class="modal hidden">
+  <!-- 预览弹窗 -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <button class="close-btn" aria-label="关闭">&times;</button>
+      <h2 id="modal-title"></h2>
+      <div id="modal-contributor"></div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- 致谢弹窗 -->
+  <div id="credits-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content credits-content">
+      <button class="close-btn" aria-label="关闭">&times;</button>
+      <h2>致谢墙</h2>
+      <p class="credits-sub">感谢以下朋友提供曲谱</p>
+      <ul id="credits-list" class="credits-list"></ul>
+      <div class="credits-cta">
+        <p>想要贡献曲谱？</p>
+        <p>把你的谱子网盘链接发到以下任一渠道：</p>
+        <ul class="credits-contact">
+          <li><a href="https://space.bilibili.com/590547783" target="_blank" rel="noopener">B站私信</a></li>
+          <li>QQ：439109032</li>
+          <li><a href="https://github.com/cleanwrite/fwjita-share/issues" target="_blank" rel="noopener">GitHub Issue</a></li>
+        </ul>
+        <p class="credits-promise">上传后你的 B站昵称会作为贡献者显示在谱子上</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 提交弹窗 -->
+  <div id="submitModal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-content submit-modal">
-      <button class="close-btn" onclick="closeSubmitModal()" aria-label="关闭">&times;</button>
-      <h2>🎸 提交新谱子</h2>
-      <form id="submitForm" onsubmit="return false;">
+      <button class="close-btn" aria-label="关闭">&times;</button>
+      <h2>提交新谱子</h2>
+      <form id="submitForm">
         <div class="form-row">
-          <label>大分类 <span class="required">*</span></label>
-          <div class="category-input-wrap">
-            <select id="submitCategory" onchange="if(this.value==='__new__') document.getElementById('newCategory').style.display='block'; else document.getElementById('newCategory').style.display='none'">
-              <option value="">-- 选择分类 --</option>
-            </select>
-          </div>
+          <label for="submitCategory">大分类 <span class="required">*</span></label>
+          <select id="submitCategory">
+            <option value="">-- 选择分类 --</option>
+          </select>
           <input type="text" id="newCategory" placeholder="输入新分类名" style="display:none; margin-top:8px;">
         </div>
-
         <div class="form-row">
-          <label>歌曲名 <span class="required">*</span></label>
+          <label for="submitSongGroup">歌曲名 <span class="required">*</span></label>
           <input type="text" id="submitSongGroup" placeholder="歌曲名称（也是文件夹名）">
         </div>
-
         <div class="form-row">
-          <label>贡献者</label>
+          <label for="submitContributor">贡献者</label>
           <input type="text" id="submitContributor" placeholder="你的名字（可选）">
         </div>
-
         <div class="form-row">
-          <label>B站主页</label>
+          <label for="submitBilibili">B站主页</label>
           <input type="text" id="submitBilibili" placeholder="https://space.bilibili.com/xxxx（可选）">
         </div>
-
         <div class="form-row">
-          <label>文件 <span class="required">*</span></label>
+          <label for="submitFiles">文件 <span class="required">*</span></label>
           <input type="file" id="submitFiles" multiple accept=".gp,.gp3,.gp4,.gp5,.gp7,.gp8,.gpx,.pdf,.jpg,.jpeg,.png,.webp,.gif,.bmp">
           <div id="fileTags" class="file-tags"></div>
         </div>
-
         <div class="form-row">
-          <label>提交密码 <span class="required">*</span></label>
+          <label for="submitPassword">提交密码 <span class="required">*</span></label>
           <input type="password" id="submitPassword" placeholder="输入提交密码">
         </div>
-
         <div id="submitResult" class="submit-result"></div>
-
-        <button type="button" onclick="submitTab()" class="submit-form-btn">提交</button>
+        <button type="button" id="submitWish" class="submit-form-btn">提交</button>
       </form>
     </div>
   </div>
 
   <!-- 管理员面板 -->
-  <div id="adminModal" class="modal hidden">
+  <div id="adminModal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-content admin-modal">
-      <button class="close-btn" onclick="closeAdminPanel()" aria-label="关闭">&times;</button>
-      <h2>⚙ 管理面板</h2>
+      <button class="close-btn" aria-label="关闭">&times;</button>
+      <h2>管理面板</h2>
       <div class="admin-auth">
-        <input type="password" id="adminPassword" placeholder="输入管理密码" onkeydown="if(event.key==='Enter') loginAdmin()">
-        <button onclick="loginAdmin()" class="admin-login-btn">登录</button>
+        <input type="password" id="adminPassword" placeholder="输入管理密码">
+        <button id="adminLoginBtn" class="admin-login-btn">登录</button>
       </div>
       <div id="adminContent" style="display:none;">
         <div class="admin-tabs">
-          <button class="admin-tab active" onclick="showAdminTab('tabs')">谱子列表</button>
-          <button class="admin-tab" onclick="showAdminTab('logs')">操作日志</button>
+          <button class="admin-tab active" data-tab="tabs">谱子列表</button>
+          <button class="admin-tab" data-tab="logs">操作日志</button>
         </div>
         <div id="adminTabContent"></div>
       </div>
@@ -155,7 +149,7 @@
     <span class="signature">fw</span>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@coderline/alphatab@latest/dist/alphaTab.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@coderline/alphatab@1.8.4/dist/alphaTab.min.js"></script>
   <script src="https://cleanwrite.github.io/fwjita-share/assets/js/tabs-data.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
