@@ -483,25 +483,37 @@
 
   function openSubmitModal() {
     var select = document.getElementById('submitCategory');
-    select.innerHTML = '<option value="">-- 选择分类 --</option>';
+    select.innerHTML = '<option value="">加载中...</option>';
     fetch(API_BASE + '/api/categories')
-      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
       .then(function (data) {
-        if (data.success) {
-          data.categories.forEach(function (cat) {
+        select.innerHTML = '<option value="">-- 选择分类 --</option>';
+        if (data.success && data.categories) {
+          // 排序：单曲放最后
+          var cats = data.categories.sort(function (a, b) {
+            if (a === '单曲') return 1;
+            if (b === '单曲') return -1;
+            return a.localeCompare(b);
+          });
+          cats.forEach(function (cat) {
             var opt = document.createElement('option');
             opt.value = cat;
             opt.textContent = cat;
             select.appendChild(opt);
           });
         }
+        var newOpt = document.createElement('option');
+        newOpt.value = '__new__';
+        newOpt.textContent = '+ 新建分类';
+        select.appendChild(newOpt);
       })
-      .catch(function () {});
-
-    var newOpt = document.createElement('option');
-    newOpt.value = '__new__';
-    newOpt.textContent = '+ 新建分类';
-    select.appendChild(newOpt);
+      .catch(function (err) {
+        select.innerHTML = '<option value="">加载失败，请刷新重试</option>';
+        console.error('Load categories failed:', err);
+      });
 
     openModal('submitModal', document.activeElement);
   }
@@ -619,12 +631,17 @@
   function openAdminPanel() {
     document.getElementById('adminContent').style.display = 'none';
     document.getElementById('adminPassword').value = '';
+    document.querySelector('.admin-auth').style.display = 'flex';
+    document.getElementById('adminTabContent').innerHTML = '';
     adminAuthed = false;
     openModal('adminModal', document.activeElement);
   }
 
   function closeAdminPanel() {
     closeModal('adminModal');
+    document.getElementById('adminContent').style.display = 'none';
+    document.querySelector('.admin-auth').style.display = 'flex';
+    adminAuthed = false;
   }
 
   function loginAdmin() {
@@ -644,7 +661,7 @@
           alert('密码错误');
         }
       })
-      .catch(function () { alert('登录失败'); });
+      .catch(function (err) { alert('登录失败: ' + (err.message || '网络错误')); });
   }
 
   function showAdminTabList() {
@@ -840,9 +857,12 @@
     document.getElementById('openAdminBtn').addEventListener('click', openAdminPanel);
     document.getElementById('credits-btn').addEventListener('click', showCredits);
 
-    // 提交表单按钮
+    // 提交表单
     document.getElementById('submitWish').addEventListener('click', submitTab);
     document.getElementById('submitFiles').addEventListener('change', handleFileSelect);
+    document.getElementById('submitCategory').addEventListener('change', function () {
+      document.getElementById('newCategory').style.display = this.value === '__new__' ? 'block' : 'none';
+    });
 
     // 管理员登录
     document.getElementById('adminLoginBtn').addEventListener('click', loginAdmin);
