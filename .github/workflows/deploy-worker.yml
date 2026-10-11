@@ -25,8 +25,7 @@ jobs:
           workingDirectory: fwjita-worker
           command: deploy
           secrets: |
-            GITHUB_TOKEN
             SUBMIT_PASSWORD
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           SUBMIT_PASSWORD: "114514"
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
