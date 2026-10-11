@@ -624,32 +624,53 @@
       return;
     }
 
-    var formData = new FormData();
-    formData.append('category', category);
-    formData.append('songGroup', songGroup);
-    formData.append('contributor', contributor);
-    formData.append('bilibili', bilibili);
-    formData.append('password', password);
+    // 读取文件为 base64，用 JSON 提交（避免中文编码问题）
+    var fileReaders = [];
     for (var i = 0; i < files.length; i++) {
-      formData.append('files', files[i]);
+      (function (file) {
+        var reader = new FileReader();
+        var promise = new Promise(function (resolve) {
+          reader.onload = function () {
+            var base64 = reader.result.split(',')[1];
+            resolve({ name: file.name, base64: base64 });
+          };
+          reader.readAsDataURL(file);
+        });
+        fileReaders.push(promise);
+      })(files[i]);
     }
 
-    fetch(API_BASE + '/api/submit', { method: 'POST', body: formData })
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data.success) {
-          result.innerHTML = '<p class="result-success">✅ ' + data.message + '</p>';
-          btn.textContent = '提交成功！';
-          setTimeout(function () { closeSubmitModal(); }, 2000);
-        } else {
-          result.innerHTML = '<p class="result-error">❌ ' + data.error + '</p>';
-          resetSubmitBtn(btn);
-        }
+    Promise.all(fileReaders).then(function (fileDataArray) {
+      var payload = {
+        category: category,
+        songGroup: songGroup,
+        contributor: contributor,
+        bilibili: bilibili,
+        password: password,
+        files: fileDataArray
+      };
+
+      fetch(API_BASE + '/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       })
-      .catch(function () {
-        result.innerHTML = '<p class="result-error">❌ 网络错误，请稍后重试</p>';
-        resetSubmitBtn(btn);
-      });
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.success) {
+            result.innerHTML = '<p class="result-success">✅ ' + data.message + '</p>';
+            btn.textContent = '提交成功！';
+            setTimeout(function () { closeSubmitModal(); }, 2000);
+          } else {
+            result.innerHTML = '<p class="result-error">❌ ' + data.error + '</p>';
+            resetSubmitBtn(btn);
+          }
+        })
+        .catch(function () {
+          result.innerHTML = '<p class="result-error">❌ 网络错误，请稍后重试</p>';
+          resetSubmitBtn(btn);
+        });
+    });
   }
 
   function resetSubmitBtn(btn) {
