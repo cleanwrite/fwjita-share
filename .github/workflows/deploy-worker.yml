@@ -24,8 +24,6 @@ jobs:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           workingDirectory: fwjita-worker
           command: deploy
-          secrets: |
-            SUBMIT_PASSWORD
         env:
           SUBMIT_PASSWORD: "114514"
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
