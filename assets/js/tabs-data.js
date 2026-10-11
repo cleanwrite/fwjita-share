@@ -1712,5 +1712,22 @@ const tabsData = [
       "name": "������",
       "bilibili": "https://space.bilibili.com/123"
     }
+  },
+  {
+    "id": 96,
+    "title": "���Ը�",
+    "artist": "",
+    "formats": [
+      "gpx"
+    ],
+    "files": {
+      "gpx": "assets/tabs/����/���Ը�/test.gpx"
+    },
+    "category": "����",
+    "song_group": "���Ը�",
+    "contributor": {
+      "name": "������",
+      "bilibili": "https://space.bilibili.com/123"
+    }
   }
 ];
