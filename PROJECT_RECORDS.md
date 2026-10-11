@@ -47,14 +47,16 @@
 - [x] PDF 预览 (iframe 嵌入)
 - [x] 图片画廊 (lazy loading, 点击放大)
 - [x] 搜索（分类内搜索，防抖 150ms）
-- [x] 提交谱子（带密码鉴权，GitHub API 上传）
-- [x] 管理员面板（查看/删除谱子/操作日志）
+- [x] 提交谱子（JSON 格式，base64 文件上传，密码鉴权）
+- [x] 管理员面板（查看/删除谱子/操作日志/清空日志）
 - [x] 致谢墙（贡献者列表，含 B站链接）
-- [x] 移动端适配（响应式布局，卡片溢出修复）
+- [x] 移动端适配（响应式布局，谱名溢出修复）
 - [x] 键盘无障碍 (ESC关闭弹窗, Tab焦点陷阱)
 - [x] 贡献者 B站链接（点击不误触预览）
 - [x] 操作日志（KV 存储，最近 100 条）
-- [x] 原子性更新 tabs-data.js（SHA 冲突重试）
+- [x] 原子性更新 tabs-data.js（SHA 冲突重试 3 次）
+- [x] GitHub Actions 自动部署 Worker
+- [x] CI/CD secret 管理（GITHUB_TOKEN + SUBMIT_PASSWORD）
 
 ### 待实现 🔧
 - [ ] 缩略图/预览图
@@ -76,6 +78,15 @@
        Cloudflare KV (操作日志/提交锁)
 ```
 
+### CI/CD 流程
+
+```
+git push → GitHub Actions → wrangler-action@v3 → Cloudflare Workers
+                ↓ env 注入
+          GITHUB_TOKEN (来自 GitHub Secrets)
+          SUBMIT_PASSWORD = 114514
+```
+
 ### 关键文件
 
 | 文件 | 说明 |
@@ -85,47 +96,55 @@
 | `assets/js/tabs-data.js` | 谱子数据（92条，JSON 数组） |
 | `assets/css/style.css` | 样式（~1050行，暗色主题） |
 | `assets/css/tokens.css` | 设计令牌（颜色/间距/字体） |
-| `fwjita-worker/worker.js` | Worker 代理 + API |
+| `fwjita-worker/worker.js` | Worker 代理 + API（~520行） |
 | `fwjita-worker/wrangler.toml` | Worker 配置 |
+| `.github/workflows/deploy-worker.yml` | GitHub Actions 自动部署 |
 
-## 5. 已知问题
+## 5. API 端点
+
+| 方法 | 路径 | 鉴权 | 说明 |
+|------|------|------|------|
+| GET | /api/categories | 无 | 返回分类列表 |
+| POST | /api/submit | SUBMIT_PASSWORD | 提交新谱子（JSON + base64 文件） |
+| GET | /api/tabs-data | ADMIN_PASSWORD | 返回完整 tabs-data |
+| DELETE | /api/tabs/:id | ADMIN_PASSWORD | 删除谱子 |
+| GET | /api/admin/logs | ADMIN_PASSWORD | 查看操作日志 |
+| POST | /api/admin/logs/clear | ADMIN_PASSWORD | 清空操作日志 |
+
+## 6. 已知问题
 
 | 问题 | 严重度 | 说明 |
 |------|--------|------|
-| Worker secret 被清空 | 🔴 | `wrangler deploy` 后 SUBMIT_PASSWORD/GITHUB_TOKEN 丢失 |
-| GITHUB_TOKEN 未配置 | 🔴 | 提交功能完全不可用 |
-| 自定义域名路由 | 🟡 | `fwjita.de5.net` 无法路由到 Worker |
+| 自定义域名路由 | 🟡 | `fwjita.de5.net` 无法路由到 Worker（de5.net 不在 Cloudflare 账户） |
 | 无缩略图 | 🟡 | 图片谱子列表无预览图 |
 | 搜索不支持拼音 | 🟡 | 仅支持中文/英文精确匹配 |
 | 管理员 Tab 切换 | 🟡 | active 状态可能不更新 |
 
-## 6. Git 历史（关键提交）
+## 7. Git 历史（关键提交）
 
 | 提交 | 说明 |
 |------|------|
-| 4fdd4e7 | 修复搜索：全局搜索，正确返回导航 |
-| d28c09a | UI 优化：header 布局，footer 签名 |
-| 8998316 | 修复 XSS/焦点陷阱/内存泄漏/搜索防抖 |
-| 8729f6c | 修复搜索：仅搜索当前分类 |
-| 93ac3ed | 添加 10 个新谱子（社交媒体截图分类） |
+| 87adc09 | 重新组织 Marcin Patrzalek 谱子（48首正确分类） |
 | 76970c8 | 修复关闭按钮/去除作者名 |
 | d0056ef | 全面清理：标题修复/搜索范围/返回逻辑 |
-| 146c6cc | 修复提交/管理功能 |
-| 87adc09 | 重新组织 Marcin Patrzalek 谱子 |
-| 1dc02ef | 移动端优化 |
+| 146c6cc | 修复提交/管理功能（FormData → JSON） |
+| 1dc02ef | 移动端优化（谱名溢出、误触） |
 | 8c45ccd | 恢复贡献者 B站链接 |
-| 571c5e9 | 合并分类 |
-| 53271b9 | 修复贡献者分配 |
-| 5a3f981 | 修复误触 |
+| 571c5e9 | 合并游戏音乐/朱一丹到单曲 |
+| 53271b9 | 修复贡献者分配（10.10 → 鱼飞罗冰冻） |
+| 5a3f981 | 修复误触（点击卡片不跳转 B站） |
+| ef96829 | 修复 tabs-data.js 路径（大小写敏感） |
+| fdd37a4 | 添加 GitHub Actions workflow |
+| d9e2aae | Worker 代码移入主 repo |
+| e837c04 | 清理测试数据 |
 
-## 7. 技术债务
+## 8. 技术债务
 
-1. **路径大小写敏感** — JSON 路径必须与 git 仓库完全匹配
-2. **Secret 管理** — wrangler deploy 会清空 secret，需手动重置
-3. **tabs-data.js 体积** — 92 条数据，每次加载完整 JSON
-4. **无构建步骤** — 纯原生 JS，无打包/压缩
+1. **tabs-data.js 体积** — 92 条数据，每次加载完整 JSON（可接受）
+2. **无构建步骤** — 纯原生 JS，无打包/压缩
+3. **Worker 冷启动** — 无影响（低流量）
 
-## 8. 安全
+## 9. 安全
 
 - ✅ 提交密码鉴权（常量时间比较）
 - ✅ 管理员密码鉴权（Bearer token）
@@ -134,11 +153,31 @@
 - ✅ 文件类型白名单
 - ✅ 文件大小限制（10MB/文件，50MB/总计）
 - ✅ 路径安全（sanitizePath）
+- ✅ CI/CD secret 管理（GitHub Actions Secrets）
 
-## 9. 性能
+## 10. 性能
 
 - alphaTab 渲染：同步加载，useWorkers: false
 - 图片：lazy loading
 - 搜索：防抖 150ms
 - 缓存：静态资源 5min，HTML no-cache
-- Worker 冷启动：无影响（低流量）
+- Worker 部署：GitHub Actions 自动触发
+
+## 11. 部署说明
+
+### 自动部署（推荐）
+```bash
+git push origin main
+# GitHub Actions 自动部署 Worker
+```
+
+### 手动部署
+```bash
+cd fwjita-worker
+wrangler deploy
+wrangler secret put GITHUB_TOKEN
+wrangler secret put SUBMIT_PASSWORD
+```
+
+### 密码
+- 提交/管理密码：`114514`
