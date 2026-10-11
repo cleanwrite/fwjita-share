@@ -1,0 +1,14 @@
+name = "fwjita-share"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+# KV namespace for submit locking and admin logs
+[[kv_namespaces]]
+binding = "KV_LOCK"
+id = "105d453a7ce347968875f044486a9bfd"
+
+# Secrets (set via: wrangler secret put KEY)
+# SUBMIT_PASSWORD  - 提交密码
+# ADMIN_PASSWORD   - 管理密码（可选，默认同 SUBMIT_PASSWORD）
+# GITHUB_TOKEN     - GitHub Personal Access Token (repo scope)
