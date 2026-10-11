@@ -837,7 +837,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Aerials/system_of_a_down-aerials_solo_acoustic_guitar_cover.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/AERIALS/system_of_a_down-aerials_solo_acoustic_guitar_cover.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Aerials",
@@ -888,7 +888,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Asturias/ASTURIAS_-_Marcin_Patrzalek_Guitar_Tab.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/ASTURIAS/ASTURIAS_-_Marcin_Patrzalek_Guitar_Tab.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Asturias",
@@ -922,7 +922,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Baba Yaga/BABA_YAGA_-_Marcin_Patrzalek_TAB.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/BABA YAGA/BABA_YAGA_-_Marcin_Patrzalek_TAB.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Baba Yaga",
@@ -973,7 +973,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Beethoven 5th Symphony/BEETHOVEN_5TH_-_Marcin_Patrzalek_GP.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/BEETHOVEN 5TH SYMPHONY/BEETHOVEN_5TH_-_Marcin_Patrzalek_GP.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Beethoven 5th Symphony",
@@ -1058,7 +1058,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/For The Sleep/FOR THE SLEEP - Marcin Patrzalek (Guitar Tab).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/FOR THE SLEEP/FOR THE SLEEP - Marcin Patrzalek (Guitar Tab).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "For The Sleep",
@@ -1092,7 +1092,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Hush/HUSH - Marcin Patrzalek (Guitar Tab).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/HUSH/HUSH - Marcin Patrzalek (Guitar Tab).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Hush",
@@ -1109,7 +1109,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Industry Baby/Industry Baby - Marcin (Max Martinez Tab).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/INDUSTRY BABY/Industry Baby - Marcin (Max Martinez Tab).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Industry Baby",
@@ -1177,7 +1177,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Loco Contigo/Loco Contigo PATREON - Marcin (TAB).gp"
+      "gp": "assets/tabs/Marcin Patrzalek/LOCO CONTIGO/Loco Contigo PATREON - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Loco Contigo",
@@ -1194,7 +1194,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Master of Puppets/MASTER OF PUPPETS_solo_acoustic_guitar.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/MASTER OF PUPPETS/MASTER OF PUPPETS_solo_acoustic_guitar.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Master of Puppets",
@@ -1245,7 +1245,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Mission Impossible/mission_impossible_missiya_nevyipolnima-main_theme_solo_acoustic_guitar.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/MISSION IMPOSSIBLE/mission_impossible_missiya_nevyipolnima-main_theme_solo_acoustic_guitar.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Mission Impossible",
@@ -1381,7 +1381,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Salt/SALT - Marcin Patrzalek (Guitar Tab).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/SALT/SALT - Marcin Patrzalek (Guitar Tab).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Salt",
@@ -1432,7 +1432,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Snow Monkey/SNOW_MONKEY_-_Marcin_TAB.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/SNOW MONKEY/SNOW_MONKEY_-_Marcin_TAB.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Snow Monkey",
@@ -1466,7 +1466,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Storm/STORM_-_Marcin_Patrzalek_Guitar_Tab.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/STORM/STORM_-_Marcin_Patrzalek_Guitar_Tab.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Storm",
@@ -1483,7 +1483,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Sweet Dreams/Sweet Dreams - Marcin (TAB).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/SWEET DREAMS/Sweet Dreams - Marcin (TAB).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Sweet Dreams",
@@ -1500,7 +1500,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Take On Me/Take On Me - Marcin (Max Martinez Tab).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/TAKE ON ME/Take On Me - Marcin (Max Martinez Tab).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Take On Me",
@@ -1517,7 +1517,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Tapping Arpeggios Patreon/Tapping_Arpeggios_Patreon.gp"
+      "gp": "assets/tabs/Marcin Patrzalek/TAPPING ARPEGGIOS PATREON/Tapping_Arpeggios_Patreon.gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Tapping Arpeggios Patreon",
@@ -1534,7 +1534,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Time Carries Me/2_Time_Carries_Me_-_Marcin_TAB.gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/TIME CARRIES ME/2_Time_Carries_Me_-_Marcin_TAB.gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Time Carries Me",
@@ -1585,7 +1585,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Toxicity/TOXICITY- Marcin Patrzalek (Solo Guitar Arrangement).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/TOXICITY/TOXICITY- Marcin Patrzalek (Solo Guitar Arrangement).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Toxicity",
