@@ -325,11 +325,6 @@ header {
   color: var(--c-accent);
 }
 
-.card-contributor {
-  font-size: var(--fs-xs);
-  color: var(--c-accent);
-}
-
 .formats {
   display: flex;
   gap: var(--sp-1);
@@ -565,6 +560,17 @@ header {
 .contributor-name-text {
   color: var(--c-accent);
   font-weight: var(--fw-medium);
+}
+
+.card-contributor {
+  font-size: var(--fs-xs);
+  color: var(--c-accent);
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
+.card-contributor:hover {
+  text-decoration: underline;
 }
 
 /* ===== 许愿弹窗 ===== */

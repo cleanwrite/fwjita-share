@@ -181,9 +181,14 @@
       var versionCount = versions.length;
       var formats = [];
       versions.forEach(function (t) { t.formats.forEach(function (f) { if (formats.indexOf(f) === -1) formats.push(f); }); });
-      var contrib = versions[0].contributor
-        ? '<span class="card-contributor">' + escapeHtml(versions[0].contributor.name || '匿名') + '</span>'
-        : '';
+      var contrib = '';
+      if (versions[0].contributor) {
+        var cname = escapeHtml(versions[0].contributor.name || '匿名');
+        var curl = versions[0].contributor.bilibili || versions[0].contributor.url;
+        contrib = curl
+          ? '<a href="' + curl + '" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">' + cname + '</a>'
+          : '<span class="card-contributor">' + cname + '</span>';
+      }
 
       if (versionCount === 1) {
         var tab = versions[0];
@@ -222,9 +227,14 @@
     }
 
     container.innerHTML = versions.map(function (tab) {
-      var contrib = tab.contributor
-        ? '<span class="card-contributor">' + escapeHtml(tab.contributor.name || '匿名') + '</span>'
-        : '';
+      var contrib = '';
+      if (tab.contributor) {
+        var cname2 = escapeHtml(tab.contributor.name || '匿名');
+        var curl2 = tab.contributor.bilibili || tab.contributor.url;
+        contrib = curl2
+          ? '<a href="' + curl2 + '" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">' + cname2 + '</a>'
+          : '<span class="card-contributor">' + cname2 + '</span>';
+      }
       return '<div class="tab-card version-card" data-id="' + tab.id + '" role="button" tabindex="0">' +
         '<div class="card-info"><h3>' + escapeHtml(tab.title) + '</h3>' +
         '<div class="card-meta-row">' + (contrib ? '<span>·</span>' + contrib : '') + '</div></div>' +
@@ -289,7 +299,9 @@
     var contributorHtml = '';
     if (tab.contributor) {
       var name = tab.contributor.name || tab.contributor.uid || '匿名';
-      contributorHtml = '<div class="contributor-tag">感谢 <span class="contributor-name-text">' + escapeHtml(name) + '</span> 提供谱子</div>';
+      var curl = tab.contributor.bilibili || tab.contributor.url;
+      var cname = escapeHtml(name);
+      contributorHtml = '<div class="contributor-tag">感谢 ' + (curl ? '<a href="' + curl + '" target="_blank" rel="noopener">' + cname + '</a>' : '<span class="contributor-name-text">' + cname + '</span>') + ' 提供谱子</div>';
     }
     document.getElementById('modal-contributor').innerHTML = contributorHtml;
 
