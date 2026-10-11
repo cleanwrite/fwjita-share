@@ -1661,5 +1661,22 @@ const tabsData = [
       "name": "鱼飞罗冰冻",
       "bilibili": "https://space.bilibili.com/3461580647827891"
     }
+  },
+  {
+    "id": 93,
+    "title": "���Ը���",
+    "artist": "",
+    "formats": [
+      "gpx"
+    ],
+    "files": {
+      "gpx": "assets/tabs/���Է���/���Ը���/test.gpx"
+    },
+    "category": "���Է���",
+    "song_group": "���Ը���",
+    "contributor": {
+      "name": "������",
+      "bilibili": "https://space.bilibili.com/123"
+    }
   }
 ];
