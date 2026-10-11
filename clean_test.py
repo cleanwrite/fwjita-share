@@ -8,7 +8,7 @@ with open('assets/js/tabs-data.js', 'r', encoding='utf-8') as f:
     content = f.read()
 data = json.loads(content[content.index('['):content.rindex(']')+1])
 
-# Remove test entries
+# Remove test entries (category or title contains 测试)
 original_count = len(data)
 data = [item for item in data if '测试' not in item['title'] and '测试' not in item['category'] and '测试' not in item['song_group']]
 
