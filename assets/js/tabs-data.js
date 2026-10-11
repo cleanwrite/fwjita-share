@@ -587,7 +587,7 @@ const tabsData = [
     "files": {
       "pdf": "assets/tabs/求生之路 dead center/求生之路 dead center.pdf"
     },
-    "category": "游戏音乐",
+    "category": "单曲",
     "song_group": "Dead Center (求生之路)",
     "contributor": {
       "name": "fw",
@@ -604,7 +604,7 @@ const tabsData = [
     "files": {
       "pdf": "assets/tabs/美丽的搭档（朱一丹的枯燥生活背景音乐/美丽的搭档.pdf"
     },
-    "category": "朱一丹",
+    "category": "单曲",
     "song_group": "美丽的搭档",
     "contributor": {
       "name": "fw",
