@@ -8,7 +8,7 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/Are you lostï¼åªæç¬¬ä¸é¢qwqï¼/are you lost/are you lost.png"
+        "assets/tabs/Are you lost（只有第一面qwq）/are you lost/are you lost.png"
       ]
     },
     "category": "单曲",
@@ -27,7 +27,7 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/Are you lostï¼åªæç¬¬ä¸é¢qwqï¼/are you lostï¼/are you lostï¼è¶ç®ç.png"
+        "assets/tabs/Are you lost（只有第一面qwq）/are you lost（/are you lost（超简版.png"
       ]
     },
     "category": "单曲",
@@ -46,15 +46,15 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/Revolution(å¤§æ é³ä¹/revolution (1).jpg",
-        "assets/tabs/Revolution(å¤§æ é³ä¹/revolution (2).jpg",
-        "assets/tabs/Revolution(å¤§æ é³ä¹/revolution (3).jpg",
-        "assets/tabs/Revolution(å¤§æ é³ä¹/revolution (4).jpg",
-        "assets/tabs/Revolution(å¤§æ é³ä¹/revolution (5).jpg",
-        "assets/tabs/Revolution(å¤§æ é³ä¹/revolution (6).jpg",
-        "assets/tabs/Revolution(å¤§æ é³ä¹/revolution (7).jpg",
-        "assets/tabs/Revolution(å¤§æ é³ä¹/revolution (8).jpg",
-        "assets/tabs/Revolution(å¤§æ é³ä¹/revolution (9).jpg"
+        "assets/tabs/Revolution(大树音乐/revolution (1).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (2).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (3).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (4).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (5).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (6).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (7).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (8).jpg",
+        "assets/tabs/Revolution(大树音乐/revolution (9).jpg"
       ]
     },
     "category": "大树音乐屋",
@@ -73,12 +73,12 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/River flows in youï¼åå­åä»/1 (1).jpg",
-        "assets/tabs/River flows in youï¼åå­åä»/1 (2).jpg",
-        "assets/tabs/River flows in youï¼åå­åä»/1 (3).jpg",
-        "assets/tabs/River flows in youï¼åå­åä»/1 (4).jpg",
-        "assets/tabs/River flows in youï¼åå­åä»/1 (5).jpg",
-        "assets/tabs/River flows in youï¼åå­åä»/1 (6).jpg"
+        "assets/tabs/River flows in you（元子吉他/1 (1).jpg",
+        "assets/tabs/River flows in you（元子吉他/1 (2).jpg",
+        "assets/tabs/River flows in you（元子吉他/1 (3).jpg",
+        "assets/tabs/River flows in you（元子吉他/1 (4).jpg",
+        "assets/tabs/River flows in you（元子吉他/1 (5).jpg",
+        "assets/tabs/River flows in you（元子吉他/1 (6).jpg"
       ]
     },
     "category": "元子吉他",
@@ -152,8 +152,8 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/undertale/(ut)his theme/his theme/his themeï¼1.jpg",
-        "assets/tabs/undertale/(ut)his theme/his theme/his themeï¼2.jpg"
+        "assets/tabs/undertale/(ut)his theme/his theme/his theme（1.jpg",
+        "assets/tabs/undertale/(ut)his theme/his theme/his theme（2.jpg"
       ]
     },
     "category": "undertale",
@@ -172,7 +172,7 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/undertale/(ut)his theme/ä¹æ¯his theme/ä¹æ¯his theme.png"
+        "assets/tabs/undertale/(ut)his theme/也是his theme/也是his theme.png"
       ]
     },
     "category": "undertale",
@@ -191,7 +191,7 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/undertale/(ut)his theme/è¿æ¯his themeï¼ï¼/è¿æ¯his themeï¼ï¼.png"
+        "assets/tabs/undertale/(ut)his theme/还是his theme（？/还是his theme（？.png"
       ]
     },
     "category": "undertale",
@@ -210,8 +210,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/undertale/Asgore[è¿åä½æ¯æç¹é¾/Asgore.pdf",
-      "gpx": "assets/tabs/undertale/Asgore[è¿åä½æ¯æç¹é¾/Asgore.gpx"
+      "pdf": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.pdf",
+      "gpx": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.gpx"
     },
     "category": "undertale",
     "song_group": "Asgore",
@@ -284,8 +284,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/undertale/Shanghaivaniaï¼æåçè²å½©è¿æ¯å¥ç©ææ¥çï¼åäººé³ä¹åæ­£/Shanghaivania.pdf",
-      "gpx": "assets/tabs/undertale/Shanghaivaniaï¼æåçè²å½©è¿æ¯å¥ç©ææ¥çï¼åäººé³ä¹åæ­£/Shanghaivania.gp"
+      "pdf": "assets/tabs/undertale/Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正/Shanghaivania.pdf",
+      "gpx": "assets/tabs/undertale/Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正/Shanghaivania.gp"
     },
     "category": "undertale",
     "song_group": "Shanghaivania",
@@ -360,8 +360,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/undertale/Tokyovania(ä¹æ¯åäººï¼ï¼Undertronic Remix/Tokyovaniaï¼Undertronic Remixï¼gtp.pdf",
-      "gpx": "assets/tabs/undertale/Tokyovania(ä¹æ¯åäººï¼ï¼Undertronic Remix/Tokyovaniaï¼Undertronic Remixï¼gtp.gp"
+      "pdf": "assets/tabs/undertale/Tokyovania(也是同人）（Undertronic Remix/Tokyovania（Undertronic Remix）gtp.pdf",
+      "gpx": "assets/tabs/undertale/Tokyovania(也是同人）（Undertronic Remix/Tokyovania（Undertronic Remix）gtp.gp"
     },
     "category": "undertale",
     "song_group": "Tokyovania (Undertronic Remix)",
@@ -379,8 +379,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/ä¸ä½ åå¨/åä¸åå¯» - ä¸ä½ åå¨(Always With Me)(æå¼¹ç).pdf",
-      "gpx": "assets/tabs/ä¸ä½ åå¨/Always With Me(ä¸ä½ åå¨).gp5"
+      "pdf": "assets/tabs/与你同在/千与千寻 - 与你同在(Always With Me)(指弹版).pdf",
+      "gpx": "assets/tabs/与你同在/Always With Me(与你同在).gp5"
     },
     "category": "千与千寻",
     "song_group": "与你同在",
@@ -398,7 +398,7 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/å¶ä»ï¼æå¿äºåå­å¥ç/ç¥éåå­å¯ä»¥åæè¯´ä¸å£°.png"
+        "assets/tabs/其他（我忘了名字啥的/知道名字可以和我说一声.png"
       ]
     },
     "category": "单曲",
@@ -416,7 +416,7 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/å³ä¼¦æ¯åçÃçº¯ææ´»æ³¼å°å§å¨ï¼æ··åè°±/Merry Cristmas,Miss Cirno.pdf"
+      "pdf": "assets/tabs/劳伦斯先生×纯情活泼小姑娘（混合谱/Merry Cristmas,Miss Cirno.pdf"
     },
     "category": "单曲",
     "song_group": "劳伦斯先生×纯情活泼小姑娘",
@@ -434,9 +434,9 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/åä» - è«æä¹¡/1.jpg",
-        "assets/tabs/åä» - è«æä¹¡/2.jpg",
-        "assets/tabs/åä» - è«æä¹¡/3.jpg"
+        "assets/tabs/吉他 - 莫愁乡/1.jpg",
+        "assets/tabs/吉他 - 莫愁乡/2.jpg",
+        "assets/tabs/吉他 - 莫愁乡/3.jpg"
       ]
     },
     "category": "单曲",
@@ -455,7 +455,7 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/å°ææ­/021950r8ukrbatuvryvz88.webp"
+        "assets/tabs/小情歌/021950r8ukrbatuvryvz88.webp"
       ]
     },
     "category": "单曲",
@@ -474,7 +474,7 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/æç±å¾ªç¯/æç±å¾ªç¯.jpeg"
+        "assets/tabs/恋爱循环/恋爱循环.jpeg"
       ]
     },
     "category": "单曲",
@@ -493,7 +493,7 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/æçä¸ç/haggstorm/haggstorm.jpg"
+        "assets/tabs/我的世界/haggstorm/haggstorm.jpg"
       ]
     },
     "category": "我的世界",
@@ -512,8 +512,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/ææ¥æ¹è/Requiemï¼éæEP/Requiem.pdf",
-      "gpx": "assets/tabs/ææ¥æ¹è/Requiemï¼éæEP/Requiem.gpx"
+      "pdf": "assets/tabs/明日方舟/Requiem（霜星EP/Requiem.pdf",
+      "gpx": "assets/tabs/明日方舟/Requiem（霜星EP/Requiem.gpx"
     },
     "category": "明日方舟",
     "song_group": "Requiem",
@@ -531,8 +531,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/ææ¥æ¹è/æ¥å¼¦/æ¥å¼¦.pdf",
-      "gpx": "assets/tabs/ææ¥æ¹è/æ¥å¼¦/æ¥å¼¦.gpx"
+      "pdf": "assets/tabs/明日方舟/春弦/春弦.pdf",
+      "gpx": "assets/tabs/明日方舟/春弦/春弦.gpx"
     },
     "category": "明日方舟",
     "song_group": "春弦",
@@ -549,7 +549,7 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/æ´å¤©/æ´å¤©_1777565102341.pdf"
+      "pdf": "assets/tabs/晴天/晴天_1777565102341.pdf"
     },
     "category": "单曲",
     "song_group": "晴天",
@@ -567,8 +567,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/æ¬¢ä¹é¢/æ¬¢ä¹é¢.pdf",
-      "gpx": "assets/tabs/æ¬¢ä¹é¢/æ¬¢ä¹é¢.gpx"
+      "pdf": "assets/tabs/欢乐颂/欢乐颂.pdf",
+      "gpx": "assets/tabs/欢乐颂/欢乐颂.gpx"
     },
     "category": "单曲",
     "song_group": "欢乐颂",
@@ -585,7 +585,7 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/æ±çä¹è·¯ dead center/æ±çä¹è·¯ dead center.pdf"
+      "pdf": "assets/tabs/求生之路 dead center/求生之路 dead center.pdf"
     },
     "category": "游戏音乐",
     "song_group": "Dead Center (求生之路)",
@@ -602,7 +602,7 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/ç¾ä¸½çæ­æ¡£ï¼æ±ä¸ä¸¹çæ¯ç¥çæ´»èæ¯é³ä¹/ç¾ä¸½çæ­æ¡£.pdf"
+      "pdf": "assets/tabs/美丽的搭档（朱一丹的枯燥生活背景音乐/美丽的搭档.pdf"
     },
     "category": "朱一丹",
     "song_group": "美丽的搭档",
@@ -620,10 +620,10 @@ const tabsData = [
     ],
     "files": {
       "images": [
-        "assets/tabs/è¯´è°çé©¬å¡é¾/è¯´è°çé©¬å¡é¾ (1).png",
-        "assets/tabs/è¯´è°çé©¬å¡é¾/è¯´è°çé©¬å¡é¾ (2).png",
-        "assets/tabs/è¯´è°çé©¬å¡é¾/è¯´è°çé©¬å¡é¾ (3).png",
-        "assets/tabs/è¯´è°çé©¬å¡é¾/è¯´è°çé©¬å¡é¾ (4).png"
+        "assets/tabs/说谎的马卡龙/说谎的马卡龙 (1).png",
+        "assets/tabs/说谎的马卡龙/说谎的马卡龙 (2).png",
+        "assets/tabs/说谎的马卡龙/说谎的马卡龙 (3).png",
+        "assets/tabs/说谎的马卡龙/说谎的马卡龙 (4).png"
       ]
     },
     "category": "单曲",
@@ -641,7 +641,7 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/éææ²³/Just two of us.pdf"
+      "pdf": "assets/tabs/郑晟河/Just two of us.pdf"
     },
     "category": "郑晟河",
     "song_group": "Just two of us",
@@ -659,8 +659,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/é£ä¹è¯/é£ä¹è¯.pdf",
-      "gpx": "assets/tabs/é£ä¹è¯/é£ä¹è¯.gpx"
+      "pdf": "assets/tabs/风之诗/风之诗.pdf",
+      "gpx": "assets/tabs/风之诗/风之诗.gpx"
     },
     "category": "单曲",
     "song_group": "风之诗",
@@ -678,8 +678,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/é»éä¹é£/é»éä¹é£.pdf",
-      "gpx": "assets/tabs/é»éä¹é£/é»éä¹é£.gpx"
+      "pdf": "assets/tabs/黄金之风/黄金之风.pdf",
+      "gpx": "assets/tabs/黄金之风/黄金之风.gpx"
     },
     "category": "单曲",
     "song_group": "黄金之风",
@@ -697,8 +697,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/é»æä¹é­ï¼blacksouls/åæ¢¦çäººå¶ï¼ä¸é³å¬å­èæ ¼æ/åæ¢¦çäººå¶.pdf",
-      "gpx": "assets/tabs/é»æä¹é­ï¼blacksouls/åæ¢¦çäººå¶ï¼ä¸é³å¬å­èæ ¼æ/åæ¢¦çäººå¶.gp5"
+      "pdf": "assets/tabs/黑暗之魂（blacksouls/做梦的人偶（三音听哭老格林/做梦的人偶.pdf",
+      "gpx": "assets/tabs/黑暗之魂（blacksouls/做梦的人偶（三音听哭老格林/做梦的人偶.gp5"
     },
     "category": "黑暗之魂",
     "song_group": "做梦的人偶",
@@ -716,8 +716,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/é»æä¹é­ï¼blacksouls/æ´é¡ç«ï¼åµå/æ´é¡ç«.pdf",
-      "gpx": "assets/tabs/é»æä¹é­ï¼blacksouls/æ´é¡ç«ï¼åµå/æ´é¡ç«ï¼å¥½åæåäº.gpx"
+      "pdf": "assets/tabs/黑暗之魂（blacksouls/柴郡猫（喵呜/柴郡猫.pdf",
+      "gpx": "assets/tabs/黑暗之魂（blacksouls/柴郡猫（喵呜/柴郡猫（好像损坏了.gpx"
     },
     "category": "黑暗之魂",
     "song_group": "柴郡猫",
@@ -734,7 +734,7 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/ï¼å¯èé¸£æ³£ä¹æ¶ï¼YOU/YOU.pdf"
+      "pdf": "assets/tabs/（寒蝉鸣泣之时）YOU/YOU.pdf"
     },
     "category": "寒蝉鸣泣之时",
     "song_group": "YOU (寒蝉鸣泣之时)",
@@ -1177,7 +1177,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Loco Contigo/Tapping Arpeggios Patreon.gp"
+      "gp": "assets/tabs/Marcin Patrzalek/Loco Contigo/Loco Contigo PATREON - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Loco Contigo",
@@ -1517,7 +1517,7 @@ const tabsData = [
       "gpx"
     ],
     "files": {
-      "gpx": "assets/tabs/Marcin Patrzalek/Tapping Arpeggios Patreon/Tapping_Arpeggios_Patreon.gp"
+      "gp": "assets/tabs/Marcin Patrzalek/Tapping Arpeggios Patreon/Tapping_Arpeggios_Patreon.gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Tapping Arpeggios Patreon",
@@ -1636,7 +1636,7 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/éææ²³/Hotel California (Eagles)/ãçº¯å­çº¿è°±ã(Eagles)Hotel California éææ²³ tab by Kevin.pdf"
+      "pdf": "assets/tabs/郑晟河/Hotel California (Eagles)/【纯六线谱】(Eagles)Hotel California 郑晟河 tab by Kevin.pdf"
     },
     "category": "郑晟河",
     "song_group": "Hotel California (Eagles)",
@@ -1653,7 +1653,7 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "pdf": "assets/tabs/éææ²³/Neon/ãçº¯å­çº¿è°±ãNeon éææ²³ tab by Kevin.pdf"
+      "pdf": "assets/tabs/郑晟河/Neon/【纯六线谱】Neon 郑晟河 tab by Kevin.pdf"
     },
     "category": "郑晟河",
     "song_group": "Neon",
