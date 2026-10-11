@@ -106,7 +106,9 @@
 
     container.innerHTML = categories.map(function (cat) {
       var tabs = grouped[cat];
-      var gpxCount = tabs.filter(function (t) { return t.formats.includes('gpx'); }).length;
+      var gpxCount = tabs.filter(function (t) {
+        return t.formats.some(function (f) { return ['gp','gp3','gp4','gp5','gp7','gp8','gpx'].indexOf(f) !== -1; });
+      }).length;
       var pdfCount = tabs.filter(function (t) { return t.formats.includes('pdf'); }).length;
       var imgCount = tabs.filter(function (t) { return t.files.images; }).length;
 
@@ -291,7 +293,13 @@
     }
     document.getElementById('modal-contributor').innerHTML = contributorHtml;
 
-    var hasGpx = tab.formats.includes('gpx') && tab.files.gpx;
+    // GPX 家族：gp/gp3/gp4/gp5/gp7/gp8/gpx 都是 Guitar Pro 文件
+    var GPX_FORMATS = ['gp', 'gp3', 'gp4', 'gp5', 'gp7', 'gp8', 'gpx'];
+    var gpxFile = null;
+    for (var gi = 0; gi < GPX_FORMATS.length; gi++) {
+      if (tab.files[GPX_FORMATS[gi]]) { gpxFile = tab.files[GPX_FORMATS[gi]]; break; }
+    }
+    var hasGpx = !!gpxFile;
     var hasPdf = tab.formats.includes('pdf') && tab.files.pdf;
     var hasImages = tab.files.images && tab.files.images.length > 0;
     var hasMultiple = (hasGpx && hasPdf) || (hasGpx && hasImages) || (hasPdf && hasImages);
@@ -313,7 +321,10 @@
 
   function renderPreviewModeSelector(tab, body) {
     var modes = [];
-    if (tab.files.gpx) modes.push({ key: 'gpx', label: '乐谱' });
+    var GPX_FORMATS = ['gp', 'gp3', 'gp4', 'gp5', 'gp7', 'gp8', 'gpx'];
+    for (var gi = 0; gi < GPX_FORMATS.length; gi++) {
+      if (tab.files[GPX_FORMATS[gi]]) { modes.push({ key: 'gpx', label: '乐谱' }); break; }
+    }
     if (tab.files.pdf) modes.push({ key: 'pdf', label: 'PDF' });
     if (tab.files.images && tab.files.images.length > 0) modes.push({ key: 'images', label: '图片' });
 
@@ -337,24 +348,34 @@
     });
 
     var content = document.getElementById('preview-content');
-    if (mode === 'gpx') renderGpxPreview(tab, content);
-    else if (mode === 'pdf') renderPdfPreview(tab, content);
-    else if (mode === 'images') renderImagesPreview(tab, content);
+    if (mode === 'gpx') { renderGpxPreview(tab, content); }
+    else if (mode === 'pdf') { renderPdfPreview(tab, content); }
+    else if (mode === 'images') { renderImagesPreview(tab, content); }
+  }
+
+  function getGpxFile(tab) {
+    var GPX_FORMATS = ['gp', 'gp3', 'gp4', 'gp5', 'gp7', 'gp8', 'gpx'];
+    for (var gi = 0; gi < GPX_FORMATS.length; gi++) {
+      if (tab.files[GPX_FORMATS[gi]]) return tab.files[GPX_FORMATS[gi]];
+    }
+    return null;
   }
 
   function renderGpxPreview(tab, container) {
-    var gpxFilename = tab.files.gpx.split('/').pop();
+    var gpxFile = getGpxFile(tab);
+    if (!gpxFile) return;
+    var gpxFilename = gpxFile.split('/').pop();
     container.innerHTML = '<div class="player-controls">' +
       '<button onclick="window._playerPlay()">▶ 播放</button>' +
       '<button onclick="window._playerPause()">⏸ 暂停</button>' +
       '<button onclick="window._playerStop()">⏹ 停止</button>' +
-      '<a href="' + encodeAssetPath(tab.files.gpx) + '" download="' + escapeHtml(gpxFilename) + '">下载 GPX</a>' +
+      '<a href="' + encodeAssetPath(gpxFile) + '" download="' + escapeHtml(gpxFilename) + '">下载</a>' +
       '<div class="speed-control"><label>速度:</label><input type="range" id="speed-slider" min="25" max="150" value="100" oninput="window._changeSpeed(this.value)"><span id="speed-value">100%</span></div>' +
     '</div>' +
     '<div id="alphaTab-container" class="alpha-tab-container">' +
       '<p class="loading-text">正在加载乐谱...</p>' +
     '</div>';
-    requestAnimationFrame(function () { initAlphaTab(tab.files.gpx); });
+    requestAnimationFrame(function () { initAlphaTab(gpxFile); });
   }
 
   function renderPdfPreview(tab, container) {

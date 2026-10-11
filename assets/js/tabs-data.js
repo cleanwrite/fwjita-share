@@ -97,8 +97,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/Something Just Like This/Something Just Like This.gp",
-      "pdf": "assets/tabs/Something Just Like This/Something Just Like This.pdf"
+      "pdf": "assets/tabs/Something Just Like This/Something Just Like This.pdf",
+      "gpx": "assets/tabs/Something Just Like This/Something Just Like This.gp"
     },
     "category": "单曲",
     "song_group": "Something Just Like This",
@@ -210,8 +210,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.gpx",
-      "pdf": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.pdf"
+      "pdf": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.pdf",
+      "gpx": "assets/tabs/undertale/Asgore[还原但是有点难/Asgore.gpx"
     },
     "category": "undertale",
     "song_group": "Asgore",
@@ -246,8 +246,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/undertale/HOME/Undertale - Home.gp5",
-      "pdf": "assets/tabs/undertale/HOME/Undertale - Home.pdf"
+      "pdf": "assets/tabs/undertale/HOME/Undertale - Home.pdf",
+      "gpx": "assets/tabs/undertale/HOME/Undertale - Home.gp5"
     },
     "category": "undertale",
     "song_group": "HOME",
@@ -265,8 +265,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/undertale/Once Upon a Time_Toby Fox/Once Upon a Time_Toby Fox.gpx",
-      "pdf": "assets/tabs/undertale/Once Upon a Time_Toby Fox/Once Upon a Time_Toby Fox.pdf"
+      "pdf": "assets/tabs/undertale/Once Upon a Time_Toby Fox/Once Upon a Time_Toby Fox.pdf",
+      "gpx": "assets/tabs/undertale/Once Upon a Time_Toby Fox/Once Upon a Time_Toby Fox.gpx"
     },
     "category": "undertale",
     "song_group": "Once Upon a Time_Toby Fox",
@@ -284,8 +284,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/undertale/Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正/Shanghaivania.gp",
-      "pdf": "assets/tabs/undertale/Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正/Shanghaivania.pdf"
+      "pdf": "assets/tabs/undertale/Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正/Shanghaivania.pdf",
+      "gpx": "assets/tabs/undertale/Shanghaivania（最后的色彩还是啥玩意来着，同人音乐反正/Shanghaivania.gp"
     },
     "category": "undertale",
     "song_group": "Shanghaivania",
@@ -303,8 +303,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/undertale/Snowy/Snowy.gp",
-      "pdf": "assets/tabs/undertale/Snowy/Snowy.pdf"
+      "pdf": "assets/tabs/undertale/Snowy/Snowy.pdf",
+      "gpx": "assets/tabs/undertale/Snowy/Snowy.gp"
     },
     "category": "undertale",
     "song_group": "Snowy",
@@ -322,8 +322,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/undertale/Spider Dance/Spider Dance.gpx",
-      "pdf": "assets/tabs/undertale/Spider Dance/Spider Dance.pdf"
+      "pdf": "assets/tabs/undertale/Spider Dance/Spider Dance.pdf",
+      "gpx": "assets/tabs/undertale/Spider Dance/Spider Dance.gpx"
     },
     "category": "undertale",
     "song_group": "Spider Dance",
@@ -341,8 +341,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/undertale/Spooktune/Spooktune.gp",
-      "pdf": "assets/tabs/undertale/Spooktune/Spooktune.pdf"
+      "pdf": "assets/tabs/undertale/Spooktune/Spooktune.pdf",
+      "gpx": "assets/tabs/undertale/Spooktune/Spooktune.gp"
     },
     "category": "undertale",
     "song_group": "Spooktune",
@@ -360,8 +360,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/undertale/Tokyovania(也是同人）（Undertronic Remix/Tokyovania（Undertronic Remix）gtp.gp",
-      "pdf": "assets/tabs/undertale/Tokyovania(也是同人）（Undertronic Remix/Tokyovania（Undertronic Remix）gtp.pdf"
+      "pdf": "assets/tabs/undertale/Tokyovania(也是同人）（Undertronic Remix/Tokyovania（Undertronic Remix）gtp.pdf",
+      "gpx": "assets/tabs/undertale/Tokyovania(也是同人）（Undertronic Remix/Tokyovania（Undertronic Remix）gtp.gp"
     },
     "category": "undertale",
     "song_group": "Tokyovania (Undertronic Remix)",
@@ -379,8 +379,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/与你同在/Always With Me(与你同在).gp5",
-      "pdf": "assets/tabs/与你同在/千与千寻 - 与你同在(Always With Me)(指弹版).pdf"
+      "pdf": "assets/tabs/与你同在/千与千寻 - 与你同在(Always With Me)(指弹版).pdf",
+      "gpx": "assets/tabs/与你同在/Always With Me(与你同在).gp5"
     },
     "category": "单曲",
     "song_group": "与你同在",
@@ -512,8 +512,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/明日方舟/Requiem（霜星EP/Requiem.gpx",
-      "pdf": "assets/tabs/明日方舟/Requiem（霜星EP/Requiem.pdf"
+      "pdf": "assets/tabs/明日方舟/Requiem（霜星EP/Requiem.pdf",
+      "gpx": "assets/tabs/明日方舟/Requiem（霜星EP/Requiem.gpx"
     },
     "category": "明日方舟",
     "song_group": "Requiem",
@@ -531,8 +531,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/明日方舟/春弦/春弦.gpx",
-      "pdf": "assets/tabs/明日方舟/春弦/春弦.pdf"
+      "pdf": "assets/tabs/明日方舟/春弦/春弦.pdf",
+      "gpx": "assets/tabs/明日方舟/春弦/春弦.gpx"
     },
     "category": "明日方舟",
     "song_group": "春弦",
@@ -567,8 +567,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/欢乐颂/欢乐颂.gpx",
-      "pdf": "assets/tabs/欢乐颂/欢乐颂.pdf"
+      "pdf": "assets/tabs/欢乐颂/欢乐颂.pdf",
+      "gpx": "assets/tabs/欢乐颂/欢乐颂.gpx"
     },
     "category": "单曲",
     "song_group": "欢乐颂",
@@ -659,8 +659,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/风之诗/风之诗.gpx",
-      "pdf": "assets/tabs/风之诗/风之诗.pdf"
+      "pdf": "assets/tabs/风之诗/风之诗.pdf",
+      "gpx": "assets/tabs/风之诗/风之诗.gpx"
     },
     "category": "单曲",
     "song_group": "风之诗",
@@ -678,8 +678,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/黄金之风/黄金之风.gpx",
-      "pdf": "assets/tabs/黄金之风/黄金之风.pdf"
+      "pdf": "assets/tabs/黄金之风/黄金之风.pdf",
+      "gpx": "assets/tabs/黄金之风/黄金之风.gpx"
     },
     "category": "单曲",
     "song_group": "黄金之风",
@@ -697,8 +697,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/黑暗之魂（blacksouls/做梦的人偶（三音听哭老格林/做梦的人偶.gp5",
-      "pdf": "assets/tabs/黑暗之魂（blacksouls/做梦的人偶（三音听哭老格林/做梦的人偶.pdf"
+      "pdf": "assets/tabs/黑暗之魂（blacksouls/做梦的人偶（三音听哭老格林/做梦的人偶.pdf",
+      "gpx": "assets/tabs/黑暗之魂（blacksouls/做梦的人偶（三音听哭老格林/做梦的人偶.gp5"
     },
     "category": "黑暗之魂",
     "song_group": "做梦的人偶",
@@ -716,8 +716,8 @@ const tabsData = [
       "pdf"
     ],
     "files": {
-      "gpx": "assets/tabs/黑暗之魂（blacksouls/柴郡猫（喵呜/柴郡猫（好像损坏了.gpx",
-      "pdf": "assets/tabs/黑暗之魂（blacksouls/柴郡猫（喵呜/柴郡猫.pdf"
+      "pdf": "assets/tabs/黑暗之魂（blacksouls/柴郡猫（喵呜/柴郡猫.pdf",
+      "gpx": "assets/tabs/黑暗之魂（blacksouls/柴郡猫（喵呜/柴郡猫（好像损坏了.gpx"
     },
     "category": "黑暗之魂",
     "song_group": "柴郡猫",
@@ -817,10 +817,10 @@ const tabsData = [
     "title": "Advanced Arpeggio Practice",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Advanced Arpeggio Practice/Advanced Arpeggio Practice - Marcin.gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Advanced Arpeggio Practice/Advanced Arpeggio Practice - Marcin.gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Advanced Arpeggio Practice",
@@ -834,10 +834,10 @@ const tabsData = [
     "title": "Aerials",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Aerials/system_of_a_down-aerials_solo_acoustic_guitar_cover.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Aerials/system_of_a_down-aerials_solo_acoustic_guitar_cover.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Aerials",
@@ -851,10 +851,10 @@ const tabsData = [
     "title": "Allergies",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Allergies/Allergies_excerpt-_Marcin.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Allergies/Allergies_excerpt-_Marcin.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Allergies",
@@ -868,10 +868,10 @@ const tabsData = [
     "title": "Alors On Danse",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Alors On Danse/Alors On Danse - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Alors On Danse/Alors On Danse - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Alors On Danse",
@@ -885,10 +885,10 @@ const tabsData = [
     "title": "Asturias",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Asturias/ASTURIAS_-_Marcin_Patrzalek_Guitar_Tab.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Asturias/ASTURIAS_-_Marcin_Patrzalek_Guitar_Tab.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Asturias",
@@ -902,10 +902,10 @@ const tabsData = [
     "title": "Autumn Leaves (Short)",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Autumn Leaves (Short)/Autumn Leaves short - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Autumn Leaves (Short)/Autumn Leaves short - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Autumn Leaves (Short)",
@@ -919,10 +919,10 @@ const tabsData = [
     "title": "Baba Yaga",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Baba Yaga/BABA_YAGA_-_Marcin_Patrzalek_TAB.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Baba Yaga/BABA_YAGA_-_Marcin_Patrzalek_TAB.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Baba Yaga",
@@ -936,10 +936,10 @@ const tabsData = [
     "title": "Back In Black (Short)",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Back In Black (Short)/Back_In_Black_short_-_Marcin_TAB.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Back In Black (Short)/Back_In_Black_short_-_Marcin_TAB.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Back In Black (Short)",
@@ -953,10 +953,10 @@ const tabsData = [
     "title": "Beat It (Short)",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Beat It (Short)/Beat It short - Marcin (TAB).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Beat It (Short)/Beat It short - Marcin (TAB).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Beat It (Short)",
@@ -970,10 +970,10 @@ const tabsData = [
     "title": "Beethoven 5th Symphony",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Beethoven 5th Symphony/BEETHOVEN_5TH_-_Marcin_Patrzalek_GP.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Beethoven 5th Symphony/BEETHOVEN_5TH_-_Marcin_Patrzalek_GP.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Beethoven 5th Symphony",
@@ -987,10 +987,10 @@ const tabsData = [
     "title": "Chopin Nocturne",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Chopin Nocturne/Chopin Nocturne - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Chopin Nocturne/Chopin Nocturne - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Chopin Nocturne",
@@ -1021,10 +1021,10 @@ const tabsData = [
     "title": "Ecstasy of Gold",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Ecstasy of Gold/Ecstasy of Gold TAB.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Ecstasy of Gold/Ecstasy of Gold TAB.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Ecstasy of Gold",
@@ -1038,10 +1038,10 @@ const tabsData = [
     "title": "Fly Me To The Moon",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Fly Me To The Moon/2 Fly Me To The Moon - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Fly Me To The Moon/2 Fly Me To The Moon - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Fly Me To The Moon",
@@ -1055,10 +1055,10 @@ const tabsData = [
     "title": "For The Sleep",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/For The Sleep/FOR THE SLEEP - Marcin Patrzalek (Guitar Tab).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/For The Sleep/FOR THE SLEEP - Marcin Patrzalek (Guitar Tab).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "For The Sleep",
@@ -1072,10 +1072,10 @@ const tabsData = [
     "title": "Giant Steps Solo",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Giant Steps Solo/Giant Steps Solo - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Giant Steps Solo/Giant Steps Solo - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Giant Steps Solo",
@@ -1089,10 +1089,10 @@ const tabsData = [
     "title": "Hush",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Hush/HUSH - Marcin Patrzalek (Guitar Tab).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Hush/HUSH - Marcin Patrzalek (Guitar Tab).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Hush",
@@ -1106,10 +1106,10 @@ const tabsData = [
     "title": "Industry Baby",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Industry Baby/Industry Baby - Marcin (Max Martinez Tab).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Industry Baby/Industry Baby - Marcin (Max Martinez Tab).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Industry Baby",
@@ -1123,10 +1123,10 @@ const tabsData = [
     "title": "Innuendo & Asturias",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Innuendo & Asturias/Innuendo & Asturias - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Innuendo & Asturias/Innuendo & Asturias - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Innuendo & Asturias",
@@ -1140,10 +1140,10 @@ const tabsData = [
     "title": "Kashmir",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Kashmir/1. Kashmir - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Kashmir/1. Kashmir - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Kashmir",
@@ -1157,10 +1157,10 @@ const tabsData = [
     "title": "Layla (Short)",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Layla (Short)/Layla short - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Layla (Short)/Layla short - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Layla (Short)",
@@ -1174,10 +1174,10 @@ const tabsData = [
     "title": "Loco Contigo",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Loco Contigo/Tapping Arpeggios Patreon.gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Loco Contigo/Tapping Arpeggios Patreon.gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Loco Contigo",
@@ -1191,10 +1191,10 @@ const tabsData = [
     "title": "Master of Puppets",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Master of Puppets/MASTER OF PUPPETS_solo_acoustic_guitar.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Master of Puppets/MASTER OF PUPPETS_solo_acoustic_guitar.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Master of Puppets",
@@ -1208,10 +1208,10 @@ const tabsData = [
     "title": "Megalovania",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Megalovania/Megalovania - Marcin (TAB).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Megalovania/Megalovania - Marcin (TAB).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Megalovania",
@@ -1225,10 +1225,10 @@ const tabsData = [
     "title": "Misirlou",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Misirlou/Misirlou short - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Misirlou/Misirlou short - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Misirlou",
@@ -1242,10 +1242,10 @@ const tabsData = [
     "title": "Mission Impossible",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Mission Impossible/mission_impossible_missiya_nevyipolnima-main_theme_solo_acoustic_guitar.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Mission Impossible/mission_impossible_missiya_nevyipolnima-main_theme_solo_acoustic_guitar.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Mission Impossible",
@@ -1276,10 +1276,10 @@ const tabsData = [
     "title": "Nothing Else Matters (Short)",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Nothing Else Matters (Short)/Nothing Else Matters (Short) - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Nothing Else Matters (Short)/Nothing Else Matters (Short) - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Nothing Else Matters (Short)",
@@ -1293,10 +1293,10 @@ const tabsData = [
     "title": "Paganini Caprice 24",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Paganini Caprice 24/2_PAGANINI_CAPRICE_24_For_Solo_Guitar_-_Marcin_Patrzalek_GP.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Paganini Caprice 24/2_PAGANINI_CAPRICE_24_For_Solo_Guitar_-_Marcin_Patrzalek_GP.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Paganini Caprice 24",
@@ -1310,10 +1310,10 @@ const tabsData = [
     "title": "Paganini Caprice No.5",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Paganini Caprice No.5/2 Paganini Caprice 5 - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Paganini Caprice No.5/2 Paganini Caprice 5 - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Paganini Caprice No.5",
@@ -1327,10 +1327,10 @@ const tabsData = [
     "title": "Paper Thin Sky",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Paper Thin Sky/PAPER_THIN_SKY_-_Marcin_Patrzalek_Guitar_Tab.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Paper Thin Sky/PAPER_THIN_SKY_-_Marcin_Patrzalek_Guitar_Tab.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Paper Thin Sky",
@@ -1344,10 +1344,10 @@ const tabsData = [
     "title": "Passionfruit",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Passionfruit/1 Passionfruit - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Passionfruit/1 Passionfruit - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Passionfruit",
@@ -1378,10 +1378,10 @@ const tabsData = [
     "title": "Salt",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Salt/SALT - Marcin Patrzalek (Guitar Tab).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Salt/SALT - Marcin Patrzalek (Guitar Tab).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Salt",
@@ -1395,10 +1395,10 @@ const tabsData = [
     "title": "September (Short)",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/September (Short)/September short - Marcin (TAB).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/September (Short)/September short - Marcin (TAB).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "September (Short)",
@@ -1412,10 +1412,10 @@ const tabsData = [
     "title": "Shape of You",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Shape of You/SHAPE_OF_YOU_-_MARCIN_PATRZALEK_TAB.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Shape of You/SHAPE_OF_YOU_-_MARCIN_PATRZALEK_TAB.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Shape of You",
@@ -1429,10 +1429,10 @@ const tabsData = [
     "title": "Snow Monkey",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Snow Monkey/SNOW_MONKEY_-_Marcin_TAB.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Snow Monkey/SNOW_MONKEY_-_Marcin_TAB.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Snow Monkey",
@@ -1446,10 +1446,10 @@ const tabsData = [
     "title": "Still D.R.E",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Still D.R.E/STILL DRE - Marcin Patrzalek (GUITAR PRO).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Still D.R.E/STILL DRE - Marcin Patrzalek (GUITAR PRO).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Still D.R.E",
@@ -1463,10 +1463,10 @@ const tabsData = [
     "title": "Storm",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Storm/STORM_-_Marcin_Patrzalek_Guitar_Tab.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Storm/STORM_-_Marcin_Patrzalek_Guitar_Tab.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Storm",
@@ -1480,10 +1480,10 @@ const tabsData = [
     "title": "Sweet Dreams",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Sweet Dreams/Sweet Dreams - Marcin (TAB).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Sweet Dreams/Sweet Dreams - Marcin (TAB).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Sweet Dreams",
@@ -1497,10 +1497,10 @@ const tabsData = [
     "title": "Take On Me",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Take On Me/Take On Me - Marcin (Max Martinez Tab).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Take On Me/Take On Me - Marcin (Max Martinez Tab).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Take On Me",
@@ -1514,10 +1514,10 @@ const tabsData = [
     "title": "Tapping Arpeggios Patreon",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Tapping Arpeggios Patreon/Tapping_Arpeggios_Patreon.gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Tapping Arpeggios Patreon/Tapping_Arpeggios_Patreon.gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Tapping Arpeggios Patreon",
@@ -1531,10 +1531,10 @@ const tabsData = [
     "title": "Time Carries Me",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/Time Carries Me/2_Time_Carries_Me_-_Marcin_TAB.gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/Time Carries Me/2_Time_Carries_Me_-_Marcin_TAB.gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Time Carries Me",
@@ -1548,10 +1548,10 @@ const tabsData = [
     "title": "Toccata",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Toccata/2 Toccata - Marcin (TAB).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Toccata/2 Toccata - Marcin (TAB).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Toccata",
@@ -1565,10 +1565,10 @@ const tabsData = [
     "title": "Toccata and Fugue in D Minor",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Toccata and Fugue in D Minor/Toccata_And_Fugue_In_D_Minor_-_Marcin.gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Toccata and Fugue in D Minor/Toccata_And_Fugue_In_D_Minor_-_Marcin.gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Toccata and Fugue in D Minor",
@@ -1582,10 +1582,10 @@ const tabsData = [
     "title": "Toxicity",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Toxicity/TOXICITY- Marcin Patrzalek (Solo Guitar Arrangement).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Toxicity/TOXICITY- Marcin Patrzalek (Solo Guitar Arrangement).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Toxicity",
@@ -1599,10 +1599,10 @@ const tabsData = [
     "title": "Untitled Solo",
     "artist": "",
     "formats": [
-      "gp5"
+      "gpx"
     ],
     "files": {
-      "gp5": "assets/tabs/Marcin Patrzalek/Untitled Solo/Untitled Solo - Marcin (TAB).gp5"
+      "gpx": "assets/tabs/Marcin Patrzalek/Untitled Solo/Untitled Solo - Marcin (TAB).gp5"
     },
     "category": "Marcin Patrzalek",
     "song_group": "Untitled Solo",
@@ -1616,10 +1616,10 @@ const tabsData = [
     "title": "What's The Use",
     "artist": "",
     "formats": [
-      "gp"
+      "gpx"
     ],
     "files": {
-      "gp": "assets/tabs/Marcin Patrzalek/What's The Use/What's The Use - Marcin (TAB).gp"
+      "gpx": "assets/tabs/Marcin Patrzalek/What's The Use/What's The Use - Marcin (TAB).gp"
     },
     "category": "Marcin Patrzalek",
     "song_group": "What's The Use",
