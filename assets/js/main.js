@@ -186,7 +186,7 @@
         var cname = escapeHtml(versions[0].contributor.name || '匿名');
         var curl = versions[0].contributor.bilibili || versions[0].contributor.url;
         contrib = curl
-          ? '<a href="' + curl + '" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">' + cname + '</a>'
+          ? '<a href="' + curl + '" target="_blank" rel="noopener" class="card-contributor">' + cname + '</a>'
           : '<span class="card-contributor">' + cname + '</span>';
       }
 
@@ -232,7 +232,7 @@
         var cname2 = escapeHtml(tab.contributor.name || '匿名');
         var curl2 = tab.contributor.bilibili || tab.contributor.url;
         contrib = curl2
-          ? '<a href="' + curl2 + '" target="_blank" rel="noopener" class="card-contributor" onclick="event.stopPropagation()">' + cname2 + '</a>'
+          ? '<a href="' + curl2 + '" target="_blank" rel="noopener" class="card-contributor">' + cname2 + '</a>'
           : '<span class="card-contributor">' + cname2 + '</span>';
       }
       return '<div class="tab-card version-card" data-id="' + tab.id + '" role="button" tabindex="0">' +
@@ -816,6 +816,11 @@
   function bindEvents() {
     // 分类卡片点击
     document.getElementById('tab-list').addEventListener('click', function (e) {
+      // 点击贡献者链接时不触发预览
+      if (e.target.closest('.card-contributor')) {
+        return;
+      }
+
       var card = e.target.closest('.category-card');
       if (card) {
         openCategory(card.dataset.category);
