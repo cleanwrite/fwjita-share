@@ -1661,5 +1661,22 @@ const tabsData = [
       "name": "鱼飞罗冰冻",
       "bilibili": "https://space.bilibili.com/3461580647827891"
     }
+  },
+  {
+    "id": 93,
+    "title": "空白",
+    "artist": "",
+    "formats": [
+      "pdf"
+    ],
+    "files": {
+      "pdf": "assets/tabs/空白示例/空白/Acoustic_Piano.pdf"
+    },
+    "category": "空白示例",
+    "song_group": "空白",
+    "contributor": {
+      "name": "fw",
+      "bilibili": ""
+    }
   }
 ];
