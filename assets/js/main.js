@@ -346,6 +346,13 @@
       }).join('') +
     '</div><div id="preview-content"></div>';
 
+    // 绑定模式切换按钮
+    body.querySelectorAll('.mode-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        switchPreviewMode(btn.dataset.mode);
+      });
+    });
+
     currentPreviewMode = 'gpx';
     renderGpxPreview(tab, document.getElementById('preview-content'));
   }
@@ -377,16 +384,40 @@
     var gpxFile = getGpxFile(tab);
     if (!gpxFile) return;
     var gpxFilename = gpxFile.split('/').pop();
+    var ext = gpxFilename.split('.').pop().toLowerCase();
     container.innerHTML = '<div class="player-controls">' +
-      '<button onclick="window._playerPlay()">▶ 播放</button>' +
-      '<button onclick="window._playerPause()">⏸ 暂停</button>' +
-      '<button onclick="window._playerStop()">⏹ 停止</button>' +
-      '<a href="' + encodeAssetPath(gpxFile) + '" download="' + escapeHtml(gpxFilename) + '">下载</a>' +
-      '<div class="speed-control"><label>速度:</label><input type="range" id="speed-slider" min="25" max="150" value="100" oninput="window._changeSpeed(this.value)"><span id="speed-value">100%</span></div>' +
+      '<button class="ctrl-btn" data-action="play">▶ 播放</button>' +
+      '<button class="ctrl-btn" data-action="pause">⏸ 暂停</button>' +
+      '<button class="ctrl-btn" data-action="stop">⏹ 停止</button>' +
+      '<a href="' + encodeAssetPath(gpxFile) + '" download="' + escapeHtml(gpxFilename) + '" class="ctrl-btn download-btn" rel="noopener">⬇ 下载 .' + escapeHtml(ext) + '</a>' +
+      '<div class="speed-control"><label>速度:</label><input type="range" id="speed-slider" min="25" max="150" value="100"><span id="speed-value">100%</span></div>' +
     '</div>' +
     '<div id="alphaTab-container" class="alpha-tab-container">' +
       '<p class="loading-text">正在加载乐谱...</p>' +
     '</div>';
+
+    // 绑定控制按钮事件
+    container.querySelectorAll('.ctrl-btn').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var action = btn.dataset.action;
+        if (action === 'play' && alphaTabApi) alphaTabApi.play();
+        else if (action === 'pause' && alphaTabApi) alphaTabApi.pause();
+        else if (action === 'stop' && alphaTabApi) alphaTabApi.stop();
+      });
+    });
+    // 绑定速度滑块
+    var slider = container.querySelector('#speed-slider');
+    if (slider) {
+      slider.addEventListener('input', function () {
+        if (alphaTabApi) {
+          alphaTabApi.playbackSpeed = this.value / 100;
+          var valEl = container.querySelector('#speed-value');
+          if (valEl) valEl.textContent = this.value + '%';
+        }
+      });
+    }
+
     requestAnimationFrame(function () { initAlphaTab(gpxFile); });
   }
 
@@ -398,8 +429,8 @@
     container.innerHTML = '<div class="image-gallery">' + tab.files.images.map(function (img) {
       var filename = img.split('/').pop();
       return '<div class="image-item">' +
-        '<img class="preview-image" src="' + encodeAssetPath(img) + '" alt="' + escapeHtml(tab.title) + '" loading="lazy" onclick="window.open(\'' + encodeAssetPath(img) + '\', \'_blank\')">' +
-        '<button class="img-download" onclick="window.open(\'' + encodeAssetPath(img) + '\', \'_blank\')">下载 ' + escapeHtml(filename) + '</button>' +
+        '<img class="preview-image" src="' + encodeAssetPath(img) + '" alt="' + escapeHtml(tab.title) + '" loading="lazy">' +
+        '<a href="' + encodeAssetPath(img) + '" download="' + escapeHtml(filename) + '" class="img-download" rel="noopener">⬇ 下载</a>' +
       '</div>';
     }).join('') + '</div>';
   }
@@ -437,14 +468,21 @@
   }
 
   function setupAlphaTab(container, buffer) {
+    // 移动端适配：确保容器有宽度
     if (!container.offsetWidth) {
       container.style.width = '100%';
-      container.style.minWidth = '600px';
+      container.style.minWidth = '300px';
     }
 
+    // 移动端缩小 scale
+    var isMobile = window.innerWidth < 768;
     var settings = {
       core: { engine: 'svg', logLevel: 1, useWorkers: false },
-      display: { staveProfile: 0, scale: 1.0 },
+      display: {
+        staveProfile: 0,
+        scale: isMobile ? 0.7 : 1.0,
+        autoResize: true
+      },
       player: {
         enablePlayer: true,
         enableCursor: true,
@@ -686,6 +724,10 @@
     document.getElementById('adminPassword').value = '';
     document.querySelector('.admin-auth').style.display = 'flex';
     document.getElementById('adminTabContent').innerHTML = '';
+    // 重置 Tab 高亮
+    document.querySelectorAll('.admin-tab').forEach(function (t) { t.classList.remove('active'); });
+    var firstTab = document.querySelector('.admin-tab[data-tab="tabs"]');
+    if (firstTab) firstTab.classList.add('active');
     adminAuthed = false;
     openModal('adminModal', document.activeElement);
   }
@@ -727,11 +769,15 @@
     container.innerHTML = '<div class="admin-actions"><span>' + tabs.length + ' 首谱子</span>' +
       '<button onclick="refreshAdminData()" class="admin-refresh-btn">刷新</button></div>' +
       tabs.map(function (t) {
+        var GPX_FORMATS = ['gp', 'gp3', 'gp4', 'gp5', 'gp7', 'gp8', 'gpx'];
+        var formatBadges = (t.formats || []).map(function (f) {
+          return '<span class="admin-tag">' + f + '</span>';
+        }).join('');
         return '<div class="admin-tab-item">' +
           '<div class="admin-tab-info">' +
             '<strong>' + escapeHtml(t.title) + '</strong>' +
             '<span class="admin-tag">' + escapeHtml(t.category) + '</span>' +
-            '<span class="admin-tag">' + (t.formats || []).join(', ') + '</span>' +
+            formatBadges +
             '<span class="admin-contrib">' + escapeHtml((t.contributor && t.contributor.name) || '') + '</span>' +
           '</div>' +
           '<button onclick="deleteTab(' + t.id + ')" class="admin-delete-btn">删除</button>' +
@@ -745,27 +791,45 @@
     fetch(API_BASE + '/api/admin/logs', { headers: { Authorization: 'Bearer ' + document.getElementById('adminPassword').value } })
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (!data.success || !data.logs.length) {
+        if (!data.success || !data.logs || !data.logs.length) {
           container.innerHTML = '<p class="empty-state">暂无日志</p>';
           return;
         }
-        container.innerHTML = data.logs.map(function (log) {
-          return '<div class="admin-log-item">' +
-            '<span class="log-action ' + log.action + '">' + (log.action === 'submit' ? '新增' : '删除') + '</span>' +
-            '<span class="log-title">' + escapeHtml(log.title) + '</span>' +
-            '<span class="log-meta">' + escapeHtml(log.category || '') + ' · ' + escapeHtml(log.contributor || '') + '</span>' +
-            '<span class="log-time">' + (log.time ? log.time.replace('T', ' ').slice(0, 16) : '') + '</span>' +
-          '</div>';
-        }).join('');
+        container.innerHTML = '<div class="admin-actions"><span>' + data.logs.length + ' 条日志</span>' +
+          '<button onclick="clearAdminLogs()" class="admin-clear-btn">清空</button></div>' +
+          data.logs.map(function (log) {
+            return '<div class="admin-log-item">' +
+              '<span class="log-action ' + (log.action || '') + '">' + (log.action === 'submit' ? '新增' : '删除') + '</span>' +
+              '<span class="log-title">' + escapeHtml(log.title || '') + '</span>' +
+              '<span class="log-meta">' + escapeHtml(log.category || '') + ' · ' + escapeHtml(log.contributor || '') + '</span>' +
+              '<span class="log-time">' + (log.time ? log.time.replace('T', ' ').slice(0, 16) : '') + '</span>' +
+            '</div>';
+          }).join('');
       })
       .catch(function () { container.innerHTML = '<p class="error-text">加载失败</p>'; });
   }
 
   function switchAdminTab(tab, btnEl) {
     document.querySelectorAll('.admin-tab').forEach(function (t) { t.classList.remove('active'); });
-    (btnEl || document.querySelector('.admin-tab[data-tab="' + tab + '"]')).classList.add('active');
+    var targetBtn = btnEl || document.querySelector('.admin-tab[data-tab="' + tab + '"]');
+    if (targetBtn) targetBtn.classList.add('active');
     if (tab === 'tabs') showAdminTabList();
     else if (tab === 'logs') showAdminLogs();
+  }
+
+  function clearAdminLogs() {
+    if (!confirm('确定要清空所有日志吗？此操作不可恢复。')) return;
+    var pwd = document.getElementById('adminPassword').value;
+    fetch(API_BASE + '/api/admin/logs/clear', { method: 'POST', headers: { Authorization: 'Bearer ' + pwd } })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success) {
+          showAdminLogs();
+        } else {
+          alert('清空失败: ' + data.error);
+        }
+      })
+      .catch(function () { alert('清空失败'); });
   }
 
   function deleteTab(id) {
@@ -979,5 +1043,6 @@
   window.refreshAdminData = refreshAdminData;
   window.showAdminTab = showAdminTabList;
   window.showAdminLogs = showAdminLogs;
+  window.clearAdminLogs = clearAdminLogs;
   window.handleFileSelect = handleFileSelect;
 })();

@@ -56,13 +56,12 @@
 - [x] 操作日志（KV 存储，最近 100 条）
 - [x] 原子性更新 tabs-data.js（SHA 冲突重试 3 次）
 - [x] GitHub Actions 自动部署 Worker
-- [x] CI/CD secret 管理（GITHUB_TOKEN + SUBMIT_PASSWORD）
+- [x] CI/CD secret 管理（GITHUB_TOKEN + SUBMIT_PASSWORD = 114514）
 
 ### 待实现 🔧
 - [ ] 缩略图/预览图
 - [ ] 拼音搜索/模糊匹配
 - [ ] 自定义域名路由 (fwjita.de5.net)
-- [ ] 管理员 Tab 切换 active 状态修复
 
 ## 4. 架构
 
@@ -107,20 +106,11 @@ git push → GitHub Actions → wrangler-action@v3 → Cloudflare Workers
 | GET | /api/categories | 无 | 返回分类列表 |
 | POST | /api/submit | SUBMIT_PASSWORD | 提交新谱子（JSON + base64 文件） |
 | GET | /api/tabs-data | ADMIN_PASSWORD | 返回完整 tabs-data |
-| DELETE | /api/tabs/:id | ADMIN_PASSWORD | 删除谱子 |
+| DELETE | /api/tabs/:id | ADMIN_PASSWORD | 删除谱子（容错：文件不存在也继续） |
 | GET | /api/admin/logs | ADMIN_PASSWORD | 查看操作日志 |
 | POST | /api/admin/logs/clear | ADMIN_PASSWORD | 清空操作日志 |
 
-## 6. 已知问题
-
-| 问题 | 严重度 | 说明 |
-|------|--------|------|
-| 自定义域名路由 | 🟡 | `fwjita.de5.net` 无法路由到 Worker（de5.net 不在 Cloudflare 账户） |
-| 无缩略图 | 🟡 | 图片谱子列表无预览图 |
-| 搜索不支持拼音 | 🟡 | 仅支持中文/英文精确匹配 |
-| 管理员 Tab 切换 | 🟡 | active 状态可能不更新 |
-
-## 7. Git 历史（关键提交）
+## 6. Git 历史（关键提交）
 
 | 提交 | 说明 |
 |------|------|
@@ -138,34 +128,26 @@ git push → GitHub Actions → wrangler-action@v3 → Cloudflare Workers
 | d9e2aae | Worker 代码移入主 repo |
 | e837c04 | 清理测试数据 |
 
-## 8. 技术债务
+## 7. 技术债务
 
 1. **tabs-data.js 体积** — 92 条数据，每次加载完整 JSON（可接受）
 2. **无构建步骤** — 纯原生 JS，无打包/压缩
 3. **Worker 冷启动** — 无影响（低流量）
 
-## 9. 安全
+## 8. 安全
 
 - ✅ 提交密码鉴权（常量时间比较）
 - ✅ 管理员密码鉴权（Bearer token）
 - ✅ XSS 防护（escapeHtml）
-- ✅ CORS 配置
+- ✅ CORS 配置（* 来源）
 - ✅ 文件类型白名单
 - ✅ 文件大小限制（10MB/文件，50MB/总计）
 - ✅ 路径安全（sanitizePath）
 - ✅ CI/CD secret 管理（GitHub Actions Secrets）
 
-## 10. 性能
+## 9. 部署说明
 
-- alphaTab 渲染：同步加载，useWorkers: false
-- 图片：lazy loading
-- 搜索：防抖 150ms
-- 缓存：静态资源 5min，HTML no-cache
-- Worker 部署：GitHub Actions 自动触发
-
-## 11. 部署说明
-
-### 自动部署（推荐）
+### 自动部署
 ```bash
 git push origin main
 # GitHub Actions 自动部署 Worker
@@ -181,3 +163,6 @@ wrangler secret put SUBMIT_PASSWORD
 
 ### 密码
 - 提交/管理密码：`114514`
+
+### 自定义域名
+如需将 `fwjita.de5.net/api/*` 路由到 Worker，需将 `de5.net` zone 添加到 Cloudflare 账户，然后在 `wrangler.toml` 添加 routes 配置。

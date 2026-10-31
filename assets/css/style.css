@@ -452,9 +452,17 @@ header {
   border-radius: var(--r-md);
   padding: var(--sp-4);
   margin-bottom: var(--sp-4);
-  min-height: 300px;
+  min-height: 200px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   color: #000;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#alphaTab-container svg {
+  max-width: 100%;
+  height: auto;
 }
 
 #alphaTab-container p {
@@ -465,13 +473,13 @@ header {
 .player-controls {
   display: flex;
   align-items: center;
-  gap: var(--sp-3);
+  gap: var(--sp-2);
   margin-bottom: var(--sp-4);
   flex-wrap: wrap;
 }
 
-.player-controls button,
-.player-controls a {
+.player-controls .ctrl-btn,
+.player-controls a.ctrl-btn {
   padding: var(--sp-2) var(--sp-3);
   border: 1px solid var(--c-border);
   border-radius: var(--r-md);
@@ -482,12 +490,22 @@ header {
   text-decoration: none;
   font-family: inherit;
   transition: all var(--tr-fast);
+  white-space: nowrap;
 }
 
-.player-controls button:hover,
-.player-controls a:hover {
+.player-controls .ctrl-btn:hover {
   border-color: var(--c-accent);
   color: var(--c-accent);
+}
+
+.download-btn {
+  color: var(--c-success) !important;
+  border-color: rgba(63, 185, 80, 0.3) !important;
+}
+
+.download-btn:hover {
+  background: rgba(63, 185, 80, 0.1) !important;
+  border-color: var(--c-success) !important;
 }
 
 .speed-control {
@@ -504,6 +522,19 @@ header {
 .speed-control input[type="range"] {
   width: 80px;
   accent-color: var(--c-accent);
+}
+
+@media (max-width: 600px) {
+  .player-controls {
+    gap: var(--sp-1);
+  }
+  .player-controls .ctrl-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  .speed-control input[type="range"] {
+    width: 60px;
+  }
 }
 
 /* ===== 图片画廊 ===== */
@@ -894,6 +925,19 @@ header {
 }
 
 .admin-refresh-btn:hover { border-color: var(--c-accent); color: var(--c-accent); }
+
+.admin-clear-btn {
+  padding: var(--sp-1) var(--sp-2);
+  border: 1px solid rgba(248, 81, 73, 0.3);
+  border-radius: var(--r-md);
+  background: transparent;
+  color: var(--c-danger);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.admin-clear-btn:hover { background: rgba(248, 81, 73, 0.1); }
 
 .admin-tab-item {
   display: flex;
